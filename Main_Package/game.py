@@ -3,6 +3,7 @@ from Main_Package.loggable import Loggable
 from Main_Package.character import Suspect
 from Main_Package.character import NPC
 from Main_Package.character import Witness
+from Main_Package.leaderboard import Leaderboard
 
 
 
