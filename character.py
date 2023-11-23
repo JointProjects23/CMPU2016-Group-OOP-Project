@@ -1,0 +1,179 @@
+# Import necessary modules and classes
+from abc import ABC, abstractmethod
+
+# Define a base class for characters
+class Character(ABC):
+    """ The Character class serves as the base class, providing common
+    attributes and methods for characters. The Suspect and Witness classes
+    are subclasses that inherit from Character and introduce their unique
+    attributes and methods. """
+
+    def __init__(self, name, dialogue, action, age):
+        self._name = name
+        self._dialogue = dialogue
+        self._interacted = False
+        self.action = action
+        self.age = age
+
+    def __str__(self):
+        # overrides the default display for printing a class instance
+        return f"{self.__class__.__name__}: {self._name}"
+
+    def __lt__(self, other):
+        # compares the age of 2 given class instances
+        return (f"Is {self._name} younger then {other._name}: "
+                f"{self.age < other.age}")
+
+    def __eq__(self, other):
+        if isinstance(other, Character):
+            return (f"Are {self._name} and {other._name} the same person: "
+                    f"{self._name == other._name}")
+        return False
+
+    def interact(self):
+        if not self._interacted:
+            interaction = f"{self._name}: {self._dialogue}"
+            self._interacted = True
+        else:
+            interaction = f"{self._name} is no longer interested in talking."
+
+        return interaction
+
+    @property
+    def name(self):
+        return self._name
+
+    @abstractmethod
+    def perform_action(self):
+        pass
+
+
+# Define an NPC class
+class NPC(Character):
+    def __init__(self, name, dialogue, action, age):
+        super().__init__(name, dialogue, action, age)
+
+    @property
+    def interact(self):
+        if not self._interacted:
+            self._interacted = True
+            return f'{self._name}: "{self._dialogue}"'
+        else:
+            return f"{self._name} is no longer interested in talking."
+
+    def perform_action(self):
+        return f"{self._name} {self.action}"
+
+    # Define a property to get the name
+    @property
+    def name(self):
+        return self._name
+
+    # Define a property to get the dialogue
+
+    @property
+    def dialogue(self):
+        return self._dialogue
+
+
+# Define a suspect character class
+class Suspect(Character):
+    """This is a special type of character. This is the suspect in our crime
+    investigation."""
+
+    def __init__(self, name, dialogue, alibi, action, age):
+        super().__init__(name, dialogue, action, age)
+        self._alibi = alibi
+
+    def __repr__(self):
+        return f"{self._name}: {self._dialogue}. Their Alibi: {self._alibi}"
+
+    def provide_alibi(self):
+        return f"{self._name}'s Alibi: {self._alibi}"
+
+    def interact(self):
+        if not self._interacted:
+            interaction = (
+                f"Suspect {self._name} reacts nervously:" 
+                f"{self._dialogue}"
+            )
+            interaction += (
+                "\nYou notice subtle body language cues indicating potential "
+                "deception"
+            )
+            self._interacted = True
+        else:
+            interaction = (
+                f"Suspect {self._name} avoids eye contact and " 
+                "remains silent."
+            )
+
+        return interaction
+
+    def perform_action(self):
+        return f"{self._name} {self.action}"
+
+    @property
+    def interacted(self):
+        return self._interacted
+
+    # Define a property to get the name
+    @property
+    def name(self):
+        return self._name
+
+
+# Define a witness character class
+class Witness(Character):
+    """This class is the witness. This person has either seen or heard
+    something to do with the crime."""
+
+    def __init__(self, name, dialogue, observation, action, age):
+        super().__init__(name, dialogue, action, age)
+        self.observation = observation
+
+    def __add__(self, other):
+        combined_name = f"{self._name} and {other._name}"
+        combined_dialogue = f"{self._dialogue} and {other._dialogue}"
+        combined_observation = f"{self.observation} and {other.observation}"
+        combined_action = self.action + other.action
+        combined_age = f"{self.age} years old and {other.age} years old"
+        return Witness(
+            combined_name,
+            combined_dialogue,
+            combined_observation,
+            combined_action,
+            combined_age
+        )
+
+    def share_observation(self):
+        return f"{self._name}'s Observation: {self.observation}"
+
+    def interact(self):
+        if not self._interacted:
+            interaction = (
+                f"Witness {self._name} speaks hurriedly: " 
+                f"{self._dialogue}"
+            )
+            interaction += (
+                "\nYou sense genuine anxiety and urgency in the " 
+                "witness's words."
+            )
+            self._interacted = True
+        else:
+            interaction = f"Witness {self._name} hesitates and murmurs softly."
+
+        return interaction
+
+    def perform_action(self):
+        return f"{self._name} {self.action}"
+
+    @property
+    def interacted(self):
+        return self._interacted
+
+    # Define a property to get the name
+    @property
+    def name(self):
+        return self._name
+
