@@ -10,5 +10,3 @@ if __name__ == "__main__":
     print("\nGame Error Logs:")
     for log in game.error_log.logs:
         print(log)
-
-    hello
