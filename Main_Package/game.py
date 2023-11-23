@@ -1,8 +1,9 @@
-from main.crimeScene import CrimeScene
-from main.loggable import Loggable
-from main.character import Suspect
-from main.character import NPC
-from main.character import Witness
+from Main_Package.crimeScene import CrimeScene
+from Main_Package.loggable import Loggable
+from Main_Package.character import Suspect
+from Main_Package.character import NPC
+from Main_Package.character import Witness
+
 
 
 # Define the main game class
