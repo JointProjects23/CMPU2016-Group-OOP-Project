@@ -6,12 +6,13 @@ from Main_Package.character import Witness
 from Main_Package.leaderboard import Leaderboard
 
 
-
 # Define the main game class
 class Game:
     """The Game class is set up to manage the game's behavior."""
 
     def __init__(self):
+        self.player_name = ""
+        self.game_leaderboard = Leaderboard()
         self.game_log = Loggable()
         self.__error_logger = Loggable()
         self.running = True
@@ -193,10 +194,11 @@ class Game:
     def start_game(self):
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
-        player_name = input("Enter your detective's name: ")
-        self.game_log.log(f"Player entered their name as {player_name}")
+        self.player_name = input("Enter your detective's name: ")
+        self.game_leaderboard.add_player(self.player_name)
+        self.game_log.log(f"Player entered their name as {self.player_name}")
         print(
-            f"As the renowned detective, {player_name},\n"
+            f"As the renowned detective, {self.player_name},\n"
             "you were called in to solve the baffling case of the "
             "missing Diamond Necklace Starlight Serenade\n\n"
             "You have been tasked with finding the missing piece "
@@ -377,6 +379,8 @@ class Game:
         self.game_log.log(
             f"Player ended the game with a final score of" f" {final_score}"
         )
+        self.game_leaderboard.update_score(self.player_name, final_score)
+        self.game_leaderboard.save_leaderboard("LeaderboardFile.txt")
         if final_score > 35:
             print("Well done, that's impressive!!")
         else:

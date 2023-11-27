@@ -18,7 +18,44 @@ class Leaderboard:
                                reverse=True)
         return sorted_scores[:num_players]
 
-    def save_leaderboard(leaderboard, filename):
-        with open(filename, 'w') as file:
-            for player, score in leaderboard._scores.items():
+    def save_leaderboard(self, filename):
+        with open(filename, 'a') as file:
+            for player, score in self._scores.items():
                 file.write(f"{player}:{score}\n")
+
+    def load_leaderboard(self, filename):
+        leaderboard = Leaderboard()
+        try:
+            with open(filename, 'r') as file:
+                for line in file:
+                    player, score = line.strip().split(':')
+                    leaderboard._scores[player] = int(score)
+        except FileNotFoundError:
+            # If the file doesn't exist yet or is empty, return an empty leaderboard
+            pass
+        return leaderboard
+
+
+# game_leaderboard = Leaderboard()
+# # game_leaderboard.add_player("Hayden")
+# # game_leaderboard.update_score("Hayden", 500000000)
+# # # Add players to the leaderboard
+# # game_leaderboard.add_player("Jamie")
+# # game_leaderboard.add_player("Sam")
+# # game_leaderboard.add_player("Finn")
+# # game_leaderboard.add_player("Scurran")
+# #
+# # # Update scores based on player achievements
+# # game_leaderboard.update_score("Jamie", 50)
+# # game_leaderboard.update_score("Sam", 30)
+# # game_leaderboard.update_score("Finn", 40)
+# # game_leaderboard.update_score("Scurran", 40)
+# # top_players = game_leaderboard.get_top_players()
+# # for player, score in top_players:
+# #     print(f"{player}: {score}")
+#
+# game_leaderboard = game_leaderboard.load_leaderboard("LeaderboardFile.txt")
+#
+# top_players = game_leaderboard.get_top_players()
+# for player, score in top_players:
+#     print(f"{player}: {score}")
