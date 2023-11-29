@@ -2,7 +2,7 @@ import random
 
 
 class HauntedMansionGame:
-    def __init__(self, secret_word, max_attempts=6):
+    def __init__(self, max_attempts=6):
         self.secret_word = secret_word.lower()
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
