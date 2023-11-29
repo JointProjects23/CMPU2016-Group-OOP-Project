@@ -230,6 +230,9 @@ class Game:
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
+                # Play mini-game only for the first door choice
+                haunted_game = play_haunted_mansion_game()
+                result = haunted_game.run()
                 self.doors_checker[0] = True
                 print(
                     "inside is a small kitchen with a butler making food\n"
