@@ -17,7 +17,7 @@ class Game:
         self.game_log = Loggable()
         self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        self.haunted_game = HauntedMansionGame()
+        self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
@@ -231,7 +231,7 @@ class Game:
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(
-            input("Which passage will you venture through...Brave "
+            input("Which passage will you venture through...Brave"
                   f"detective:")
         )
 
@@ -241,31 +241,19 @@ class Game:
                 print("Those who dare to enter ahead..guess this word...or "
                       f"ill take your head")
                 # Play mini-game only for the first door choice
-                result = self.haunted_game.play_haunted_mansion_game()
-                if result == True:
-                    self.doors_checker[0] = True
-                    print(
-                        "inside is a small kitchen with a butler making food\n"
-                        "you ask him who he is  and he tells you hes the "
-                        "the mansion's butler, Mr. Reginald\n"
-                        "after talking, you realise he has a suspiciously "
-                        "extensive knowledge of the mansion's layout\n"
-                    )
-                    self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge " "of the mansion's layout"
-                    )
-
+                self.haunted_game.play_haunted_mansion_game()
+                self.doors_checker[0] = True
+                print(
+                    "inside is a small kitchen with a butler making food\n"
+                    "you ask him who he is  and he tells you hes the "
+                    "the mansion's butler, Mr. Reginald\n"
+                    "after talking, you realise he has a suspiciously "
+                    "extensive knowledge of the mansion's layout\n"
+                )
+                self.crime_scene.add_clue(
+                    "Mr. Reginald's extensive knowledge " "of the mansion's layout"
+                )
             elif int(player_input) == 2 and not self.doors_checker[1]:
-<<<<<<< Updated upstream
-                RPS_Result = self.rock_paper_scissors.play_game()
-                if RPS_Result == True:
-                    self.doors_checker[1] = True
-                    print(
-                        "You slowly open the door to reveal a...\n"
-                        "...a dark corridor which leads you to stairs\n"
-                    )
-                    self.crime_scene.add_clue("The letter on the ground")
-=======
                 print("Those who dare to enter ahead..Prove to me you are "
                       "worthy, Beat me in this game of with..before you end "
                       "up dead")
@@ -276,7 +264,6 @@ class Game:
                     "...a dark corridor which leads you to stairs\n"
                 )
                 self.crime_scene.add_clue("The letter on the ground")
->>>>>>> Stashed changes
             elif int(player_input) == 3 and not self.doors_checker[2]:
                 print("Those who dare to procced ahead..let me riddle you a "
                       "question before you end you dead")
