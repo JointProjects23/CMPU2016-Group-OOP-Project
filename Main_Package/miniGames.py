@@ -20,9 +20,7 @@ class HauntedMansionGame:
         elif len(guess) == len(self.secret_word) and guess.isalpha():
             self.check_word(guess)
         else:
-            print(
-                "You may enter a full word or single letter as your guess "
-                "Decetive")
+            print("You may enter a full word or single letter as your guess")
 
     def check_letter(self, guess):
         if guess in self.guessed_letters:
@@ -79,7 +77,7 @@ class HauntedMansionGame:
 
             if self.is_winner():
                 print(
-                    f"Suprise Surpise you actually got it right "
+                    f"Surprise, Surprise you actually got it right "
                     f"Detective...You may enter")
                 return 1
 
@@ -115,7 +113,7 @@ class RockPaperScissors:
         elif (user_choice == "rock" and computer_choice == "scissors") or \
                 (user_choice == "paper" and computer_choice == "rock") or \
                 (user_choice == "scissors" and computer_choice == "paper"):
-            return "You've won detective, proceede ahead..."
+            return "You've won, proceed ahead..."
         else:
             return "Silly little Detective"
 
@@ -126,19 +124,25 @@ class RockPaperScissors:
             user_choice = self.get_user_choice()
             computer_choice = self.get_computer_choice()
             print(
-                f"You chose {user_choice} Detective. I chos"
-                f"e{computer_choice}.")
+                f"You chose {user_choice} Detective. I chose"
+                f"{computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             print(result)
             if result == "You win Detective":
                 break
-            print(f"You have {self.attempts} chnaces left Detective")
+            print(f"You have {self.attempts} chances left Detective")
 
 
 class Riddle:
     def __init__(self):
-        self.__answer = open("riddle_answer.txt", 'r').readline()
-        self.riddle = open('riddle.txt', 'r').readline()
+        self.__answer = self.openfile("riddle_answer.txt")
+        self.riddle = Riddle.openfile(self, "riddle.txt")
+        self.line = random.randint(0, 4)
+
+    def openfile(self, filename):
+        with open(filename, 'r') as file:
+            items_list = file.readlines()
+        return items_list
 
     def print_riddle(self):
         print(self.riddle)
