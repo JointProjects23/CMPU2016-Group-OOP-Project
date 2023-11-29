@@ -4,6 +4,8 @@ from Main_Package.character import Suspect
 from Main_Package.character import NPC
 from Main_Package.character import Witness
 from Main_Package.leaderboard import Leaderboard
+from inventory import Inventory
+from item import Item 
 
 
 # Define the main game class
@@ -15,6 +17,9 @@ class Game:
         self.game_leaderboard = Leaderboard()
         self.game_log = Loggable()
         self.__error_logger = Loggable()
+        
+        self.inventory = Inventory()  # Initialize the player's inventory
+
         self.running = True
         self.started = False
         self.characters_interacted = False
@@ -129,6 +134,7 @@ class Game:
                 "'r' to review your clues,"
                 "'d' to choose a door"
                 ", or 's' to see your current score"
+                "'u' to use an item from your inventory:"
             )
 
             self.game_log.log(f"Player input is {player_input}.")
@@ -175,6 +181,9 @@ class Game:
             elif player_input.lower() == "s":
                 self.game_log.log("Player chose to see their score")
                 print(f"Your current score is {self.__score__()}")
+            elif player_input.lower() == "u":
+                item_name = input("Enter the name of the item you want to use: ")
+                self.inventory.use_item(item_name, self)
             else:
                 raise ValueError("Incorrect user entry.")
 
@@ -266,6 +275,7 @@ class Game:
             clue_suspect = self.suspect.interact()
             self.crime_scene.add_clue(clue_suspect)
             print(clue_suspect)  # keep the outputs going
+            self.inventory.add_item(Item("Clue from Suspect", clue_suspect))
             self.game_log.log(f"{self.suspect.name} interacted with Player")
             self.game_log.log(f"{self.suspect.name} provided clue:" f" {clue_suspect}")
 
@@ -322,15 +332,7 @@ class Game:
             )
 
     def interact_with_npcs(self):
-        if self.npcs_interacted:
-            print(
-                "You have already talked to them they no longer wish to " "talk to you"
-            )
-            self.game_log.log(
-                "Player tried to interact with NPCs but they "
-                "already interacted with player "
-            )
-        else:
+        if not self.npcs_interacted:
             print("You decide to interact some others in the room.")
             for index, npc in enumerate(self.npcs):
                 self.game_log.log(f"{npc.name} interacted with Player")
@@ -343,6 +345,8 @@ class Game:
                 "who have nothing to do with the crime"
             )
             self.npcs_interacted = True
+            self.inventory.add_item(Item("NPC Interaction", "Received information from NPCs")) # Detail needed to be added here, Storyline etc
+
             print(self.npcs[1] < self.npcs[0])
 
     def examine_clues(self):
@@ -354,10 +358,17 @@ class Game:
                 "There's a distinct smell of perfume lingering in the air.\n"
                 "The mystery deepens."
             )
+
+            # Add items to the inventory when examining clues
             self.crime_scene.add_clue("Torn fabric")
+            self.inventory.add_item(Item("Torn Fabric", "A torn piece of fabric near the window"))
             self.crime_scene.add_clue("Broken glass near window")
+            self.inventory.add_item(Item("Broken Glass", "Glass pieces near the window"))
             self.crime_scene.add_clue("An overturned table at crime scene")
+            self.inventory.add_item(Item("Overturned Table", "Table overturned at the crime scene"))
             self.crime_scene.add_clue("Smell of perfume")
+            self.inventory.add_item(Item("Perfume Smell", "Distinct smell of perfume"))
+
             self.crime_scene.investigated = True
         else:
             print(
