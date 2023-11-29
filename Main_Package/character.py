@@ -1,7 +1,8 @@
 # Import necessary modules and classes
 from abc import ABC, abstractmethod
-
 # Define a base class for characters
+
+
 class Character(ABC):
     """ The Character class serves as the base class, providing common
     attributes and methods for characters. The Suspect and Witness classes

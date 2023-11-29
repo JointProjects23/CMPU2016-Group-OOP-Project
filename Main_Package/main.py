@@ -1,5 +1,5 @@
-from Main_Package.game import Game
-from Main_Package.leaderboard import Leaderboard
+from game import Game
+from leaderboard import Leaderboard
 
 if __name__ == "__main__":
     game = Game()
