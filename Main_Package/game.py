@@ -366,14 +366,15 @@ class Game:
             )
 
     def continue_game(self):
-        print("You continue your investigation, determined to solve the " "mystery...")
+        print("You continue your investigation, determined to solve the "
+              "mystery...")
 
     def end_game(self):
         # Finds the score from the magic method score
         final_score = self.__score__()
 
-        log_filename = input("Please enter a filename to save the logs:")
-        self.log.save_logs_to_file(log_filename)
+        # log_filename = input("Please enter a filename to save the logs:")
+        self.log.save_logs_to_file("blah")
 
         print(f"Game Over! Your final score was {final_score}")
         self.game_log.log(
