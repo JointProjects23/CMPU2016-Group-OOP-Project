@@ -256,13 +256,21 @@ class Game:
                 )
                 self.crime_scene.add_clue("The letter on the ground")
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print(
+                self.game_riddle.display_riddle()
+                print("Enter your answer here :")
+                user_input = input()
+                if user_input.lower() == self.game_riddle.answer.lower():
+                    print("You guessed correctly")
+                    print(
                     "You open the library door to reveal a hidden\n"
                     "passage...\n"
                     "What secrets does it hold?"
                 )
-                self.crime_scene.add_clue("The hidden passage " "behind library door")
-                self.doors_checker[2] = True
+                    self.crime_scene.add_clue("The hidden passage " "behind library door")
+                    self.doors_checker[2] = True
+                else:
+                    print("You guessed incorrectly")
+
             else:
                 self.game_log.log(
                     f"Player chose to enter door {player_input} "
