@@ -237,18 +237,20 @@ class Game:
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
                 # Play mini-game only for the first door choice
-                self.haunted_game.play_haunted_mansion_game()
-                self.doors_checker[0] = True
-                print(
-                    "inside is a small kitchen with a butler making food\n"
-                    "you ask him who he is  and he tells you hes the "
-                    "the mansion's butler, Mr. Reginald\n"
-                    "after talking, you realise he has a suspiciously "
-                    "extensive knowledge of the mansion's layout\n"
-                )
-                self.crime_scene.add_clue(
-                    "Mr. Reginald's extensive knowledge " "of the mansion's layout"
-                )
+                result = self.haunted_game.play_haunted_mansion_game()
+                if result == True:
+                    self.doors_checker[0] = True
+                    print(
+                        "inside is a small kitchen with a butler making food\n"
+                        "you ask him who he is  and he tells you hes the "
+                        "the mansion's butler, Mr. Reginald\n"
+                        "after talking, you realise he has a suspiciously "
+                        "extensive knowledge of the mansion's layout\n"
+                    )
+                    self.crime_scene.add_clue(
+                        "Mr. Reginald's extensive knowledge " "of the mansion's layout"
+                    )
+
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 RPS_Result = self.rock_paper_scissors.play_game()
                 if RPS_Result == True:

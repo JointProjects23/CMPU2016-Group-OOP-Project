@@ -3,21 +3,22 @@ import random
 
 class HauntedMansionGame:
     def __init__(self, max_attempts=6):
-        self.secret_word = secret_word.lower()
+        self.secret_words = open("riddle_answer.txt", 'r').readlines()
+        self.line = random.randint(0, 6)
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
         self.guessed_letters = set()
 
     def display_word(self):
         return ' '.join(
-            letter if letter in self.guessed_letters else '_' for letter in
-            self.secret_word)
+            letter if letter in self.guessed_letters
+            else '_' for letter in self.secret_words[self.line])
 
     def check_guess(self, guess):
         guess = guess.lower()
         if len(guess) == 1 and guess.isalpha():
             self.check_letter(guess)
-        elif len(guess) == len(self.secret_word) and guess.isalpha():
+        elif len(guess) == len(self.secret_words[self.line]) and guess.isalpha():
             self.check_word(guess)
         else:
             print(
@@ -32,26 +33,26 @@ class HauntedMansionGame:
         self.guessed_letters.add(guess)
         self.remaining_attempts -= 1
 
-        if guess not in self.secret_word:
+        if guess not in self.secret_words[self.line]:
             print(f"'{guess}' is not in the word.")
         else:
             print(f"'{guess}' is in the word!")
             return 1
 
     def check_word(self, guess):
-        if guess == self.secret_word:
-            self.guessed_letters = set(self.secret_word)
+        if guess == self.secret_words[self.line]:
+            self.guessed_letters = set(self.secret_words[self.line])
         else:
             for letter in guess:
-                if letter in self.secret_word and letter not in self.guessed_letters:
+                if letter in self.secret_words[self.line] and letter not in self.guessed_letters:
                     print(f"'{letter}' is in the word.")
                     self.guessed_letters.add(letter)
-                elif letter not in self.secret_word:
+                elif letter not in self.secret_words[self.line]:
                     print(f"'{letter}' is not in the word.")
                     self.remaining_attempts -= 1
 
     def is_winner(self):
-        return set(self.secret_word) == self.guessed_letters
+        return set(self.secret_words[self.line]) == self.guessed_letters
 
     def is_game_over(self):
         return self.remaining_attempts <= 0
@@ -78,13 +79,13 @@ class HauntedMansionGame:
                 print(
                     "Congratulations! You guessed the word and unlocked the "
                     "hidden passage.")
-                return 1
+                return True
 
             if self.is_game_over():
                 print(
                     f"Sorry, you're out of attempts. The word was '"
                     f"{self.secret_word}'.")
-                return 0
+                return False
 
 
 class RockPaperScissors:

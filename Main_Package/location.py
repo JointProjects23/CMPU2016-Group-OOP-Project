@@ -39,8 +39,6 @@ class Kitchen(Location):
             print("variable is expected to be a boolean.")
 
 
-
-
 class Library(Location):
     def __init__(self, number_of_clues):
         super().__init__(number_of_clues)
