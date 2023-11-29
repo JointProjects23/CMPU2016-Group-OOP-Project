@@ -2,7 +2,7 @@ import random
 
 
 class HauntedMansionGame:
-    def __init__(self, secret_word, max_attempts=6):
+    def __init__(self, max_attempts=6):
         self.secret_word = secret_word.lower()
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
@@ -103,14 +103,17 @@ class RockPaperScissors:
     def get_computer_choice(self):
         return random.choice(self.choices)
 
-    def determine_winner(self, user_choice, computer_choice):
+    def determine_winner(self, user_choice, computer_choice, attempts):
         if user_choice == computer_choice:
+            self.attempts = self.attempts - 1
             return "It's a tie!"
         elif (user_choice == "rock" and computer_choice == "scissors") or \
                 (user_choice == "paper" and computer_choice == "rock") or \
                 (user_choice == "scissors" and computer_choice == "paper"):
+            self.attempts = self.attempts - 1
             return "You win!"
         else:
+            self.attempts = self.attempts - 1
             return "Man at door wins!"
 
     def play_game(self):
@@ -121,11 +124,13 @@ class RockPaperScissors:
             computer_choice = self.get_computer_choice()
             print(
                 f"You chose {user_choice}. Computer chose {computer_choice}.")
-            result = self.determine_winner(user_choice, computer_choice)
+            result = self.determine_winner(user_choice, computer_choice,
+                                           self.attempts)
             print(result)
             if result == "You win!":
-                break
+                return True
             print(f"You have {self.attempts} left")
+        return False
 
 
 class Riddle:

@@ -17,7 +17,7 @@ class Game:
         self.game_log = Loggable()
         self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        self.haunted_game = HauntedMansionGame("batch")
+        self.haunted_game = HauntedMansionGame()
         self.inventory = Inventory()  # Initialize the player's inventory
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
@@ -250,13 +250,14 @@ class Game:
                     "Mr. Reginald's extensive knowledge " "of the mansion's layout"
                 )
             elif int(player_input) == 2 and not self.doors_checker[1]:
-                self.rock_paper_scissors.play_game()
-                self.doors_checker[1] = True
-                print(
-                    "You slowly open the door to reveal a...\n"
-                    "...a dark corridor which leads you to stairs\n"
-                )
-                self.crime_scene.add_clue("The letter on the ground")
+                RPS_Result = self.rock_paper_scissors.play_game()
+                if RPS_Result == True:
+                    self.doors_checker[1] = True
+                    print(
+                        "You slowly open the door to reveal a...\n"
+                        "...a dark corridor which leads you to stairs\n"
+                    )
+                    self.crime_scene.add_clue("The letter on the ground")
             elif int(player_input) == 3 and not self.doors_checker[2]:
                 print("Solve the riddle to continue")
                 self.game_riddle.print_riddle()
