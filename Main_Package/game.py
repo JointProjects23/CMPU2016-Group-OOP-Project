@@ -4,6 +4,8 @@ from Main_Package.character import Suspect
 from Main_Package.character import NPC
 from Main_Package.character import Witness
 from Main_Package.leaderboard import Leaderboard
+from miniGames import HauntedMansionGame
+from miniGames import RockPaperScissors
 from inventory import Inventory
 from item import Item 
 
@@ -17,9 +19,9 @@ class Game:
         self.game_leaderboard = Leaderboard()
         self.game_log = Loggable()
         self.__error_logger = Loggable()
-        
+        self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
-
+        self.rock_paper_scissors = RockPaperScissors
         self.running = True
         self.started = False
         self.characters_interacted = False
@@ -114,6 +116,7 @@ class Game:
                 self.__error_logger.log("Unexpected error from run():\n{e}.")
                 print(
                     "Unexpected caught error during running of the Game. "
+                    f"\n{e}\n"
                     "We continue playing..."
                 )
             else:
@@ -183,7 +186,7 @@ class Game:
                 print(f"Your current score is {self.__score__()}")
             elif player_input.lower() == "u":
                 item_name = input("Enter the name of the item you want to use: ")
-                self.inventory.use_item(item_name, self)
+                self.inventory.use_item(self, item_name)
             else:
                 raise ValueError("Incorrect user entry.")
 
@@ -231,8 +234,7 @@ class Game:
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
                 # Play mini-game only for the first door choice
-                haunted_game = play_haunted_mansion_game()
-                result = haunted_game.run()
+                self.haunted_game.play_haunted_mansion_game()
                 self.doors_checker[0] = True
                 print(
                     "inside is a small kitchen with a butler making food\n"

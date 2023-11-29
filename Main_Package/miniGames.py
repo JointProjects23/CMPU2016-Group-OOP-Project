@@ -21,7 +21,8 @@ class HauntedMansionGame:
             self.check_word(guess)
         else:
             print(
-                "Please enter a word of the same length as the secret word or a single letter.")
+                "Please enter a word of the same length as the secret word "
+                "or a single letter.")
 
     def check_letter(self, guess):
         if guess in self.guessed_letters:
@@ -55,36 +56,35 @@ class HauntedMansionGame:
     def is_game_over(self):
         return self.remaining_attempts <= 0
 
+    def get_random_word(self):
+        words = ['specter', 'haunt', 'apparition', 'phantom', 'spirit',
+                 'wraith',
+                 'poltergeist']
+        return random.choice(words)
 
-def get_random_word():
-    words = ['specter', 'haunt', 'apparition', 'phantom', 'spirit', 'wraith',
-             'poltergeist']
-    return random.choice(words)
+    def play_haunted_mansion_game(self):
+        print("Welcome to the Haunted Mansion!")
+        print(
+            f"You have {self.max_attempts} attempts to guess the secret word "
+            f"and unlock the hidden passage.")
+        print(self.display_word())
 
+        while not self.is_game_over():
+            guess = input("Enter your guess: ")
+            self.check_guess(guess)
+            print(self.display_word())
 
-def play_haunted_mansion_game():
-    secret_word = get_random_word()
-    game = HauntedMansionGame(secret_word)
+            if self.is_winner():
+                print(
+                    "Congratulations! You guessed the word and unlocked the "
+                    "hidden passage.")
+                return 1
 
-    print("Welcome to the Haunted Mansion!")
-    print(
-        f"You have {game.max_attempts} attempts to guess the secret word and unlock the hidden passage.")
-    print(game.display_word())
-
-    while not game.is_game_over():
-        guess = input("Enter your guess: ")
-        game.check_guess(guess)
-        print(game.display_word())
-
-        if game.is_winner():
-            print(
-                "Congratulations! You guessed the word and unlocked the hidden passage.")
-            return 1
-
-        if game.is_game_over():
-            print(
-                f"Sorry, you're out of attempts. The word was '{secret_word}'.")
-            return 0
+            if self.is_game_over():
+                print(
+                    f"Sorry, you're out of attempts. The word was '"
+                    f"{self.secret_word}'.")
+                return 0
 
 
 class RockPaperScissors:
@@ -117,11 +117,7 @@ class RockPaperScissors:
         while True:
             user_choice = self.get_user_choice()
             computer_choice = self.get_computer_choice()
-            print(f"You chose {user_choice}. Computer chose {computer_choice}.")
+            print(
+                f"You chose {user_choice}. Computer chose {computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             print(result)
-
-
-
-
-
