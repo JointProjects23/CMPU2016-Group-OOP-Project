@@ -17,7 +17,7 @@ class Game:
         self.game_log = Loggable()
         self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        self.haunted_game = HauntedMansionGame("batch")
+        self.haunted_game = HauntedMansionGame()
         self.inventory = Inventory()  # Initialize the player's inventory
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
