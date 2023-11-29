@@ -245,6 +245,8 @@ class Game:
                     "Mr. Reginald's extensive knowledge " "of the mansion's layout"
                 )
             elif int(player_input) == 2 and not self.doors_checker[1]:
+                rps = RockPaperScissors()
+                rps.play_game()
                 self.doors_checker[1] = True
                 print(
                     "You slowly open the door to reveal a...\n"
