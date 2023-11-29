@@ -55,5 +55,5 @@ class Attic(Location):
         super().__init__(number_of_clues)
         self.visited = False
         self.all_clues_found = False
-        self.npc = NPC("Anne Frank", "Help", "Goes back to "
+        self.npc = NPC("Anne", "Hello", "Goes back to "
                                              "wrtiing her journal", 15)

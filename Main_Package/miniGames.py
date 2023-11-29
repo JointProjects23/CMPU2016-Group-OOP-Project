@@ -130,13 +130,14 @@ class RockPaperScissors:
 
 class Riddle:
     def __init__(self):
-        self.__answer = open("riddle_answer.txt", 'r').readline()
-        self.riddle = open('riddle.txt', 'r').readline()
+        self.__answer = open("riddle_answer.txt", 'r').readlines()
+        self.riddle = open('riddle.txt', 'r').readlines()
+        self.line = random.randint(0, 4)
 
     def print_riddle(self):
-        print(self.riddle)
+        print(self.riddle[self.line])
 
     @property
     def get_answer(self):
-        return self.__answer
+        return self.__answer[self.line]
 
