@@ -4,6 +4,8 @@ from Main_Package.character import Suspect
 from Main_Package.character import NPC
 from Main_Package.character import Witness
 from Main_Package.leaderboard import Leaderboard
+from Main_Package.miniGames import play_haunted_mansion_game
+from Main_Package.miniGames import RockPaperScissors
 
 
 # Define the main game class
@@ -21,6 +23,7 @@ class Game:
         self.npcs_interacted = False
         self.score = 0
         self.crime_scene = CrimeScene("Mansion's Drawing Room")
+
         self.witness = Witness(
             "Lady Victoria Starling",
             "I cant believe my Diamond necklace was"
@@ -221,18 +224,27 @@ class Game:
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
-                self.doors_checker[0] = True
-                print(
-                    "inside is a small kitchen with a butler making food\n"
-                    "you ask him who he is  and he tells you hes the "
-                    "the mansion's butler, Mr. Reginald\n"
-                    "after talking, you realise he has a suspiciously "
-                    "extensive knowledge of the mansion's layout\n"
-                )
-                self.crime_scene.add_clue(
-                    "Mr. Reginald's extensive knowledge " "of the mansion's layout"
-                )
+                # Play mini-game only for the first door choice
+                haunted_game = play_haunted_mansion_game()
+                result = haunted_game.run()
+                if result == 1:
+                    self.doors_checker[0] = True
+                    print(
+                        "inside is a small kitchen with a butler making food\n"
+                        "you ask him who he is  and he tells you hes the "
+                        "the mansion's butler, Mr. Reginald\n"
+                        "after talking, you realise he has a suspiciously "
+                        "extensive knowledge of the mansion's layout\n"
+                    )
+
+                    self.crime_scene.add_clue(
+                        "Mr. Reginald's extensive knowledge of the mansion's layout"
+                    )
+                else :
+                    self.update()
             elif int(player_input) == 2 and not self.doors_checker[1]:
+                rps = RockPaperScissors()
+                rps.play_game()
                 self.doors_checker[1] = True
                 print(
                     "You slowly open the door to reveal a...\n"

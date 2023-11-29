@@ -9,7 +9,7 @@ if __name__ == "__main__":
     # for log in game.log.logs:
     #     print(log)
     # print("\nGame Error Logs:")
-    # for log in game.error_log.logs:
+    # for log in game.error_log.lsogs:
     #     print(log)
     game_leaderboard = Leaderboard()
     game_leaderboard = game_leaderboard.load_leaderboard("LeaderboardFile.txt")
