@@ -5,8 +5,8 @@ from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
 import time
-from location import CrimeScene
-from location import Kitchen, Library
+from location import CrimeScene, Kitchen, Attic, Library
+
 
 
 # Define the main game class

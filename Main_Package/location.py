@@ -1,5 +1,5 @@
 from character import NPC
-from abc import abstractmethod
+
 
 class Location:
     def __init__(self, number_of_clues):
