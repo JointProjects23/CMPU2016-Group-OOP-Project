@@ -497,7 +497,7 @@ class Game:
             f"Player ended the game with a final score of" f" {final_score}"
         )
         self.game_leaderboard.update_score(self.player_name, final_score)
-        self.game_leaderboard.save_leaderboard("LeaderboardFile.txt")
+        self.game_leaderboard.save_leaderboard("Gamefile.json")
         if final_score > 35:
             print("Well done, that's impressive!!")
         else:

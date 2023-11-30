@@ -1,5 +1,20 @@
 Player chose to start the game
-Player entered their name as Sam
+Player entered their name as Hansdjandjkasd
+Successfully updating
+---
+Player input is .
+---
+Player input is i9.
+---
+Player input is i.
+Player chose to interact with characters
+Player chose to interact with NPCs
+Beatrice interacted with Player
+Beatrice said to the player: How do you do.
+Seamus interacted with Player
+Seamus said to the player: Welcome to the mansion
+The Child interacted with Player
+The Child said to the player: Go away this is my house!
 Successfully updating
 ---
 Player input is i.
@@ -22,32 +37,10 @@ Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was
 You notice subtle body language cues indicating potential deception
 Successfully updating
 ---
-Player input is r.
-Player chose to review clues at Crime Scene
-Successfully updating
----
-Player input is e.
-Player chose to examine clues at Crime Scene
-Successfully updating
----
-Player input is u.
----
-Player input is .
----
-Player input is e.
-Player chose to examine clues at Crime Scene
-Successfully updating
----
-Player input is e.
-Player chose to examine clues at Crime Scene
-Successfully updating
----
 Player input is i.
 Player chose to interact with characters
+Player chose to interact with witness and suspects
 Successfully updating
----
-Player input is d.
-Player chose to enter door 1
 ---
 Player input is q.
 Player quit the game

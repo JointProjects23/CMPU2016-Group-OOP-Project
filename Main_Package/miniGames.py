@@ -86,6 +86,19 @@ class HauntedMansionGame:
                     f"Get out of here Detective, MY WORD WAS '"
                     f"{self.secret_word}'.")
                 return 0
+        self.save_secret_word("secret_word.json")
+
+    def save_secret_word(self, filename):
+        with open(filename, 'w') as file:
+            json.dump({"secret_word": self.secret_word}, file)
+
+    def load_secret_word(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                data = json.load(file)
+                self.secret_word = data.get("secret_word", "")
+        except FileNotFoundError:
+            pass
 
 
 class RockPaperScissors:
