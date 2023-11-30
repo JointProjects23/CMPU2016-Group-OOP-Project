@@ -4,10 +4,8 @@ from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-from location import  Kitchen
 import time
-from location import CrimeScene
-
+from location import CrimeScene, Kitchen, Attic, Library
 
 
 # Define the main game class

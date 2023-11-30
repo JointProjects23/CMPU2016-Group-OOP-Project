@@ -95,42 +95,43 @@ class RockPaperScissors:
 
     def get_user_choice(self):
         while True:
-            user_choice = input("What is your choice Detective rock, paper, "
-                                "or scissors: "
-                                "").lower()
+            user_choice = input("What is your choice Rock, Paper, "
+                                "or Scissors: ").lower()
             if user_choice in self.choices:
                 return user_choice
             else:
-                print("What was that detective.pick only rock, paper, "
-                      "or scissors!!!")
+                print("Pick only rock, paper, or scissors!!")
 
     def get_computer_choice(self):
         return random.choice(self.choices)
 
     def determine_winner(self, user_choice, computer_choice):
         if user_choice == computer_choice:
-            return "We picked the same, interesting Detective"
+            print("Draw!!")
+            return False
         elif (user_choice == "rock" and computer_choice == "scissors") or \
                 (user_choice == "paper" and computer_choice == "rock") or \
                 (user_choice == "scissors" and computer_choice == "paper"):
-            return "You've won, proceed ahead..."
+            return True
         else:
-            return "Silly little Detective"
+            self.attempts -= 1
+            print("Another win for me")
+            return False
 
     def play_game(self):
-        print("This game is Rock, Paper, Scissors Detective!"
-              "You have 3 tries, or I take your HEAD!!!")
+        print("This game is Rock, Paper, Scissors!"
+              "You have 3 tries, or you are not allowed in!")
         while self.attempts > 0:
             user_choice = self.get_user_choice()
             computer_choice = self.get_computer_choice()
             print(
-                f"You chose {user_choice} Detective. I chose"
+                f"You chose {user_choice}. I chose "
                 f"{computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
-            print(result)
-            if result == "You win Detective":
+            if result:
+                print("You win!")
                 break
-            print(f"You have {self.attempts} chances left Detective")
+            print(f"You have {self.attempts} chances left")
 
 
 class Riddle:
