@@ -7,7 +7,7 @@ from item import Item
 from location import  Kitchen
 import time
 from location import CrimeScene
-
+from location import Kitchen
 
 
 # Define the main game class
