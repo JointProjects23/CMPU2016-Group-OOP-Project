@@ -34,28 +34,3 @@ class Leaderboard:
             # If the file doesn't exist yet or is empty, return an empty leaderboard
             pass
         return leaderboard
-
-
-# game_leaderboard = Leaderboard()
-# # game_leaderboard.add_player("Hayden")
-# # game_leaderboard.update_score("Hayden", 500000000)
-# # # Add players to the leaderboard
-# # game_leaderboard.add_player("Jamie")
-# # game_leaderboard.add_player("Sam")
-# # game_leaderboard.add_player("Finn")
-# # game_leaderboard.add_player("Scurran")
-# #
-# # # Update scores based on player achievements
-# # game_leaderboard.update_score("Jamie", 50)
-# # game_leaderboard.update_score("Sam", 30)
-# # game_leaderboard.update_score("Finn", 40)
-# # game_leaderboard.update_score("Scurran", 40)
-# # top_players = game_leaderboard.get_top_players()
-# # for player, score in top_players:
-# #     print(f"{player}: {score}")
-#
-# game_leaderboard = game_leaderboard.load_leaderboard("LeaderboardFile.txt")
-#
-# top_players = game_leaderboard.get_top_players()
-# for player, score in top_players:
-#     print(f"{player}: {score}")

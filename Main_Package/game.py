@@ -112,7 +112,7 @@ class Game:
 
         for char in text:
             print(char, end="", flush=True)
-            time.sleep(0.05)  # Adjust the delay time as needed
+            time.sleep(0.005)  # Adjust the delay time as needed
 
         while self.running:
             try:
@@ -247,8 +247,8 @@ class Game:
 
         if room_choice.lower() == 'k':
             print("you walk through the never ending halls of the mansion on "
-                  "your way to the kitchen.")
-            print("you open the door and see the chef chopping carrots while "
+                  "your way to the kitchen."
+                  "you open the door and see the chef chopping carrots while "
                   "shouting at his assistace")
             interact_choice = input("do you want to talk to the chef? (y/n) : ")
             if interact_choice.lower() == 'y':
@@ -257,16 +257,20 @@ class Game:
             else:
                 print("You walk back out of the room")
         if room_choice.lower() == "a":
+            print("you walk through the never ending halls of the mansion on "
+                  "your way to the attic.")
             interact_choice = input(
-                f"do you want to talk to the {self.attic.npc.name}? (y/n) : ")
+                f"do you want to talk to the girl? (y/n) : ")
             if interact_choice.lower() == 'y':
                 print(self.attic.interact_with_npcs)
                 print(self.attic.npc_action)
             else:
                 print("You walk back out of the room")
         if room_choice.lower() == "l":
+            print("you walk through the never ending halls of the mansion on "
+                  "your way to the library.")
             interact_choice = input(
-                "do you want to talk to the attic? (y/n) : ")
+                "do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
                 print(self.attic.interact_with_npcs)
                 print(self.attic.npc_action)
@@ -324,7 +328,8 @@ class Game:
                       "question before you end you dead")
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
-                if user_input.lower() == self.game_riddle.get_answer:
+                if (user_input.lower().strip() ==
+                        self.game_riddle.get_answer.strip()):
                     print("Very wise Detective, you my proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
@@ -432,7 +437,8 @@ class Game:
             )
             self.npcs_interacted = True
             self.inventory.add_item(Item("NPC Interaction",
-                                         "Received information from NPCs"))  # Detail needed to be added here, Storyline etc
+                                         "Received information from NPCs"))
+            # Detail needed to be added here, Storyline etc
 
             print(self.npcs[1] < self.npcs[0])
 
@@ -459,7 +465,6 @@ class Game:
             self.crime_scene.add_clue("Smell of perfume")
             self.inventory.add_item(
                 Item("Perfume Smell", "Distinct smell of perfume"))
-
             self.crime_scene.investigated = True
         else:
             print(
