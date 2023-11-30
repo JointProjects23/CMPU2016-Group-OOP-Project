@@ -7,7 +7,6 @@ class Location:
         self.all_clues_found = False
         self.number_of_clues_to_find = number_of_clues
 
-
 class Kitchen(Location):
     def __init__(self, number_of_clues):
         super().__init__(number_of_clues)
@@ -15,6 +14,8 @@ class Kitchen(Location):
         self._all_clues_found = False
         self.npc = NPC("Chef", "Get out of my Kitchen", "Goes back to "
                                                         "cooking", 50)
+    def display(self):
+        return NPC
 
     @property
     def visited(self):

@@ -5,7 +5,7 @@ from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-
+from location import  Kitchen
 
 # Define the main game class
 class Game:
@@ -19,6 +19,7 @@ class Game:
         self.__error_logger = Loggable()
         self.haunted_game = HauntedMansionGame()
         self.inventory = Inventory()  # Initialize the player's inventory
+        self.kitchen = Kitchen(4)
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
         self.started = False
@@ -135,7 +136,7 @@ class Game:
                 "'i' to interact with characters, 'e' to examine clues at "
                 "Crime Scene,"
                 "'r' to review your clues,"
-                "'d' to choose a door"
+                "'x' explore further"
                 ", or 's' to see your current score"
                 "'u' to use an item from your inventory:"
             )
@@ -181,8 +182,8 @@ class Game:
                     else:
                         print("No clues have been gathered yet.")
                         self.game_log.log("Player had no clues to review")
-            elif player_input.lower() == "d":
-                self.door_choice()
+            elif player_input.lower() == "x":
+                self.explore_options()
             elif player_input.lower() == "s":
                 self.game_log.log("Player chose to see their score")
                 print(f"Your current score is {self.__score__()}")
@@ -220,6 +221,27 @@ class Game:
             "of the mansion's owner, Lady Victoria Starling!\n"
         )
 
+    def explore_options(self):
+        explore_choice = input("you can choose to explore upstairs(1) or downstairs(2) : ")
+
+        if explore_choice == '1':
+            self.explore_upstairs()
+        elif explore_choice == '2':
+            self.door_choice()
+        else:
+            raise ValueError(f"Invalid door choice: {explore_choice}")
+
+    def explore_upstairs(self):
+        room_choice = input("youve been told to search the kitchen(k), the Library(l)"
+                            "and the attic(a). Which would you like to explore now? : ")
+
+        if room_choice.lower() == 'k':
+            print("you walk through the never ending halls of the mansion on your way to the kitchen.")
+            print("you open the door and see the chef chopping carrots while shouting at his assistace")
+            interact_choice = input("do you want to talk to the chef? (y/n) : ")
+            if interact_choice.lower() == 'y':
+                pass
+
     def door_choice(self):
         """This method handles the door examination option. User input is
         being handled. The user can make 3 choices: door 1 leads to the
@@ -237,8 +259,8 @@ class Game:
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
                 # Play mini-game only for the first door choice
-                result = self.haunted_game.play_haunted_mansion_game()
-                if result == True:
+                word_result = self.haunted_game.play_haunted_mansion_game()
+                if word_result == True:
                     self.doors_checker[0] = True
                     print(
                         "inside is a small kitchen with a butler making food\n"
