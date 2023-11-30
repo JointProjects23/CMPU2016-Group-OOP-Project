@@ -4,10 +4,9 @@ from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-from location import  Kitchen
 import time
 from location import CrimeScene
-from location import Kitchen
+from location import Kitchen, Library
 
 
 # Define the main game class
@@ -267,10 +266,11 @@ class Game:
             interact_choice = input(
                 "do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
-                print(self.attic.interact_with_npcs)
-                print(self.attic.npc_action)
+                print(self.library.interact_with_npcs)
+                print(self.library.npc_action)
             else:
                 print("You walk back out of the room")
+            self.library.save_clues()
         if room_choice.lower() == 'c':
             print("As you make your way through the winding stairs that lead \n"
                   "to the crime scene you feel all eyes are on you, you must\n"
@@ -320,13 +320,15 @@ class Game:
                 print("Those who dare to enter ahead..Prove to me you are "
                       "worthy, Beat me in this game of with..before you end "
                       "up dead")
-                self.rock_paper_scissors.play_game()
-                self.doors_checker[1] = True
-                print(
-                    "You slowly open the door to reveal a...\n"
-                    "...a dark corridor which leads you to stairs\n"
-                )
-                self.crime_scene.add_clue("The letter on the ground")
+                RPS_Result =self.rock_paper_scissors.play_game()
+                if RPS_Result == True:
+                    self.doors_checker[1] = True
+                    print(
+                        "You slowly open the door to reveal a...\n"
+                        "...a dark corridor which leads you to stairs\n"
+                    )
+                    self.crime_scene.add_clue("The letter on the ground")
+
             elif int(player_input) == 3 and not self.doors_checker[2]:
                 print("Those who dare to procced ahead..let me riddle you a "
                       "question before you end you dead")

@@ -99,8 +99,10 @@ class RockPaperScissors:
                                 "or scissors: "
                                 "").lower()
             if user_choice in self.choices:
+                self.attempts = self.attempts - 1
                 return user_choice
             else:
+                self.attempts = self.attempts - 1
                 print("What was that detective.pick only rock, paper, "
                       "or scissors!!!")
 
@@ -128,10 +130,11 @@ class RockPaperScissors:
                 f"{computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             print(result)
-            if result == "You win Detective":
-                break
+            if result == "You've won, proceed ahead...":
+                self.attempts = 0
+                return True
             print(f"You have {self.attempts} chances left Detective")
-
+        return False
 
 class Riddle:
     def __init__(self):
