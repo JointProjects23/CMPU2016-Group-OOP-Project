@@ -22,7 +22,7 @@ class Game:
         self.__error_logger = Loggable()
         self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
-        self.kitchen = Kitchen(4)
+        self.kitchen = Kitchen()
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
         self.started = False
@@ -229,7 +229,8 @@ class Game:
         )
 
     def explore_options(self):
-        explore_choice = input("you can choose to explore upstairs(1) or downstairs(2) : ")
+        explore_choice = input("you can choose to "
+                               "explore upstairs(1) or downstairs(2) : ")
 
         if explore_choice == '1':
             self.explore_upstairs()
@@ -239,15 +240,38 @@ class Game:
             raise ValueError(f"Invalid door choice: {explore_choice}")
 
     def explore_upstairs(self):
-        room_choice = input("youve been told to search the kitchen(k), the Library(l)"
-                            "and the attic(a). Which would you like to explore now? : ")
+        room_choice = input("youve been told to search the kitchen(k), "
+                            "the Library(l)"
+                            "and the attic(a). Which would you like to "
+                            "explore now? : ")
 
         if room_choice.lower() == 'k':
-            print("you walk through the never ending halls of the mansion on your way to the kitchen.")
-            print("you open the door and see the chef chopping carrots while shouting at his assistace")
+            print("you walk through the never ending halls of the mansion on "
+                  "your way to the kitchen.")
+            print("you open the door and see the chef chopping carrots while "
+                  "shouting at his assistace")
             interact_choice = input("do you want to talk to the chef? (y/n) : ")
             if interact_choice.lower() == 'y':
-                pass
+                print(self.kitchen.interact_with_npcs)
+                print(self.kitchen.npc_action)
+            else:
+                print("You walk back out of the room")
+        if room_choice.lower() == "a":
+            interact_choice = input(
+                f"do you want to talk to the {self.attic.npc.name}? (y/n) : ")
+            if interact_choice.lower() == 'y':
+                print(self.attic.interact_with_npcs)
+                print(self.attic.npc_action)
+            else:
+                print("You walk back out of the room")
+        if room_choice.lower() == "l":
+            interact_choice = input(
+                "do you want to talk to the attic? (y/n) : ")
+            if interact_choice.lower() == 'y':
+                print(self.attic.interact_with_npcs)
+                print(self.attic.npc_action)
+            else:
+                print("You walk back out of the room")
 
     def door_choice(self):
         """This method handles the door examination option. User input is
@@ -255,7 +279,8 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark passages appear before you:")
+        print("You venture forward within this decrepted mansion,Three dark "
+              "passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(

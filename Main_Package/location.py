@@ -1,5 +1,5 @@
 from character import NPC
-
+from abc import abstractmethod
 
 class Location:
     def __init__(self, number_of_clues):
@@ -36,6 +36,14 @@ class Location:
     def review_clue(self):
         return self.__clues
 
+    @property
+    def interact_with_npcs(self):
+        return self.npc.interact
+
+    @property
+    def npc_action(self):
+        return {self.npc.action}
+
 
 class CrimeScene(Location):
     def __init__(self, name):
@@ -59,6 +67,9 @@ class CrimeScene(Location):
         with open("CrimeSceneClues.txt", 'w') as file:
             file.write(f"Location: {self.__class__.__name__}\n")
             file.write(f"All clues found: {self.all_clues_found}\n")
+
+    def interact_with_npcs(self):
+        pass
 
 
 class Kitchen(Location):
@@ -95,10 +106,11 @@ class Attic(Location):
         super().__init__(2)
         self.visited = False
         self.all_clues_found = False
-        self.npc = NPC("Anne", "Hello", "Goes back to "
+        self.npc = NPC("knarF ennA", "pleH", "Goes back to "
                                         "wrtiing her journal", 15)
 
     def save_clues(self):
         with open("AtticClues.txt", 'w') as file:
             file.write(f"Location: {self.__class__.__name__}\n")
             file.write(f"All clues found: {self.all_clues_found}\n")
+
