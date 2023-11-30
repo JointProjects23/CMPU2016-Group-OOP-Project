@@ -148,13 +148,12 @@ class Game:
                 "\033[1;33m'r' to review your clues\n"
                 "\033[1;33m'd' to choose a door\n"
                 "\033[1;33m's' to see your current score \n"
-                "\033[1;33m'u' to use an item from your inventory: \n"
                 "\033[0mPlease Enter your selection: "
             )
 
             for char in text:
                 print(char, end="", flush=True)
-                time.sleep(0.01)  # Adjust the delay time as needed
+                time.sleep(0.005)  # Adjust the delay time as needed
 
             player_input = input()
 
@@ -250,10 +249,10 @@ class Game:
             raise ValueError(f"Invalid door choice: {explore_choice}")
 
     def explore_upstairs(self):
-        room_choice = input("youve been told to search the kitchen(k), "
-                            "the Library(l)"
+        room_choice = input("you have been told to search the kitchen(k), "
+                            "the Library(l) "
                             "and the attic(a). Which would you like to "
-                            "explore now? : ")
+                            "explore now?: ")
 
         if room_choice.lower() == 'k':
             print("you walk through the never ending halls of the mansion on "

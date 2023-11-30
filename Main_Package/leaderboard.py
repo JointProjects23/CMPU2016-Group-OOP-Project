@@ -33,8 +33,4 @@ class Leaderboard:
             # If the file doesn't exist yet or is empty, return an empty leaderboard
             pass
         return leaderboard
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes

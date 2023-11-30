@@ -1,9 +1,6 @@
 from character import NPC
-<<<<<<< Updated upstream
 from abc import abstractmethod
-=======
 
->>>>>>> Stashed changes
 
 class Location:
     def __init__(self, number_of_clues):
