@@ -7,8 +7,6 @@ Haayden:0
 Hayden:0
 Hayden:44
 Hayden:44
-<<<<<<< Updated upstream
-=======
 Hayden:0
-Sam:45
->>>>>>> Stashed changes
+Hayden:1
+qwec:0
