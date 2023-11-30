@@ -270,7 +270,7 @@ class Game:
             print("you walk through the never ending halls of the mansion on "
                   "your way to the library.")
             interact_choice = input(
-                "do you want to talk to the librarian? (y/n) : ")
+                "Do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
                 print(self.attic.interact_with_npcs)
                 print(self.attic.npc_action)
@@ -283,7 +283,7 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark "
+        print("You venture forward within this decrepit mansion,Three dark "
               "passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
@@ -324,13 +324,13 @@ class Game:
                 )
                 self.crime_scene.add_clue("The letter on the ground")
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print("Those who dare to procced ahead..let me riddle you a "
-                      "question before you end you dead")
+                print("Those who dare to proceed ahead..let me riddle you a "
+                      "question before you end up dead")
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
                 if (user_input.lower().strip() ==
                         self.game_riddle.get_answer.strip()):
-                    print("Very wise Detective, you my proceed")
+                    print("Very wise Detective, lucky guess, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
                         "passage...\n"
