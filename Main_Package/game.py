@@ -224,9 +224,11 @@ class Game:
         )
 
     def explore_options(self):
-        explore_choice = input("you can choose to explore upstairs(1) or "
-                               "downstairs(2) : ")
 
+        explore_choice = input("Which path do you dare to take,"
+                               "The path that leads upstairs(1) or "
+                               "The path that leads downstairs("
+                               "2) : ")
         if explore_choice == '1':
             self.explore_upstairs()
         elif explore_choice == '2':
@@ -235,21 +237,23 @@ class Game:
             raise ValueError(f"Invalid door choice: {explore_choice}")
 
     def explore_upstairs(self):
-        room_choice = input("youve been told to search the kitchen(k), the "
-                            "Library(l), the attic(a) and the crime scene(c). "
-                            "Which would you like to explore now? : ")
+        room_choice = input("As you venture forward 3 paths are revealed "
+                            "to you:\n\nA smelly old Kitchen(K)"
+                            "\nThe eyre Library(L)"
+                            "\nThe dusty Attic(A)\nWhich do you dare to "
+                            "go to first : ")
 
         if room_choice.lower() == 'k':
-            print("you walk through the never ending halls of the mansion on "
-                  "your way to the kitchen."
-                  "you open the door and see the chef chopping carrots while "
-                  "shouting at his assistace")
-            interact_choice = input("do you want to talk to the chef? (y/n) : ")
+            print('you walk through the seemingly never ending upstairs '
+                  'hallway of the mansion on your way to the smelly kitchen'
+                  'you open the door and see a creepy old man cutting carrots')
+            interact_choice = input("Do you want to talk to the chef "
+                                    "(Y/N) : ")
             if interact_choice.lower() == 'y':
                 print(self.kitchen.interact_with_npcs)
                 print(self.kitchen.npc_action)
             else:
-                print("You walk back out of the room")
+                print('Scared off interaction...How embarrassing')
         if room_choice.lower() == "a":
             print("you walk through the never ending halls of the mansion on "
                   "your way to the attic.")

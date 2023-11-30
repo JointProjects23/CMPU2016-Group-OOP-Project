@@ -77,8 +77,8 @@ class Kitchen(Location):
         super().__init__(3)
         self._visited = False
         self._all_clues_found = False
-        self.npc = NPC("Chef", "Get out of my Kitchen", "Goes back to "
-                                                        "cooking", 50)
+        self.npc = NPC("Smelly Chef", "Get out of my Kitchen", "Goes back to "
+                                                        "cooking", 69)
 
     def save_clues(self):
         with open("KitchenClues.txt", 'w') as file:
