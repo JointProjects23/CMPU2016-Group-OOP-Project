@@ -9,7 +9,6 @@ from location import CrimeScene, Kitchen, Attic, Library
 from user_registration import register_user, login_user
 
 
-
 # Define the main game class
 class Game:
     """The Game class is set up to manage the game's behavior."""
@@ -22,6 +21,8 @@ class Game:
         self.__error_logger = Loggable()
         self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
+        self.library = Library()
+        self.attic = Attic()
         self.kitchen = Kitchen()
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
@@ -104,26 +105,30 @@ class Game:
         return self.__error_logger
 
     def initialize_player(self):
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
+        while True:
+            user_choice = input("Do you want to register(R) or login(L): ")
 
-        registration_successful = register_user(username, password)
+            username = input("Enter your username: ")
+            password = input("Enter your password: ")
 
-        if registration_successful:
-            login_successful = login_user(username, password)
-
-            if login_successful:
-                self.player_name = username
-                print("Login successful!")
+            if user_choice.lower() == "r":
+                if register_user(username, password):
+                    print("Successfully Registered, enjoy the game")
+                    self.player_name = username
+                    break
+            elif user_choice.lower() == "l":
+                if login_user(username, password):
+                    print("Login successful!")
+                    self.player_name = username
+                    break
+                else:
+                    print("Login failed. Exiting...")
+                    self.running = False
+                    break
             else:
-                print("Login failed. Exiting...")
-                self.running = False
-        else:
-            print("Registration failed. Exiting...")
-            self.running = False
+                print("Please enter a valid option (R/L).")
 
     def run(self):
-        self.initialize_player()
         text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
                "You are about to embark on a thrilling " \
                "adventure as a detective\n" \
@@ -133,6 +138,8 @@ class Game:
         for char in text:
             print(char, end="", flush=True)
             time.sleep(0.005)  # Adjust the delay time as needed
+
+        self.initialize_player()
 
         while self.running:
             try:
@@ -233,7 +240,7 @@ class Game:
     def start_game(self):
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
-        self.player_name = input("Enter Your name, Detective: ")
+        print(f"Welcome {self.player_name}")
         self.game_leaderboard.add_player(self.player_name)
         self.game_log.log(f"Player entered their name as {self.player_name}")
         print(
@@ -297,13 +304,14 @@ class Game:
                 print("You walk back out of the room")
             self.library.save_clues()
         if room_choice.lower() == 'c':
-            print("As you make your way through the winding stairs that lead \n"
-                  "to the crime scene you feel all eyes are on you, you must\n"
+            print("As you make your way through the winding stairs that lead\n"
+                  " to the crime scene you feel all eyes are on you, "
+                  "you must\n"
                   "solve this crime. You reach the top of the stairs and go\n"
                   "to the bedroom were the precious jewels were stored. You\n"
                   "slowly push the door open.")
             self.game_log.log("Player chose to examine clues at "
-                            "Crime Scene")
+                              "Crime Scene")
             self.examine_clues()
 
     def door_choice(self):
@@ -328,7 +336,7 @@ class Game:
                       f"ill take your head")
                 # Play mini-game only for the first door choice
                 word_result = self.haunted_game.play_haunted_mansion_game()
-                if word_result == True:
+                if word_result:
                     self.doors_checker[0] = True
                     print(
                         "inside is a small kitchen with a butler making food\n"
@@ -338,15 +346,16 @@ class Game:
                         "extensive knowledge of the mansion's layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge " "of the mansion's layout"
+                        "Mr. Reginald's extensive knowledge " 
+                        "of the mansion's layout"
                     )
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
                       "worthy, Beat me in this game of with..before you end "
                       "up dead")
-                RPS_Result =self.rock_paper_scissors.play_game()
-                if RPS_Result == True:
+                rps_result = self.rock_paper_scissors.play_game()
+                if rps_result:
                     self.doors_checker[1] = True
                     print(
                         "You slowly open the door to reveal a...\n"

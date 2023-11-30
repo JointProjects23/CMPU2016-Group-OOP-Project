@@ -3,6 +3,7 @@
 import json
 import bcrypt
 
+
 def register_user(username, password):
     # Load existing user data from JSON file
     try:
@@ -12,9 +13,9 @@ def register_user(username, password):
         users = {}
 
     # Check if the username is already taken
-    if username in users:
+    if username.lower in users:
         print("Username already exists. Please choose a different one.")
-        return
+        return False
 
     # Hash the password using bcrypt
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -24,7 +25,8 @@ def register_user(username, password):
     with open('user_data.json', 'w') as file:
         json.dump(users, file)
 
-    print("Registration successful.")
+    return True
+
 
 def login_user(username, password):
     # Load user data from JSON file
@@ -32,23 +34,25 @@ def login_user(username, password):
         with open('user_data.json', 'r') as file:
             users = json.load(file)
     except FileNotFoundError:
-        print("No users registered yet.")
-        return
+        print("No users registered yet, please register to continue")
+        return False
 
     # Check if the username exists
     if username not in users:
-        print("Username not found.")
-        return
+        print("Username not found, please try again or register to continue")
+        return False
 
     # Retrieve hashed password
     stored_hashed_password = users[username]['hashed_password']
 
-    # Verify the entered password
-    if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
-        print("Login successful.")
-    else:
-        print("Incorrect password.")
+    counter = 3
+    while counter > 0:
+        # Verify the entered password
+        if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
+            return True
+        else:
+            print(f"Incorrect password,{counter} attempts left, try again")
+            counter -= 1
+            password = input("Enter your password: ")
 
-# Example usage:
-register_user('john_doe', 'secure_password')
-login_user('john_doe', 'secure_password')
+    return False
