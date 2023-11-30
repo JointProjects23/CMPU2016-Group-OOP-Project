@@ -1,4 +1,3 @@
-from crimeScene import CrimeScene
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
@@ -6,6 +5,8 @@ from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
 import time
+from location import CrimeScene
+
 
 
 # Define the main game class
