@@ -106,8 +106,10 @@ class Attic(Location):
         super().__init__(2)
         self.visited = False
         self.all_clues_found = False
-        self.npc = NPC("knarF ennA", "pleH", "Goes back to "
-                                        "wrtiing her journal", 15)
+
+        self.npc = NPC("Laura", "Hello how are you", "Goes back to "
+                                                     "writing her journal", 15)
+
 
     def save_clues(self):
         with open("AtticClues.txt", 'w') as file:

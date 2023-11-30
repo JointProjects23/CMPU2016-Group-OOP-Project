@@ -8,6 +8,7 @@ import time
 from location import CrimeScene, Kitchen, Attic, Library
 
 
+
 # Define the main game class
 class Game:
     """The Game class is set up to manage the game's behavior."""
@@ -136,11 +137,11 @@ class Game:
 
         if self.started:
             player_input = input(
-                "Press one of the following keys: \n'q' to quit\n'c' to continue\n"
-                "'i' to interact with characters\n'e' to examine clues at"
-                " Crime Scene\n"
+                "Press one of the following keys: \n'q' to quit\n'c' to"
+                " continue \n"
+                "'i' to interact with characters\n"
                 "'r' to review your clues\n"
-                "'x' to explore the mansion\n"
+                "'x' to explore the mansion further\n"
                 "'s' to see your current score \n"
                 "'u' to use an item from your inventory: \n"
                 "Please Enter your selection: "
@@ -171,10 +172,6 @@ class Game:
                 elif character_choice == "2":
                     self.game_log.log("Player chose to interact with NPCs")
                     self.interact_with_npcs()
-            elif player_input.lower() == "e":
-                self.game_log.log("Player chose to examine clues at "
-                                  "Crime Scene")
-                self.examine_clues()
             elif player_input.lower() == "r":
                 self.game_log.log("Player chose to review clues "
                                   "at Crime Scene")
@@ -227,11 +224,11 @@ class Game:
         )
 
     def explore_options(self):
+
         explore_choice = input("Which path do you dare to take,"
                                "The path that leads upstairs(1) or "
                                "The path that leads downstairs("
                                "2) : ")
-
         if explore_choice == '1':
             self.explore_upstairs()
         elif explore_choice == '2':
@@ -273,10 +270,20 @@ class Game:
             interact_choice = input(
                 "do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
-                print(self.attic.interact_with_npcs)
-                print(self.attic.npc_action)
+                print(self.library.interact_with_npcs)
+                print(self.library.npc_action)
             else:
                 print("You walk back out of the room")
+            self.library.save_clues()
+        if room_choice.lower() == 'c':
+            print("As you make your way through the winding stairs that lead \n"
+                  "to the crime scene you feel all eyes are on you, you must\n"
+                  "solve this crime. You reach the top of the stairs and go\n"
+                  "to the bedroom were the precious jewels were stored. You\n"
+                  "slowly push the door open.")
+            self.game_log.log("Player chose to examine clues at "
+                            "Crime Scene")
+            self.examine_clues()
 
     def door_choice(self):
         """This method handles the door examination option. User input is
@@ -317,13 +324,15 @@ class Game:
                 print("Those who dare to enter ahead..Prove to me you are "
                       "worthy, Beat me in this game of with..before you end "
                       "up dead")
-                self.rock_paper_scissors.play_game()
-                self.doors_checker[1] = True
-                print(
-                    "You slowly open the door to reveal a...\n"
-                    "...a dark corridor which leads you to stairs\n"
-                )
-                self.crime_scene.add_clue("The letter on the ground")
+                RPS_Result =self.rock_paper_scissors.play_game()
+                if RPS_Result == True:
+                    self.doors_checker[1] = True
+                    print(
+                        "You slowly open the door to reveal a...\n"
+                        "...a dark corridor which leads you to stairs\n"
+                    )
+                    self.crime_scene.add_clue("The letter on the ground")
+
             elif int(player_input) == 3 and not self.doors_checker[2]:
                 print("Those who dare to procced ahead..let me riddle you a "
                       "question before you end you dead")
@@ -440,8 +449,6 @@ class Game:
             self.inventory.add_item(Item("NPC Interaction",
                                          "Received information from NPCs"))
             # Detail needed to be added here, Storyline etc
-
-            print(self.npcs[1] < self.npcs[0])
 
     def examine_clues(self):
         if not self.crime_scene.investigated:

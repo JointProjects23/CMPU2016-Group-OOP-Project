@@ -98,9 +98,8 @@ class RockPaperScissors:
             user_choice = input("What is your choice Rock, Paper, "
                                 "or Scissors: ").lower()
             if user_choice in self.choices:
-                return user_choice
-            else:
                 print("Pick only rock, paper, or scissors!!")
+                return user_choice
 
     def get_computer_choice(self):
         return random.choice(self.choices)
