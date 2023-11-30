@@ -4,7 +4,9 @@ from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
+import time
 from location import CrimeScene
+
 
 
 # Define the main game class
@@ -100,13 +102,15 @@ class Game:
         return self.__error_logger
 
     def run(self):
-        print(
-            "Welcome to 'The Poirot Mystery'\n"
-            "You are about to embark on a thrilling "
-            "adventure as a detective\n"
-            "Your expertise is needed to solve a complex case "
-            "and unveil the truth\n"
-        )
+        text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
+               "You are about to embark on a thrilling " \
+               "adventure as a detective\n" \
+               "Your expertise is needed to solve a complex case " \
+               "and unveil the truth\n\033[0m"
+
+        for char in text:
+            print(char, end="", flush=True)
+            time.sleep(0.05)  # Adjust the delay time as needed
 
         while self.running:
             try:
@@ -132,13 +136,14 @@ class Game:
 
         if self.started:
             player_input = input(
-                "Press 'q' to quit, 'c' to continue,"
-                "'i' to interact with characters, 'e' to examine clues at "
-                "Crime Scene,"
-                "'r' to review your clues,"
-                "'d' to choose a door"
-                ", or 's' to see your current score"
-                "'u' to use an item from your inventory:"
+                "Press one of the following keys: \n'q' to quit\n'c' to continue\n"
+                "'i' to interact with characters\n'e' to examine clues at"
+                " Crime Scene\n"
+                "'r' to review your clues\n"
+                "'d' to choose a door\n"
+                "'s' to see your current score \n"
+                "'u' to use an item from your inventory: \n"
+                "Please Enter your selection: "
             )
 
             self.game_log.log(f"Player input is {player_input}.")
