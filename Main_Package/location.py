@@ -1,4 +1,4 @@
-from Main_Package.character import NPC
+from character import NPC
 
 
 class Location:
@@ -73,6 +73,7 @@ class Kitchen(Location):
         with open("KitchenClues.txt", 'w') as file:
             file.write(f"Location: {self.__class__.__name__}\n")
             file.write(f"All clues found: {self.all_clues_found}\n")
+            file.write(f"Clues found:\n{self._}")
 
 
 class Library(Location):
