@@ -1,8 +1,53 @@
 Player chose to start the game
-Player entered their name as qwec
+Player entered their name as Sam
 Successfully updating
 ---
-Player input is 1.
+Player input is i.
+Player chose to interact with characters
+Player chose to interact with witness and suspects
+Mr. Reginald  interacted with Player
+Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Mr. Reginald  provided alibi: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Lady Victoria Starling interacted with Player
+Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Ms. Parker interacted with Player
+Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
+You notice subtle body language cues indicating potential deception
+Successfully updating
+---
+Player input is r.
+Player chose to review clues at Crime Scene
+Successfully updating
+---
+Player input is e.
+Player chose to examine clues at Crime Scene
+Successfully updating
+---
+Player input is u.
+---
+Player input is .
+---
+Player input is e.
+Player chose to examine clues at Crime Scene
+Successfully updating
+---
+Player input is e.
+Player chose to examine clues at Crime Scene
+Successfully updating
+---
+Player input is i.
+Player chose to interact with characters
+Successfully updating
+---
+Player input is d.
+Player chose to enter door 1
 ---
 Player input is q.
 Player quit the game
