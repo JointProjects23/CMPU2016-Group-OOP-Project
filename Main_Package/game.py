@@ -241,14 +241,33 @@ class Game:
                             "Which would you like to explore now? : ")
 
         if room_choice.lower() == 'k':
-            print("you walk through the never ending halls of the mansion on"
-                  " your way to the kitchen.")
+            print("you walk through the never ending halls of the mansion on "
+                  "your way to the kitchen.")
             print("you open the door and see the chef chopping carrots while "
-                  "shouting at his assistant")
+                  "shouting at his assistace")
             interact_choice = input("do you want to talk to the chef? (y/n) : ")
             if interact_choice.lower() == 'y':
-                pass
-        elif room_choice.lower() == 'c':
+                print(self.kitchen.interact_with_npcs)
+                print(self.kitchen.npc_action)
+            else:
+                print("You walk back out of the room")
+        if room_choice.lower() == "a":
+            interact_choice = input(
+                f"do you want to talk to the {self.attic.npc.name}? (y/n) : ")
+            if interact_choice.lower() == 'y':
+                print(self.attic.interact_with_npcs)
+                print(self.attic.npc_action)
+            else:
+                print("You walk back out of the room")
+        if room_choice.lower() == "l":
+            interact_choice = input(
+                "do you want to talk to the attic? (y/n) : ")
+            if interact_choice.lower() == 'y':
+                print(self.attic.interact_with_npcs)
+                print(self.attic.npc_action)
+            else:
+                print("You walk back out of the room")
+        if room_choice.lower() == 'c':
             print("As you make your way through the winding stairs that lead \n"
                   "to the crime scene you feel all eyes are on you, you must\n"
                   "solve this crime. You reach the top of the stairs and go\n"
@@ -257,7 +276,6 @@ class Game:
             self.game_log.log("Player chose to examine clues at "
                             "Crime Scene")
             self.examine_clues()
-
 
     def door_choice(self):
         """This method handles the door examination option. User input is

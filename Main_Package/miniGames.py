@@ -135,14 +135,14 @@ class RockPaperScissors:
 
 class Riddle:
     def __init__(self):
+        self.line = random.randint(0, 4)
         self.__answer = self.openfile("riddle_answer.txt")
         self.riddle = self.openfile("riddle.txt")
-        self.line = random.randint(0, 4)
 
     def openfile(self, filename):
         with open(filename, 'r') as file:
             items_list = file.readlines()
-        return items_list
+        return items_list[self.line]
 
     def print_riddle(self):
         print(self.riddle)
