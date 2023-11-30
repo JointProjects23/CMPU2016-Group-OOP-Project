@@ -268,10 +268,11 @@ class Game:
                 print(self.attic.interact_with_npcs)
                 print(self.attic.npc_action)
             else:
-                print("You walk back out of the room")
+                print("Scared off interaction...How embarrassing")
         if room_choice.lower() == "l":
-            print("you walk through the never ending halls of the mansion on "
-                  "your way to the library.")
+            print("you walk through the seemingly never ending upstairs"
+                  "hallway of the mansion on your way to the eyre Library"
+                  "As you walk in you see a Librarian putting books away ")
             interact_choice = input(
                 "do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
