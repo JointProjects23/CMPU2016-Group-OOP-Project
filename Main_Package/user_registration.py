@@ -45,14 +45,14 @@ def login_user(username, password):
     # Retrieve hashed password
     stored_hashed_password = users[username]['hashed_password']
 
-    counter = 3
+    counter = 5
     while counter > 0:
         # Verify the entered password
         if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
             return True
         else:
-            print(f"Incorrect password,{counter} attempts left, try again")
             counter -= 1
+            print(f"Incorrect password,{counter} attempts left, try again")
             password = input("Enter your password: ")
 
     return False
