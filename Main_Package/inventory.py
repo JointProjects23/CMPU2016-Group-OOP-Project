@@ -1,7 +1,5 @@
 # inventory.py
 
-from item import Item
-
 class Inventory:
     """The Inventory class manages the player's inventory."""
 

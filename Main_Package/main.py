@@ -1,6 +1,5 @@
-from Main_Package.game import Game
-from Main_Package.leaderboard import Leaderboard
-from Main_Package.miniGames import play_haunted_mansion_game
+from game import Game
+from leaderboard import Leaderboard
 
 if __name__ == "__main__":
     game = Game()
@@ -10,7 +9,7 @@ if __name__ == "__main__":
     # for log in game.log.logs:
     #     print(log)
     # print("\nGame Error Logs:")
-    # for log in game.error_log.logs:
+    # for log in game.error_log.lsogs:
     #     print(log)
     game_leaderboard = Leaderboard()
     game_leaderboard = game_leaderboard.load_leaderboard("LeaderboardFile.txt")

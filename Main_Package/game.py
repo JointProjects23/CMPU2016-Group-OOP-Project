@@ -1,9 +1,8 @@
-from Main_Package.crimeScene import CrimeScene
-from Main_Package.loggable import Loggable
-from Main_Package.character import Suspect
-from Main_Package.character import NPC
-from Main_Package.character import Witness
-from Main_Package.leaderboard import Leaderboard
+from crimeScene import CrimeScene
+from loggable import Loggable
+from character import Suspect, NPC, Witness
+from leaderboard import Leaderboard
+from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
 import time
@@ -17,10 +16,11 @@ class Game:
         self.player_name = ""
         self.game_leaderboard = Leaderboard()
         self.game_log = Loggable()
+        self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        
+        self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
-
+        self.rock_paper_scissors = RockPaperScissors()
         self.running = True
         self.started = False
         self.characters_interacted = False
@@ -56,12 +56,15 @@ class Game:
                 "decides to hang around and see what will happen",
                 68,
             ),
-            NPC("Seamus", "Welcome to the mansion", "decides to walk away", 29),
-            NPC("The Child", "Go away this is my house!", "angrily storms away", 8),
+            NPC("Seamus", "Welcome to the mansion", "decides to walk away",
+                29),
+            NPC("The Child", "Go away this is my house!",
+                "angrily storms away", 8),
         ]
 
         self.doors_checker = [False] * 3
-        self.doors = ["Kitchen door", "Basement door", "Library door"]
+        self.doors = ["Hidden Passage(1)", "Hidden Passage(2)", "Hidden "
+                                                                "Passage(3)"]
 
     def __score__(self):
         score = 0
@@ -117,6 +120,7 @@ class Game:
                 self.__error_logger.log("Unexpected error from run():\n{e}.")
                 print(
                     "Unexpected caught error during running of the Game. "
+                    f"\n{e}\n"
                     "We continue playing..."
                 )
             else:
@@ -167,10 +171,12 @@ class Game:
                     self.game_log.log("Player chose to interact with NPCs")
                     self.interact_with_npcs()
             elif player_input.lower() == "e":
-                self.game_log.log("Player chose to examine clues at " "Crime Scene")
+                self.game_log.log("Player chose to examine clues at "
+                                  "Crime Scene")
                 self.examine_clues()
             elif player_input.lower() == "r":
-                self.game_log.log("Player chose to review clues " "at Crime Scene")
+                self.game_log.log("Player chose to review clues "
+                                  "at Crime Scene")
                 if self.crime_scene:
                     clues = self.crime_scene.review_clue()
                     if clues:
@@ -186,8 +192,9 @@ class Game:
                 self.game_log.log("Player chose to see their score")
                 print(f"Your current score is {self.__score__()}")
             elif player_input.lower() == "u":
-                item_name = input("Enter the name of the item you want to use: ")
-                self.inventory.use_item(item_name, self)
+                item_name = input(
+                    "Enter the name of the item you want to use: ")
+                self.inventory.use_item(item_name)
             else:
                 raise ValueError("Incorrect user entry.")
 
@@ -207,7 +214,7 @@ class Game:
     def start_game(self):
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
-        self.player_name = input("Enter your detective's name: ")
+        self.player_name = input("Enter Your name, Detective: ")
         self.game_leaderboard.add_player(self.player_name)
         self.game_log.log(f"Player entered their name as {self.player_name}")
         print(
@@ -224,16 +231,21 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You decide to choose a door to investigate:")
+        print("You venture forward within this decrepted mansion,Three dark passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(
-            input("Enter the number of the door you want to investigate: ")
+            input("Which passage will you venture through...Brave"
+                  f"detective:")
         )
 
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
+                print("Those who dare to enter ahead..guess this word...or "
+                      f"ill take your head")
+                # Play mini-game only for the first door choice
+                self.haunted_game.play_haunted_mansion_game()
                 self.doors_checker[0] = True
                 print(
                     "inside is a small kitchen with a butler making food\n"
@@ -246,6 +258,10 @@ class Game:
                     "Mr. Reginald's extensive knowledge " "of the mansion's layout"
                 )
             elif int(player_input) == 2 and not self.doors_checker[1]:
+                print("Those who dare to enter ahead..Prove to me you are "
+                      "worthy, Beat me in this game of with..before you end "
+                      "up dead")
+                self.rock_paper_scissors.play_game()
                 self.doors_checker[1] = True
                 print(
                     "You slowly open the door to reveal a...\n"
@@ -253,24 +269,34 @@ class Game:
                 )
                 self.crime_scene.add_clue("The letter on the ground")
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print(
-                    "You open the library door to reveal a hidden\n"
-                    "passage...\n"
-                    "What secrets does it hold?"
-                )
-                self.crime_scene.add_clue("The hidden passage " "behind library door")
-                self.doors_checker[2] = True
+                print("Those who dare to procced ahead..let me riddle you a "
+                      "question before you end you dead")
+                self.game_riddle.print_riddle()
+                user_input = input("What is your guess Detective:")
+                if user_input.lower() == self.game_riddle.get_answer:
+                    print("Very wise Detective, you my proceed")
+                    print(
+                        "You open the library door to reveal a hidden\n"
+                        "passage...\n"
+                        "What secrets does it hold?"
+                    )
+                    self.crime_scene.add_clue("The hidden passage "
+                                              "behind library door")
+                    self.doors_checker[2] = True
+                else:
+                    print("Not very smart for a Detective, are you")
+
             else:
                 self.game_log.log(
                     f"Player chose to enter door {player_input} "
                     f"but they had already looked inside"
                 )
                 print(
-                    f"You have looked in the {self.doors[player_input - 1]} "
-                    f"already."
+                    f"You've already been to {self.doors[player_input - 1]} "
+                    f"Detective."
                 )
         else:
-            raise ValueError(f"Invalid door choice: {player_input}")
+            raise ValueError(f"Invalid door choice Detective: {player_input}")
 
     def interact_with_characters(self):
         if not self.characters_interacted:
@@ -281,7 +307,8 @@ class Game:
             print(clue_suspect)  # keep the outputs going
             self.inventory.add_item(Item("Clue from Suspect", clue_suspect))
             self.game_log.log(f"{self.suspect.name} interacted with Player")
-            self.game_log.log(f"{self.suspect.name} provided clue:" f" {clue_suspect}")
+            self.game_log.log(
+                f"{self.suspect.name} provided clue:" f" {clue_suspect}")
 
             # this adds the suspect alibi to a variable
             # adds it to the clue list,
@@ -290,13 +317,15 @@ class Game:
             self.crime_scene.add_clue(suspect_alibi)
             print(suspect_alibi)
             print(self.suspect.perform_action())
-            self.game_log.log(f"{self.suspect.name} " f"provided alibi: {clue_suspect}")
+            self.game_log.log(
+                f"{self.suspect.name} " f"provided alibi: {clue_suspect}")
 
             clue_witness = self.witness.interact()
             self.crime_scene.add_clue(clue_witness)
             print(clue_witness)
             self.game_log.log(f"{self.witness.name} interacted with Player")
-            self.game_log.log(f"{self.suspect.name} " f"provided clue: {clue_suspect}")
+            self.game_log.log(
+                f"{self.suspect.name} " f"provided clue: {clue_suspect}")
 
             # this adds the witness observation to a variable adds
             # it to the clue list, then prints that and the witness action
@@ -313,7 +342,8 @@ class Game:
             self.crime_scene.add_clue(clue_witness)
             print(clue_witness)
             self.game_log.log(f"{self.witness2.name} interacted with Player")
-            self.game_log.log(f"{self.suspect.name} " f"provided clue: {clue_suspect}")
+            self.game_log.log(
+                f"{self.suspect.name} " f"provided clue: {clue_suspect}")
 
             # this adds the witness2 observation
             # to a variable adds it to the clue list, then prints that and
@@ -343,13 +373,15 @@ class Game:
                 interaction = npc.interact
                 action = npc.perform_action()
                 print(f"{interaction}\n{action}")
-                self.game_log.log(f"{npc.name} said to the player:" f" {npc.dialogue}")
+                self.game_log.log(
+                    f"{npc.name} said to the player:" f" {npc.dialogue}")
             self.crime_scene.add_clue(
                 "Three people hanging around the Crime Scene"
                 "who have nothing to do with the crime"
             )
             self.npcs_interacted = True
-            self.inventory.add_item(Item("NPC Interaction", "Received information from NPCs")) # Detail needed to be added here, Storyline etc
+            self.inventory.add_item(Item("NPC Interaction",
+                                         "Received information from NPCs"))  # Detail needed to be added here, Storyline etc
 
             print(self.npcs[1] < self.npcs[0])
 
@@ -365,13 +397,17 @@ class Game:
 
             # Add items to the inventory when examining clues
             self.crime_scene.add_clue("Torn fabric")
-            self.inventory.add_item(Item("Torn Fabric", "A torn piece of fabric near the window"))
+            self.inventory.add_item(
+                Item("Torn Fabric", "A torn piece of fabric near the window"))
             self.crime_scene.add_clue("Broken glass near window")
-            self.inventory.add_item(Item("Broken Glass", "Glass pieces near the window"))
+            self.inventory.add_item(
+                Item("Broken Glass", "Glass pieces near the window"))
             self.crime_scene.add_clue("An overturned table at crime scene")
-            self.inventory.add_item(Item("Overturned Table", "Table overturned at the crime scene"))
+            self.inventory.add_item(Item("Overturned Table",
+                                         "Table overturned at the crime scene"))
             self.crime_scene.add_clue("Smell of perfume")
-            self.inventory.add_item(Item("Perfume Smell", "Distinct smell of perfume"))
+            self.inventory.add_item(
+                Item("Perfume Smell", "Distinct smell of perfume"))
 
             self.crime_scene.investigated = True
         else:
@@ -381,14 +417,15 @@ class Game:
             )
 
     def continue_game(self):
-        print("You continue your investigation, determined to solve the " "mystery...")
+        print("You continue your investigation, determined to solve the "
+              "mystery...")
 
     def end_game(self):
         # Finds the score from the magic method score
         final_score = self.__score__()
 
-        log_filename = input("Please enter a filename to save the logs:")
-        self.log.save_logs_to_file(log_filename)
+        # log_filename = input("Please enter a filename to save the logs:")
+        self.log.save_logs_to_file("blah")
 
         print(f"Game Over! Your final score was {final_score}")
         self.game_log.log(
