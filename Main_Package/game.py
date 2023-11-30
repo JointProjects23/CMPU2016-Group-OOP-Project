@@ -6,6 +6,7 @@ from inventory import Inventory
 from item import Item
 import time
 from location import CrimeScene, Kitchen, Attic, Library
+from user_registration import register_user, login_user
 
 
 
@@ -102,7 +103,27 @@ class Game:
     def error_log(self):
         return self.__error_logger
 
+    def initialize_player(self):
+        username = input("Enter your username: ")
+        password = input("Enter your password: ")
+
+        registration_successful = register_user(username, password)
+
+        if registration_successful:
+            login_successful = login_user(username, password)
+
+            if login_successful:
+                self.player_name = username
+                print("Login successful!")
+            else:
+                print("Login failed. Exiting...")
+                self.running = False
+        else:
+            print("Registration failed. Exiting...")
+            self.running = False
+
     def run(self):
+        self.initialize_player()
         text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
                "You are about to embark on a thrilling " \
                "adventure as a detective\n" \

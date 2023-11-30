@@ -1,19 +1,43 @@
 import random
 
-
 class HauntedMansionGame:
     def __init__(self, secret_word, max_attempts=6):
+        """
+        Initialize a HauntedMansionGame instance.
+
+        Parameters:
+        - secret_word (str): The secret word to be guessed.
+        - max_attempts (int): The maximum number of attempts allowed for guessing the word. Default is 6.
+
+        Returns:
+        None
+        """
         self.secret_word = secret_word.lower()
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
         self.guessed_letters = set()
 
     def display_word(self):
+        """
+        Display the current state of the secret word, revealing guessed letters and hiding others.
+
+        Returns:
+        str: The formatted secret word display.
+        """
         return ' '.join(
             letter if letter in self.guessed_letters else '_' for letter in
             self.secret_word)
 
     def check_guess(self, guess):
+        """
+        Check the validity of the guess and update the game state accordingly.
+
+        Parameters:
+        - guess (str): The user's guess, either a single letter or a complete word.
+
+        Returns:
+        None
+        """
         guess = guess.lower()
         if len(guess) == 1 and guess.isalpha():
             self.check_letter(guess)
@@ -23,6 +47,15 @@ class HauntedMansionGame:
             print("You may enter a full word or single letter as your guess")
 
     def check_letter(self, guess):
+        """
+        Check a single letter guess and update the game state.
+
+        Parameters:
+        - guess (str): The single letter guessed by the user.
+
+        Returns:
+        int or None: Returns 1 if the guessed letter is correct, None otherwise.
+        """
         if guess in self.guessed_letters:
             print("STOP GUESSING THE SAME WORD DETECTIVE.")
             return
@@ -37,6 +70,15 @@ class HauntedMansionGame:
             return 1
 
     def check_word(self, guess):
+        """
+        Check a complete word guess and update the game state.
+
+        Parameters:
+        - guess (str): The complete word guessed by the user.
+
+        Returns:
+        None
+        """
         if guess == self.secret_word:
             self.guessed_letters = set(self.secret_word)
         else:
@@ -50,19 +92,42 @@ class HauntedMansionGame:
                     self.remaining_attempts -= 1
 
     def is_winner(self):
+        """
+        Check if the user has guessed the entire word correctly.
+
+        Returns:
+        bool: True if the user has guessed the entire word, False otherwise.
+        """
         return set(self.secret_word) == self.guessed_letters
 
     def is_game_over(self):
+        """
+        Check if the game is over due to reaching the maximum attempts.
+
+        Returns:
+        bool: True if the game is over, False otherwise.
+        """
         return self.remaining_attempts <= 0
 
     def get_random_word(self):
+        """
+        Get a random word from a predefined list.
+
+        Returns:
+        str: A random word.
+        """
         words = ['specter', 'haunt', 'apparition', 'phantom', 'spirit',
-                 'wraith',
-                 'poltergeist']
+                 'wraith', 'poltergeist']
         return random.choice(words)
 
     def play_haunted_mansion_game(self):
-        print("Wanna Play a guessing game Detective??\nWhat word could i "
+        """
+        Play the Haunted Mansion guessing game.
+
+        Returns:
+        int: 1 if the user wins, 0 if the game is lost.
+        """
+        print("Wanna Play a guessing game Detective??\nWhat word could I "
               "possibly be thinking of...")
         print(
             f"\nCareful detective you only have {self.max_attempts} guesses "
@@ -90,10 +155,22 @@ class HauntedMansionGame:
 
 class RockPaperScissors:
     def __init__(self):
+        """
+        Initialize a RockPaperScissors instance.
+
+        Returns:
+        None
+        """
         self.choices = ["rock", "paper", "scissors"]
         self.attempts = 3
 
     def get_user_choice(self):
+        """
+        Get the user's choice for Rock, Paper, or Scissors.
+
+        Returns:
+        str: The user's choice.
+        """
         while True:
             user_choice = input("What is your choice Rock, Paper, "
                                 "or Scissors: ").lower()
@@ -102,9 +179,25 @@ class RockPaperScissors:
                 return user_choice
 
     def get_computer_choice(self):
+        """
+        Get the computer's random choice for Rock, Paper, or Scissors.
+
+        Returns:
+        str: The computer's choice.
+        """
         return random.choice(self.choices)
 
     def determine_winner(self, user_choice, computer_choice):
+        """
+        Determine the winner of the Rock, Paper, Scissors game.
+
+        Parameters:
+        - user_choice (str): The user's choice.
+        - computer_choice (str): The computer's choice.
+
+        Returns:
+        bool: True if the user wins, False otherwise.
+        """
         if user_choice == computer_choice:
             print("Draw!!")
             return False
@@ -118,6 +211,12 @@ class RockPaperScissors:
             return False
 
     def play_game(self):
+        """
+        Play the Rock, Paper, Scissors game.
+
+        Returns:
+        None
+        """
         print("This game is Rock, Paper, Scissors!"
               "You have 3 tries, or you are not allowed in!")
         while self.attempts > 0:
