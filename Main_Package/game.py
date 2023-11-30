@@ -7,6 +7,8 @@ from item import Item
 from location import  Kitchen
 import time
 from location import CrimeScene
+import json
+
 
 
 
@@ -68,6 +70,7 @@ class Game:
         self.doors_checker = [False] * 3
         self.doors = ["Hidden Passage(1)", "Hidden Passage(2)", "Hidden "
                                                                 "Passage(3)"]
+
 
     def __score__(self):
         score = 0
@@ -137,16 +140,23 @@ class Game:
          choice to start the game or quit."""
 
         if self.started:
-            player_input = input(
-                "Press one of the following keys: \n'q' to quit\n'c' to continue\n"
-                "'i' to interact with characters\n'e' to examine clues at"
-                " Crime Scene\n"
-                "'r' to review your clues\n"
-                "'d' to choose a door\n"
-                "'s' to see your current score \n"
-                "'u' to use an item from your inventory: \n"
-                "Please Enter your selection: "
+            text = (
+                "\033[1;32mPress one of the following keys: \n"
+                "\033[1;33m'q' to quit\n'c' to continue\n"
+                "\033[1;33m'i' to interact with characters\n"
+                "\033[1;33m'e' to examine clues at Crime Scene\n"
+                "\033[1;33m'r' to review your clues\n"
+                "\033[1;33m'd' to choose a door\n"
+                "\033[1;33m's' to see your current score \n"
+                "\033[1;33m'u' to use an item from your inventory: \n"
+                "\033[0mPlease Enter your selection: "
             )
+
+            for char in text:
+                print(char, end="", flush=True)
+                time.sleep(0.01)  # Adjust the delay time as needed
+
+            player_input = input()
 
             self.game_log.log(f"Player input is {player_input}.")
 

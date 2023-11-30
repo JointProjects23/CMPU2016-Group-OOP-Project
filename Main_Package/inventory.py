@@ -15,8 +15,8 @@ class Inventory:
         """Use an item from the inventory."""
         for item in self.items:
             if item.name.lower() == item_name.lower():
-                item.use()
+                # item.use()  # Remove the call to item.use()
                 self.items.remove(item)
-                print(f"{item.name} has been removed from your inventory.")
+                # print(f"{item.name} has been removed from your inventory.")  # Remove the print statement
                 return
         print(f"You don't have {item_name} in your inventory.")
