@@ -22,7 +22,7 @@ class Game:
         self.__error_logger = Loggable()
         self.haunted_game = HauntedMansionGame("batch")
         self.inventory = Inventory()  # Initialize the player's inventory
-        self.kitchen = Kitchen(4)
+        self.kitchen = Kitchen()
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
         self.started = False
@@ -138,11 +138,11 @@ class Game:
 
         if self.started:
             player_input = input(
-                "Press one of the following keys: \n'q' to quit\n'c' to continue\n"
-                "'i' to interact with characters\n'e' to examine clues at"
-                " Crime Scene\n"
+                "Press one of the following keys: \n'q' to quit\n'c' to"
+                " continue \n"
+                "'i' to interact with characters\n"
                 "'r' to review your clues\n"
-                "'d' to choose a door\n"
+                "'x' to explore the mansion further\n"
                 "'s' to see your current score \n"
                 "'u' to use an item from your inventory: \n"
                 "Please Enter your selection: "
@@ -173,10 +173,6 @@ class Game:
                 elif character_choice == "2":
                     self.game_log.log("Player chose to interact with NPCs")
                     self.interact_with_npcs()
-            elif player_input.lower() == "e":
-                self.game_log.log("Player chose to examine clues at "
-                                  "Crime Scene")
-                self.examine_clues()
             elif player_input.lower() == "r":
                 self.game_log.log("Player chose to review clues "
                                   "at Crime Scene")
@@ -229,7 +225,8 @@ class Game:
         )
 
     def explore_options(self):
-        explore_choice = input("you can choose to explore upstairs(1) or downstairs(2) : ")
+        explore_choice = input("you can choose to explore upstairs(1) or "
+                               "downstairs(2) : ")
 
         if explore_choice == '1':
             self.explore_upstairs()
@@ -239,15 +236,28 @@ class Game:
             raise ValueError(f"Invalid door choice: {explore_choice}")
 
     def explore_upstairs(self):
-        room_choice = input("youve been told to search the kitchen(k), the Library(l)"
-                            "and the attic(a). Which would you like to explore now? : ")
+        room_choice = input("youve been told to search the kitchen(k), the "
+                            "Library(l), the attic(a) and the crime scene(c). "
+                            "Which would you like to explore now? : ")
 
         if room_choice.lower() == 'k':
-            print("you walk through the never ending halls of the mansion on your way to the kitchen.")
-            print("you open the door and see the chef chopping carrots while shouting at his assistace")
+            print("you walk through the never ending halls of the mansion on"
+                  " your way to the kitchen.")
+            print("you open the door and see the chef chopping carrots while "
+                  "shouting at his assistant")
             interact_choice = input("do you want to talk to the chef? (y/n) : ")
             if interact_choice.lower() == 'y':
                 pass
+        elif room_choice.lower() == 'c':
+            print("As you make your way through the winding stairs that lead \n"
+                  "to the crime scene you feel all eyes are on you, you must\n"
+                  "solve this crime. You reach the top of the stairs and go\n"
+                  "to the bedroom were the precious jewels were stored. You\n"
+                  "slowly push the door open.")
+            self.game_log.log("Player chose to examine clues at "
+                            "Crime Scene")
+            self.examine_clues()
+
 
     def door_choice(self):
         """This method handles the door examination option. User input is
@@ -255,7 +265,8 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark passages appear before you:")
+        print("You venture forward within this decrepted mansion,Three dark "
+              "passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(
@@ -408,8 +419,6 @@ class Game:
             self.npcs_interacted = True
             self.inventory.add_item(Item("NPC Interaction",
                                          "Received information from NPCs"))  # Detail needed to be added here, Storyline etc
-
-            print(self.npcs[1] < self.npcs[0])
 
     def examine_clues(self):
         if not self.crime_scene.investigated:
