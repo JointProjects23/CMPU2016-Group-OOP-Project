@@ -246,11 +246,12 @@ class Game:
                             "explore now? : ")
 
         if room_choice.lower() == 'k':
-            print("you walk through the never ending halls of the mansion on "
-                  "your way to the kitchen."
-                  "you open the door and see the chef chopping carrots while "
-                  "shouting at his assistace")
-            interact_choice = input("do you want to talk to the chef? (y/n) : ")
+            print('you walk through the seemingly never ending upstairs \n'
+                  'hallway of the mansion on your way to the smelly kitchen \n'
+                  'you open the door and see a creepy old man cutting carrots')
+            interact_choice = input("Do you want to talk to the chef "
+                                    "(Y/N) : ")
+
             if interact_choice.lower() == 'y':
                 print(self.kitchen.interact_with_npcs)
                 print(self.kitchen.npc_action)
@@ -268,7 +269,8 @@ class Game:
                 print("You walk back out of the room")
         if room_choice.lower() == "l":
             print("you walk through the never ending halls of the mansion on "
-                  "your way to the library.")
+                  "your way to the library\n"
+                  "The door is open and you see someone in the corner")
             interact_choice = input(
                 "Do you want to talk to the librarian? (y/n) : ")
             if interact_choice.lower() == 'y':
