@@ -324,7 +324,7 @@ class Game:
                       "question before you end you dead")
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
-                if user_input.lower() == self.game_riddle.get_answer:
+                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
                     print("Very wise Detective, you my proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
