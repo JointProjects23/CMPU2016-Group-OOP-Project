@@ -11,19 +11,6 @@ class Leaderboard:
         """
         self._scores = {}
 
-    def add_player(self, player_name):
-        """
-        Add a new player to the leaderboard with an initial score of 0.
-
-        Parameters:
-        - player_name (str): The name of the player to be added.
-
-        Returns:
-        None
-        """
-        if player_name not in self._scores:
-            self._scores[player_name] = 0
-
     def update_score(self, player_name, score):
         """
         Update the score of a player.
