@@ -109,6 +109,10 @@ class Game:
         while True:
             user_choice = input("Do you want to register(R) or login(L): ")
 
+            if user_choice.lower() not in ["r", "l"]:
+                print("Please enter a valid option (R/L).")
+                continue
+
             username = input("Enter your username: ")
             password = input("Enter your password: ")
 
@@ -117,17 +121,17 @@ class Game:
                     print("Successfully Registered, enjoy the game")
                     self.player_name = username.lower()
                     break
+                else:
+                    print("Registration failed. Please choose a different username.")
             elif user_choice.lower() == "l":
                 if login_user(username, password):
                     print("Login successful!")
                     self.player_name = username.lower()
                     break
                 else:
-                    print("Login failed. Exiting...")
+                    print("Login failed. Please check your username and password.")
                     self.running = False
                     break
-            else:
-                print("Please enter a valid option (R/L).")
 
     def update_user_score(self, username, score):
         try:
