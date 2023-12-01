@@ -52,6 +52,7 @@ class Leaderboard:
         Leaderboard: A new instance of the Leaderboard class with data loaded from the file.
         """
         leaderboard = Leaderboard()
+        user_data = {}  # Initialize an empty dictionary
         try:
             with open(filename, 'r') as file:
                 user_data = json.load(file)
@@ -60,9 +61,8 @@ class Leaderboard:
             pass
 
         for player, info in user_data.items():
-            if "name" in info and "score" in player:
+            if "name" in info and "score" in info:
                 leaderboard._scores[info["name"]] = info["score"]
-
 
         return leaderboard
 

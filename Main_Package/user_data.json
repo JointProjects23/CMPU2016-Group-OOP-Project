@@ -58,5 +58,10 @@
     "name": "whbd",
     "hashed_password": "$2b$12$3wwewWZO15y0630k4Sv2pupj8vaV0s6zxNqqYssa8No6fcQGYTXt6",
     "score": 0
+  },
+  "sam": {
+    "name": "Sam",
+    "hashed_password": "$2b$12$qVAj5ygjpPhB9d894NgD9eB9.GB6hmh8JFTOP71NUO4GzCizojNRy",
+    "score": 3
   }
 }
