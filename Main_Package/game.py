@@ -118,7 +118,9 @@ class Game:
         return self.__error_logger
 
     def initialize_player(self):
-        while True:
+        max_login_attempts = 3
+
+        while max_login_attempts > 0:
             user_choice = input("Do you want to register(R) or login(L): ")
 
             if user_choice.lower() not in ["r", "l"]:
@@ -141,9 +143,15 @@ class Game:
                     self.player_name = username.lower()
                     break
                 else:
-                    print("Login failed. Please check your username and password.")
-                    self.running = False
-                    break
+                    print("Login failed. Incorrect username or password. Attempts remaining:",
+                          max_login_attempts - 1)
+                    max_login_attempts -= 1
+                    if max_login_attempts == 0:
+                        print("Maximum login attempts reached. Exiting...")
+                        self.running = False
+                        break
+                    else:
+                        print("Invalid option. Please enter 'R' for registration or 'L' for login.")
 
     def update_user_score(self, username, score):
         try:
