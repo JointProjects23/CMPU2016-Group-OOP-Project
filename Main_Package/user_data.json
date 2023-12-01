@@ -3,11 +3,16 @@
     "hashed_password": "$2b$12$FdR.6.0mBlbqJ5LLBlNk7.GBDYBA4lH/6EeX7w6/SquW9HEh5zC.q",
     "Score:": 10
   },
-  "sam": {
-    "hashed_password": "$2b$12$mffL2eA5zOKFOIqMvbFhB.A5BhabCUFLkbCnoKzQSiQ7Hpl59RccG",
+  "hayden": {
+    "hashed_password": "$2b$12$ED4MACvLRNSdNSwzTNRAGu2qa1XA9Al7jwYJz7q5f6Rd21RrNubAS",
     "score": 0
   },
-  "Sam": {
+  "hayd": {
+    "hashed_password": "$2b$12$dXOaI9AMDTVt2njyO9gYieqK0v.R/7o3IxqVFpKPR1IpBarRt.iSS",
     "score": 41
+  },
+  "john": {
+    "hashed_password": "$2b$12$oV5q3nLWqwEYM7hqZazzPuRy6x0r/LHA25Cy0ThMQVmRUEYYVQ7ta",
+    "score": 3
   }
 }

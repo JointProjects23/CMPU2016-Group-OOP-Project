@@ -48,7 +48,8 @@ def login_user(username, password):
     counter = 5
     while counter > 0:
         # Verify the entered password
-        if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
+        if bcrypt.checkpw(password.encode('utf-8'),
+                          stored_hashed_password.encode('utf-8')):
             return True
         else:
             counter -= 1

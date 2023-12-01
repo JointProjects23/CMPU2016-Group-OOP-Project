@@ -115,7 +115,7 @@ class Game:
             if user_choice.lower() == "r":
                 if register_user(username, password):
                     print("Successfully Registered, enjoy the game")
-                    self.player_name = username
+                    self.player_name = username.lower()
                     break
             elif user_choice.lower() == "l":
                 if login_user(username, password):
@@ -136,7 +136,7 @@ class Game:
         except FileNotFoundError:
             user_data = {}
 
-        user_data[username] = {"score": score}
+        user_data[username.lower()]["score"] = score
 
         with open('user_data.json', 'w') as file:
             json.dump(user_data, file, indent=2)
