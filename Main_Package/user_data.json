@@ -2,5 +2,12 @@
   "john_doe": {
     "hashed_password": "$2b$12$FdR.6.0mBlbqJ5LLBlNk7.GBDYBA4lH/6EeX7w6/SquW9HEh5zC.q",
     "Score:": 10
+  },
+  "sam": {
+    "hashed_password": "$2b$12$mffL2eA5zOKFOIqMvbFhB.A5BhabCUFLkbCnoKzQSiQ7Hpl59RccG",
+    "score": 0
+  },
+  "Sam": {
+    "score": 41
   }
 }

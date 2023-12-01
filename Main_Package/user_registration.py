@@ -13,17 +13,17 @@ def register_user(username, password):
         users = {}
 
     # Check if the username is already taken
-    if username.lower in users:
+    if username.lower() in users:
         print("Username already exists. Please choose a different one.")
         return False
 
     # Hash the password using bcrypt
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    # Save user data to JSON file
-    users[username] = {'hashed_password': hashed_password.decode('utf-8')}
+    # Save user data to JSON file with an initial score of 0
+    users[username.lower()] = {'hashed_password': hashed_password.decode('utf-8'), 'score': 0}
     with open('user_data.json', 'w') as file:
-        json.dump(users, file)
+        json.dump(users, file, indent=2)
 
     return True
 

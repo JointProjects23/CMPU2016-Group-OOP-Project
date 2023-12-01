@@ -1,10 +1,11 @@
+import time
+import json
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-import time
 from location import CrimeScene, Kitchen, Attic, Library
 from user_registration import register_user, login_user
 
@@ -127,6 +128,18 @@ class Game:
                     break
             else:
                 print("Please enter a valid option (R/L).")
+
+    def update_user_score(self, username, score):
+        try:
+            with open('user_data.json', 'r') as file:
+                user_data = json.load(file)
+        except FileNotFoundError:
+            user_data = {}
+
+        user_data[username] = {"score": score}
+
+        with open('user_data.json', 'w') as file:
+            json.dump(user_data, file, indent=2)
 
     def run(self):
         text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
@@ -525,7 +538,10 @@ class Game:
         self.game_log.log(
             f"Player ended the game with a final score of" f" {final_score}"
         )
-        self.game_leaderboard.update_score(self.player_name, final_score)
+
+        # Update user's score in user_data.json
+        self.update_user_score(self.player_name, final_score)
+
         self.game_leaderboard.save_leaderboard("LeaderboardFile.txt")
         if final_score > 35:
             print("Well done, that's impressive!!")
