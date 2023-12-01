@@ -103,8 +103,10 @@ class Game:
 
     def reward_for_game_completion(self, game_name):
         print(f"You are rewarded for completing the {game_name} game!")
-        self.game_scores[game_name] += 10  # Adjust the score based on your preference
-        print(f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
+        self.game_scores[
+            game_name] += 10  # Adjust the score based on your preference
+        print(
+            f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
         # We may need to add additional rewards or messages as needed below
 
     @property
@@ -136,22 +138,25 @@ class Game:
                     self.player_name = username.lower()
                     break
                 else:
-                    print("Registration failed. Please choose a different username.")
+                    print(
+                        "Registration failed. Please choose a different username.")
             elif user_choice.lower() == "l":
                 if login_user(username, password):
                     print("Login successful!")
                     self.player_name = username.lower()
                     break
                 else:
-                    print("Login failed. Incorrect username or password. Attempts remaining:",
-                          max_login_attempts - 1)
+                    print(
+                        "Login failed. Incorrect username or password. Attempts remaining:",
+                        max_login_attempts - 1)
                     max_login_attempts -= 1
                     if max_login_attempts == 0:
                         print("Maximum login attempts reached. Exiting...")
                         self.running = False
                         break
                     else:
-                        print("Invalid option. Please enter 'R' for registration or 'L' for login.")
+                        print(
+                            "Invalid option. Please enter 'R' for registration or 'L' for login.")
 
     def update_user_score(self, username, score):
         try:
@@ -381,7 +386,7 @@ class Game:
                         "extensive knowledge of the mansion's layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge " 
+                        "Mr. Reginald's extensive knowledge "
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
@@ -404,7 +409,8 @@ class Game:
 
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print("Those who dare to proceed ahead...let me riddle you a question before you end up dead")
+                print(
+                    "Those who dare to proceed ahead...let me riddle you a question before you end up dead")
                 # Use the new methods from the updated Riddle class
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
@@ -416,7 +422,8 @@ class Game:
                         "passage...\n"
                         "What secrets does it hold?"
                     )
-                    self.crime_scene.add_clue("The hidden passage behind the library door")
+                    self.crime_scene.add_clue(
+                        "The hidden passage behind the library door")
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
                     self.reward_for_game_completion('riddle_game')
@@ -582,29 +589,30 @@ class Game:
             print("That's disappointing... expected better from you")
 
     def store_clues(self):
-        crime_scene_clues = self.crime_scene.save_clues(self.player_name)
-        attic_clues = self.attic.save_clues(self.player_name)
-        kitchen_clues = self.kitchen.save_clues(self.player_name)
-        library_clues = self.library.save_clues(self.player_name)
-
-        # Initialize an empty dictionary for all clues
-        all_clues = {}
-
-        # Loop through each set of clues and update the all_clues dictionary
-        for clues in (
-        crime_scene_clues, attic_clues, kitchen_clues, library_clues):
-            for username, data in clues.items():
-                if username not in all_clues:
-                    all_clues[username] = {}
-                all_clues[username].update(data)
-
         try:
             with open('user_data.json', 'r') as file:
                 user_data = json.load(file)
         except FileNotFoundError:
             user_data = {}
 
-        user_data[self.player_name]["clues"] = all_clues
+        user_data[self.player_name]["Location_clues"] = {
+                "CrimeScene": {
+                    "All clues found": self.crime_scene.all_clues_found,
+                    "Clues": self.crime_scene.review_clue()
+                },
+                "Attic": {
+                    "All clues found": self.attic.all_clues_found,
+                    "Clues": self.attic.review_clue()
+                },
+                "Kitchen": {
+                    "All clues found": self.kitchen.all_clues_found,
+                    "Clues": self.kitchen.review_clue()
+                },
+                "Library": {
+                    "All clues found": self.library.all_clues_found,
+                    "Clues": self.library.review_clue()
+                }
+        }
 
         with open('user_data.json', 'w') as file:
             json.dump(user_data, file, indent=2)

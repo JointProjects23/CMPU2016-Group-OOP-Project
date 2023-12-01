@@ -111,19 +111,6 @@ class Location:
         """
         return {self.npc.action}
 
-    def save_clues(self, username,):
-        clues_data = {}
-
-        user_clues = {
-            "Location": self.__class__.__name__,
-            "All clues found": self.all_clues_found,
-            "Clues": self.__clues
-        }
-
-        clues_data[username] = {"clues": user_clues}
-
-        return clues_data
-
 
 class CrimeScene(Location):
     def __init__(self, name):
