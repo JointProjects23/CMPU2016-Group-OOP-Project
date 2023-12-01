@@ -20,7 +20,7 @@ class Game:
         self.game_log = Loggable()
         self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        self.haunted_game = HauntedMansionGame("batch")
+        self.haunted_game = HauntedMansionGame()
         self.inventory = Inventory()  # Initialize the player's inventory
         self.library = Library()
         self.attic = Attic()
@@ -120,7 +120,7 @@ class Game:
             elif user_choice.lower() == "l":
                 if login_user(username, password):
                     print("Login successful!")
-                    self.player_name = username
+                    self.player_name = username.lower()
                     break
                 else:
                     print("Login failed. Exiting...")
@@ -136,7 +136,7 @@ class Game:
         except FileNotFoundError:
             user_data = {}
 
-        user_data[username.lower()]["score"] = score
+        user_data[username]["score"] = score
 
         with open('user_data.json', 'w') as file:
             json.dump(user_data, file, indent=2)
@@ -254,8 +254,6 @@ class Game:
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
         print(f"Welcome {self.player_name}")
-        self.game_leaderboard.add_player(self.player_name)
-        self.game_log.log(f"Player entered their name as {self.player_name}")
         print(
             f"As the renowned detective, {self.player_name},\n"
             "you were called in to solve the baffling case of the "
@@ -542,7 +540,6 @@ class Game:
         # Update user's score in user_data.json
         self.update_user_score(self.player_name, final_score)
 
-        self.game_leaderboard.save_leaderboard("LeaderboardFile.txt")
         if final_score > 35:
             print("Well done, that's impressive!!")
         else:

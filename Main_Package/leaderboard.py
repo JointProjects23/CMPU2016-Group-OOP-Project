@@ -1,3 +1,6 @@
+import json
+
+
 class Leaderboard:
     def __init__(self):
         """
@@ -38,20 +41,6 @@ class Leaderboard:
         sorted_scores = sorted(self._scores.items(), key=lambda x: x[1], reverse=True)
         return sorted_scores[:num_players]
 
-    def save_leaderboard(self, filename):
-        """
-        Save the leaderboard to a file.
-
-        Parameters:
-        - filename (str): The name of the file to save the leaderboard data.
-
-        Returns:
-        None
-        """
-        with open(filename, 'a') as file:
-            for player, score in self._scores.items():
-                file.write(f"{player}:{score}\n")
-
     def load_leaderboard(self, filename):
         """
         Load a leaderboard from a file.
@@ -65,15 +54,15 @@ class Leaderboard:
         leaderboard = Leaderboard()
         try:
             with open(filename, 'r') as file:
-                for line in file:
-                    # Check if the line contains a colon (:) before splitting
-                    if ':' in line:
-                        player, score = line.strip().split(':')
-                        leaderboard._scores[player] = int(score)
-                    else:
-                        print(f"Ignoring invalid line: {line}")
+                user_data = json.load(file)
         except FileNotFoundError:
             # If the file doesn't exist yet or is empty, return an empty leaderboard
             pass
+
+        for player, info in user_data.items():
+            if "name" in info and "score" in player:
+                leaderboard._scores[info["name"]] = info["score"]
+
+
         return leaderboard
 

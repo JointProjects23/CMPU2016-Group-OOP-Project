@@ -21,7 +21,8 @@ def register_user(username, password):
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     # Save user data to JSON file with an initial score of 0
-    users[username.lower()] = {'hashed_password': hashed_password.decode('utf-8'), 'score': 0}
+    users[username.lower()] = {"name": username, 'hashed_password':
+    hashed_password.decode('utf-8'), 'score': 0}
     with open('user_data.json', 'w') as file:
         json.dump(users, file, indent=2)
 

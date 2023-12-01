@@ -1,7 +1,8 @@
 import random
+import json
 
 class HauntedMansionGame:
-    def __init__(self, secret_word, max_attempts=6):
+    def __init__(self, max_attempts=6):
         """
         Initialize a HauntedMansionGame instance.
 
@@ -12,7 +13,7 @@ class HauntedMansionGame:
         Returns:
         None
         """
-        self.secret_word = secret_word.lower()
+        self.secret_word = self.get_random_word()
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
         self.guessed_letters = set()
@@ -116,9 +117,10 @@ class HauntedMansionGame:
         Returns:
         str: A random word.
         """
-        words = ['specter', 'haunt', 'apparition', 'phantom', 'spirit',
-                 'wraith', 'poltergeist']
-        return random.choice(words)
+        with open('game_data.json', 'r') as file:
+            game_data = json.load(file)
+
+        return random.choice(game_data["Secret_words"])
 
     def play_haunted_mansion_game(self):
         """
