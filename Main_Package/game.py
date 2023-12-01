@@ -261,7 +261,7 @@ class Game:
                 print('Scared off interaction...How embarrassing')
         if room_choice.lower() == "a":
             print("you walk through the never ending halls of the mansion on "
-                  "your way to the attic.")
+                  "your way to the dusty attic.")
             interact_choice = input(
                 f"do you want to talk to the girl? (y/n) : ")
             if interact_choice.lower() == 'y':
