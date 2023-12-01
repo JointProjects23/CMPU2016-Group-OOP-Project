@@ -2,66 +2,38 @@
   "john_doe": {
     "name": "John",
     "hashed_password": "$2b$12$FdR.6.0mBlbqJ5LLBlNk7.GBDYBA4lH/6EeX7w6/SquW9HEh5zC.q",
-    "Score:": 10
+    "Score:": 10,
+    "clues": {
+      "CrimeScene": "",
+      "Attic": ""
+    }
   },
   "hayden": {
     "name": "Hayden",
-    "hashed_password": "$2b$12$ED4MACvLRNSdNSwzTNRAGu2qa1XA9Al7jwYJz7q5f6Rd21RrNubAS",
-    "score": 0
+    "hashed_password": "$2b$12$E9kChIwrFOlaZsiYkj65FeRiAuxNocMXERV/dChesAoBwKPurz0lm",
+    "score": 41,
+    "clues": {
+      "hayden": {
+        "clues": {
+          "Location": "Library",
+          "All clues found": false,
+          "Clues": []
+        }
+      }
+    }
   },
-  "hayd": {
-    "name": "Hayd",
-    "hashed_password": "$2b$12$dXOaI9AMDTVt2njyO9gYieqK0v.R/7o3IxqVFpKPR1IpBarRt.iSS",
-    "score": 41
-  },
-  "john": {
-    "name": "John",
-    "hashed_password": "$2b$12$oV5q3nLWqwEYM7hqZazzPuRy6x0r/LHA25Cy0ThMQVmRUEYYVQ7ta",
-    "score": 3
-  },
-  "hayden3": {
-    "name": "Hayden3",
-    "hashed_password": "$2b$12$qRYsnUe1sQCMdAR9jBvcieLA0M1ooe9A78OecfMLp6.g/dXQtrkZ2",
-    "score": 0
-  },
-  "hayden4": {
-    "name": "Hayden4",
-    "hashed_password": "$2b$12$kkhj3pupaqbhZw6sU6/wveg6UdPc8lsrCAOqr3x4QZd81H4f2m4E.",
-    "score": 0
-  },
-  "hayden5": {
-    "name": "Hayden5",
-    "hashed_password": "$2b$12$722tOBv.hugkGh/FnAnl6.BoCZqHgwyK8IUGzjBp4LlAiY0y0M/hK",
-    "score": 0
-  },
-  "hayde": {
-    "name": "hayde",
-    "hashed_password": "$2b$12$MxmIqltGk/p/A64t.YgVYO96DvYgDX8a21iSKnBntmqaHuvsSKiPS",
-    "score": 0
-  },
-  "wfwoeubc": {
-    "name": "wfwoeubc",
-    "hashed_password": "$2b$12$ie5RGHnjStMyy4VgrxjmEeAGuplE7U/awMJjGXuJdiWG8Ka7MW3oS",
-    "score": 0
-  },
-  "rf": {
-    "name": "rf",
-    "hashed_password": "$2b$12$PWdj/1ZavXLZS5XM4hqpJeiUl5FDaPFWLXGdcOVSmAe.ovJIBlD/W",
-    "score": 0
-  },
-  "dsc": {
-    "name": "dsc",
-    "hashed_password": "$2b$12$QB90u7nVZNO/j7x89UgBVOwXukIbcow9org2kOkeuqzjjuyGA24aC",
-    "score": 0
-  },
-  "whbd": {
-    "name": "whbd",
-    "hashed_password": "$2b$12$3wwewWZO15y0630k4Sv2pupj8vaV0s6zxNqqYssa8No6fcQGYTXt6",
-    "score": 0
-  },
-  "sam": {
-    "name": "Sam",
-    "hashed_password": "$2b$12$qVAj5ygjpPhB9d894NgD9eB9.GB6hmh8JFTOP71NUO4GzCizojNRy",
-    "score": 3
+  "hayden123": {
+    "name": "Hayden123",
+    "hashed_password": "$2b$12$/w3WpYHwajtNYQmmKZ6JO.yTqxyLQzqTNE/VkkbDoJfeRq7k5cBgC",
+    "score": 41,
+    "clues": {
+      "hayden123": {
+        "clues": {
+          "Location": "Library",
+          "All clues found": false,
+          "Clues": []
+        }
+      }
+    }
   }
 }
