@@ -70,6 +70,12 @@ class Game:
         self.doors_checker = [False] * 3
         self.doors = ["Hidden Passage(1)", "Hidden Passage(2)", "Hidden "
                                                                 "Passage(3)"]
+        self.game_scores = {
+            "Haunted Mansion": 0,
+            "Rock Paper Scissors": 0,
+            "Riddle": 0,
+            # Add more games as needed
+        }
 
     def __score__(self):
         score = 0
@@ -94,6 +100,12 @@ class Game:
             score += len(self.crime_scene.review_clue())
 
         return score
+
+    def reward_for_game_completion(self, game_name):
+        print(f"You are rewarded for completing the {game_name} game!")
+        self.game_scores[game_name] += 10  # Adjust the score based on your preference
+        print(f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
+        # We may need to add additional rewards or messages as needed below
 
     @property
     def log(self):
@@ -364,6 +376,8 @@ class Game:
                         "Mr. Reginald's extensive knowledge " 
                         "of the mansion's layout"
                     )
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('haunted_game')
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
@@ -377,23 +391,27 @@ class Game:
                         "...a dark corridor which leads you to stairs\n"
                     )
                     self.crime_scene.add_clue("The letter on the ground")
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('rock_paper_scissors')
+
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print("Those who dare to procced ahead..let me riddle you a "
-                      "question before you end you dead")
+                print("Those who dare to proceed ahead...let me riddle you a question before you end up dead")
+                # Use the new methods from the updated Riddle class
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
-                if (user_input.lower().strip() ==
-                        self.game_riddle.get_answer.strip()):
-                    print("Very wise Detective, you my proceed")
+                # Access the answer using the get_answer property
+                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
+                    print("Very wise Detective, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
                         "passage...\n"
                         "What secrets does it hold?"
                     )
-                    self.crime_scene.add_clue("The hidden passage "
-                                              "behind library door")
+                    self.crime_scene.add_clue("The hidden passage behind the library door")
                     self.doors_checker[2] = True
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('riddle_game')
                 else:
                     print("Not very smart for a Detective, are you")
 
@@ -530,11 +548,16 @@ class Game:
               "mystery...")
 
     def end_game(self):
-        # Finds the score from the magic method score
-        final_score = self.__score__()
+        # Find the scores from the individual games
+        haunted_game_score = self.game_scores["Haunted Mansion"]
+        rps_score = self.game_scores["Rock Paper Scissors"]
+        riddle_score = self.game_scores["Riddle"]
+
+        # Calculate the final total score
+        final_score = self.__score__() + haunted_game_score + rps_score + riddle_score
 
         # log_filename = input("Please enter a filename to save the logs:")
-        self.log.save_logs_to_file("blah")
+        self.log.save_logs_to_file("log_file")
 
         print(f"Game Over! Your final score was {final_score}")
         self.game_log.log(

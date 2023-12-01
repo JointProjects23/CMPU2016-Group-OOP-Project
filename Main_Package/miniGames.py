@@ -41,11 +41,13 @@ class HauntedMansionGame:
         """
         guess = guess.lower()
         if len(guess) == 1 and guess.isalpha():
-            self.check_letter(guess)
+            return self.check_letter(guess)
         elif len(guess) == len(self.secret_word) and guess.isalpha():
-            self.check_word(guess)
+            return self.check_word(guess)
         else:
-            print("You may enter a full word or single letter as your guess")
+            print("Please enter a valid single letter or a complete word.")
+            return None
+
 
     def check_letter(self, guess):
         """
@@ -58,17 +60,17 @@ class HauntedMansionGame:
         int or None: Returns 1 if the guessed letter is correct, None otherwise.
         """
         if guess in self.guessed_letters:
-            print("STOP GUESSING THE SAME WORD DETECTIVE.")
-            return
-
-        self.guessed_letters.add(guess)
-        self.remaining_attempts -= 1
-
-        if guess not in self.secret_word:
-            print(f"'{guess}'Tis not the word, Stupid Detective.")
+            print("You already guessed that letter.")
         else:
-            print(f"'{guess}'Well done...Detective")
-            return 1
+            self.guessed_letters.add(guess)
+            self.remaining_attempts -= 1
+            if guess not in self.secret_word:
+                print(f"'{guess}' is not in the word.")
+            else:
+                print(f"'{guess}' is in the word.")
+                if self.is_winner():
+                    return 1  # User wins if they guessed the entire word
+        return 0  # User did not win
 
     def check_word(self, guess):
         """
@@ -82,15 +84,18 @@ class HauntedMansionGame:
         """
         if guess == self.secret_word:
             self.guessed_letters = set(self.secret_word)
+            return 1  # User wins if they guessed the entire word
         else:
-            for letter in guess:
-                if letter in self.secret_word and letter not in self.guessed_letters:
-                    print(f"'{letter}' is a letter in the word, getting "
-                          f"close Detective.")
-                    self.guessed_letters.add(letter)
-                elif letter not in self.secret_word:
-                    print(f"'{letter}' Tis not in the word Detective.")
-                    self.remaining_attempts -= 1
+            correct_letters = set(letter for letter in guess if letter in self.secret_word)
+
+            if correct_letters:
+                self.guessed_letters.update(correct_letters)
+                print(f"Correct letters: {', '.join(correct_letters)}")
+            else:
+                self.remaining_attempts -= 1
+                print(f"Incorrect word guess. You have {self.remaining_attempts} guesses remaining. Choose carefully.")
+
+            return 0  # User did not win
 
     def is_winner(self):
         """
@@ -112,15 +117,25 @@ class HauntedMansionGame:
 
     def get_random_word(self):
         """
-        Get a random word from a predefined list.
+        Get a random word from the 'Secret_words' list in 'game_data.json'.
 
         Returns:
         str: A random word.
         """
-        with open('game_data.json', 'r') as file:
-            game_data = json.load(file)
+        try:
+            with open('game_data.json', 'r') as file:
+                game_data = json.load(file)
 
-        return random.choice(game_data["Secret_words"])
+            secret_words = game_data.get("Secret_words", [])
+            if secret_words:
+                return random.choice(secret_words).lower()  # Convert to lowercase for case-insensitive comparison
+            else:
+                print("No secret words found in 'game_data.json'.")
+                return ""
+        except FileNotFoundError:
+            print("'game_data.json' not found.")
+            return ""
+
 
     def play_haunted_mansion_game(self):
         """
@@ -129,31 +144,21 @@ class HauntedMansionGame:
         Returns:
         int: 1 if the user wins, 0 if the game is lost.
         """
-        print("Wanna Play a guessing game Detective??\nWhat word could I "
-              "possibly be thinking of...")
-        print(
-            f"\nCareful detective you only have {self.max_attempts} guesses "
-            f"for my word"
-            f" to unlock the hidden passage.")
+        print("Welcome to the Haunted Mansion!\nCan you guess the secret word?")
+        print(f"You have {self.max_attempts} attempts.")
         print(self.display_word())
 
         while not self.is_game_over():
-            guess = input("What is your guess Detective:")
-            self.check_guess(guess)
+            guess = input("Enter your guess: ")
+            result = self.check_guess(guess)
             print(self.display_word())
 
-            if self.is_winner():
-                print(
-                    f"Surprise, Surprise you actually got it right "
-                    f"Detective...You may enter")
+            if result == 1:
+                print("Congratulations! You guessed the entire word.")
                 return 1
 
-            if self.is_game_over():
-                print(
-                    f"Get out of here Detective, MY WORD WAS '"
-                    f"{self.secret_word}'.")
-                return 0
-
+        print(f"Game over! The secret word was '{self.secret_word}'.")
+        return 0
 
 class RockPaperScissors:
     def __init__(self):
@@ -177,8 +182,9 @@ class RockPaperScissors:
             user_choice = input("What is your choice Rock, Paper, "
                                 "or Scissors: ").lower()
             if user_choice in self.choices:
-                print("Pick only rock, paper, or scissors!!")
                 return user_choice
+            else:
+                print("Pick only rock, paper, or scissors!!")
 
     def get_computer_choice(self):
         """
@@ -206,10 +212,11 @@ class RockPaperScissors:
         elif (user_choice == "rock" and computer_choice == "scissors") or \
                 (user_choice == "paper" and computer_choice == "rock") or \
                 (user_choice == "scissors" and computer_choice == "paper"):
+            print("You win!")
             return True
         else:
             self.attempts -= 1
-            print("Another win for me")
+            print(f"Another win for me. You have {self.attempts} chances left.")
             return False
 
     def play_game(self):
@@ -219,35 +226,35 @@ class RockPaperScissors:
         Returns:
         None
         """
-        print("This game is Rock, Paper, Scissors!"
-              "You have 3 tries, or you are not allowed in!")
+        print("This game is Rock, Paper, Scissors! You have 3 tries, or you are not allowed in!")
         while self.attempts > 0:
             user_choice = self.get_user_choice()
             computer_choice = self.get_computer_choice()
-            print(
-                f"You chose {user_choice}. I chose "
-                f"{computer_choice}.")
+            print(f"You chose {user_choice}. I chose {computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             if result:
-                print("You win!")
                 break
-            print(f"You have {self.attempts} chances left")
+            if self.attempts > 0:
+                print(f"You have {self.attempts} chances left.")
+            else:
+                print("You are out of attempts. Game over!")
 
 
 class Riddle:
     def __init__(self):
-        self.line = random.randint(0, 4)
-        self.__answer = self.openfile("riddle_answer.txt")
-        self.riddle = self.openfile("riddle.txt")
+        self.riddles_and_answers = self.load_riddles_and_answers()
+        self.current_riddle = None  # Store the current riddle
 
-    def openfile(self, filename):
-        with open(filename, 'r') as file:
-            items_list = file.readlines()
-        return items_list[self.line]
+    def load_riddles_and_answers(self):
+        with open("game_data.json", "r") as file:
+            data = json.load(file)
+        return data
 
     def print_riddle(self):
-        print(self.riddle)
+        self.current_riddle = random.choice(list(self.riddles_and_answers["Riddles"].keys()))
+        print(self.current_riddle)
 
     @property
     def get_answer(self):
-        return self.__answer
+        return self.riddles_and_answers["Riddles"].get(self.current_riddle, "")
+

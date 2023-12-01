@@ -63,5 +63,10 @@
     "name": "Sam",
     "hashed_password": "$2b$12$qVAj5ygjpPhB9d894NgD9eB9.GB6hmh8JFTOP71NUO4GzCizojNRy",
     "score": 3
+  },
+  "samuel": {
+    "name": "Samuel",
+    "hashed_password": "$2b$12$21n5uascC2R7YDMH5uSQe.ojn3tfM6W0nHYF4SYE5dw/p1XWLQHcS",
+    "score": 1
   }
 }
