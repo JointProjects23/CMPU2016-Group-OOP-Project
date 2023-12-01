@@ -287,33 +287,37 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark "
+        print("You venture forward within this decrepit mansion,Three dark "
               "passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(
-            input("Which passage will you venture through...Brave"
-                  f"detective:")
+            input("Which passage will you venture through...Brave "
+                  "detective:")
         )
 
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
             self.game_log.log(f"Player chose to enter door {player_input}")
             if int(player_input) == 1 and not self.doors_checker[0]:
-                print("Those who dare to enter ahead..guess this word...or "
-                      f"ill take your head")
+                print("\nAs you approach the first passage way you notice an "
+                      "inscription along the wall: It reads\n\t\t"
+                      "\"Those brave enough to proceed ahead guess this"
+                      "secret word or you might just end up dead\"")
                 # Play mini-game only for the first door choice
                 word_result = self.haunted_game.play_haunted_mansion_game()
-                if word_result == True:
+                if word_result:
                     self.doors_checker[0] = True
                     print(
-                        "inside is a small kitchen with a butler making food\n"
-                        "you ask him who he is  and he tells you hes the "
+                        "As you walk through the first dark passage way, "
+                        "the lights hanging from the ceiling begin to flicker\n"
+                        "you ask him who he is  and he tells you he's the "
                         "the mansion's butler, Mr. Reginald\n"
-                        "after talking, you realise he has a suspiciously "
+                        "after talking, you realize he has a suspiciously "
                         "extensive knowledge of the mansion's layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge " "of the mansion's layout"
+                        "Mr. Reginald's extensive knowledge "
+                        "of the mansion's layout"
                     )
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
@@ -328,20 +332,19 @@ class Game:
                 )
                 self.crime_scene.add_clue("The letter on the ground")
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print("Those who dare to procced ahead..let me riddle you a "
-                      "question before you end you dead")
+                print("Those who dare to proceed ahead..let me riddle you a "
+                      "question before you end up dead")
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
-                if (user_input.lower().strip() ==
-                        self.game_riddle.get_answer.strip()):
-                    print("Very wise Detective, you my proceed")
+                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
+                    print("Very wise Detective, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
                         "passage...\n"
                         "What secrets does it hold?"
                     )
                     self.crime_scene.add_clue("The hidden passage "
-                                              "behind library door")
+                                              "behind the library door")
                     self.doors_checker[2] = True
                 else:
                     print("Not very smart for a Detective, are you")
@@ -357,7 +360,6 @@ class Game:
                 )
         else:
             raise ValueError(f"Invalid door choice Detective: {player_input}")
-
     def interact_with_characters(self):
         if not self.characters_interacted:
             print("You decide to interact with the characters in the room.")

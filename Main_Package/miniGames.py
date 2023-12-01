@@ -1,5 +1,6 @@
 import random
 
+import random
 
 class HauntedMansionGame:
     def __init__(self, secret_word, max_attempts=6):
@@ -7,86 +8,121 @@ class HauntedMansionGame:
         self.max_attempts = max_attempts
         self.remaining_attempts = max_attempts
         self.guessed_letters = set()
+        self.incorrect_guess_count = 0  # Track incorrect guesses
+        self.five_letter_incorrect_count = 0  # Track incorrect guesses for 5-letter words
 
     def display_word(self):
-        return ' '.join(
-            letter if letter in self.guessed_letters else '_' for letter in
-            self.secret_word)
+        revealed_word = ''
+        for i, letter in enumerate(self.secret_word):
+            if letter in self.guessed_letters or self.five_letter_incorrect_count > 0:
+                revealed_word += letter + ' '
+            else:
+                revealed_word += '_ '
+        return revealed_word.strip()
 
     def check_guess(self, guess):
         guess = guess.lower()
         if len(guess) == 1 and guess.isalpha():
-            self.check_letter(guess)
+            print("Single letters are not allowed. Please enter a 5-letter word.")
         elif len(guess) == len(self.secret_word) and guess.isalpha():
             self.check_word(guess)
         else:
-            print("You may enter a full word or single letter as your guess")
+            print("What could the word possibly be? "
+                  "(Please input a 5-letter word or a single letter):")
 
     def check_letter(self, guess):
         if guess in self.guessed_letters:
-            print("STOP GUESSING THE SAME WORD DETECTIVE.")
+            print("STOP GUESSING THE SAME LETTER DETECTIVE.")
             return
 
         self.guessed_letters.add(guess)
         self.remaining_attempts -= 1
 
         if guess not in self.secret_word:
-            print(f"'{guess}'Tis not the word, Stupid Detective.")
+            self.incorrect_guess_count += 1
+            print(f"'{guess}' Tis not the letter, Detective. "
+                  f"Incorrect guesses: {self.incorrect_guess_count}")
+            if self.incorrect_guess_count >= 5:
+                print("You can no longer venture here, Detective.")
         else:
-            print(f"'{guess}'Well done...Detective")
-            return 1
+            print(f"'{guess}' Well done...Detective")
 
     def check_word(self, guess):
-        if guess == self.secret_word:
-            self.guessed_letters = set(self.secret_word)
+        if len(guess) == 5:
+            # Check for 5-letter word
+            if guess == self.secret_word:
+                self.guessed_letters = set(self.secret_word)
+                print("Correct word! Well done...Detective")
+            else:
+                self.incorrect_guess_count += 1
+                self.five_letter_incorrect_count += 1
+
+                print(f"'{guess}' is not the correct word, Detective. "
+                      f"Incorrect guesses: {self.incorrect_guess_count}")
+
+                if self.five_letter_incorrect_count >= 5:
+                    print("You can no longer venture here, Detective.")
+                    self.remaining_attempts = 0
+                else:
+                    print("You can try again, Detective.")
+                    self.remaining_attempts -= 1
+
         else:
+            # Handle incorrect guess for non-5-letter words
             for letter in guess:
                 if letter in self.secret_word and letter not in self.guessed_letters:
                     print(f"'{letter}' is a letter in the word, getting "
                           f"close Detective.")
                     self.guessed_letters.add(letter)
                 elif letter not in self.secret_word:
-                    print(f"'{letter}' Tis not in the word Detective.")
-                    self.remaining_attempts -= 1
+                    self.incorrect_guess_count += 1
+                    print(f"'{letter}' Tis not in the word Detective. "
+                          f"Incorrect guesses: {self.incorrect_guess_count}")
+                    if self.incorrect_guess_count >= 5:
+                        print("You can no longer venture here, Detective.")
+                        self.remaining_attempts = 0
+                    else:
+                        self.remaining_attempts -= 1
 
     def is_winner(self):
         return set(self.secret_word) == self.guessed_letters
 
     def is_game_over(self):
-        return self.remaining_attempts <= 0
+        return self.remaining_attempts <= 0 or self.incorrect_guess_count >= 5
 
     def get_random_word(self):
         words = ['specter', 'haunt', 'apparition', 'phantom', 'spirit',
-                 'wraith',
-                 'poltergeist']
+                 'wraith', 'poltergeist']
         return random.choice(words)
 
     def play_haunted_mansion_game(self):
-        print("Wanna Play a guessing game Detective??\nWhat word could i "
-              "possibly be thinking of...")
+        print("\nThis takes you back for a moment; you ponder your choices and decide "
+              "it's for the best to listen to the inscription on the wall.\n"
+              "What word could it possibly be? Maybe there are clues elsewhere?")
         print(
-            f"\nCareful detective you only have {self.max_attempts} guesses "
-            f"for my word"
-            f" to unlock the hidden passage.")
+            f"\nCareful detective, you only have {self.max_attempts} guesses "
+            f"to venture down this passageway.")
         print(self.display_word())
 
         while not self.is_game_over():
-            guess = input("What is your guess Detective:")
+            guess = input("What is your guess, Detective: ")
             self.check_guess(guess)
             print(self.display_word())
 
             if self.is_winner():
                 print(
-                    f"Surprise, Surprise you actually got it right "
-                    f"Detective...You may enter")
+                    f"Surprise, Surprise! You actually got it right, "
+                    f"Detective...You begin to pass through the passageway, "
+                    f"confident in your abilities to solve this mystery.")
                 return 1
 
             if self.is_game_over():
                 print(
-                    f"Get out of here Detective, MY WORD WAS '"
-                    f"{self.secret_word}'.")
+                    f"You are suddenly pushed back from the passageway. "
+                    f"The word \"{self.secret_word}\" echoes through the hallway. "
+                    f"You have guessed the word wrong, and you begin to realize "
+                    f"going back through the passageway is not possible.")
                 return 0
-
 
 class RockPaperScissors:
     def __init__(self):
@@ -95,13 +131,13 @@ class RockPaperScissors:
 
     def get_user_choice(self):
         while True:
-            user_choice = input("What is your choice Detective rock, paper, "
+            user_choice = input("What is your choice Detective, rock, paper, "
                                 "or scissors: "
                                 "").lower()
             if user_choice in self.choices:
                 return user_choice
             else:
-                print("What was that detective.pick only rock, paper, "
+                print("What was that detective? Pick only rock, paper, "
                       "or scissors!!!")
 
     def get_computer_choice(self):
@@ -128,9 +164,15 @@ class RockPaperScissors:
                 f"{computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             print(result)
-            if result == "You win Detective":
+            if result == "You've won, proceed ahead...":
+                print(
+                    "You've proven your worth in the game of Rock, Paper, Scissors."
+                    "Proceeding ahead to the next challenge..."
+                )
                 break
-            print(f"You have {self.attempts} chances left Detective")
+            else:
+                self.attempts -= 1
+                print(f"You have {self.attempts} chances left Detective")
 
 
 class Riddle:
