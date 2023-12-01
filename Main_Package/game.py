@@ -1,12 +1,13 @@
+import time
+import json
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-import time
 from location import CrimeScene, Kitchen, Attic, Library
-
+from user_registration import register_user, login_user
 
 
 # Define the main game class
@@ -19,8 +20,10 @@ class Game:
         self.game_log = Loggable()
         self.game_riddle = Riddle()
         self.__error_logger = Loggable()
-        self.haunted_game = HauntedMansionGame("batch")
+        self.haunted_game = HauntedMansionGame()
         self.inventory = Inventory()  # Initialize the player's inventory
+        self.library = Library()
+        self.attic = Attic()
         self.kitchen = Kitchen()
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
@@ -67,6 +70,12 @@ class Game:
         self.doors_checker = [False] * 3
         self.doors = ["Hidden Passage(1)", "Hidden Passage(2)", "Hidden "
                                                                 "Passage(3)"]
+        self.game_scores = {
+            "Haunted Mansion": 0,
+            "Rock Paper Scissors": 0,
+            "Riddle": 0,
+            # Add more games as needed
+        }
 
     def __score__(self):
         score = 0
@@ -92,6 +101,12 @@ class Game:
 
         return score
 
+    def reward_for_game_completion(self, game_name):
+        print(f"You are rewarded for completing the {game_name} game!")
+        self.game_scores[game_name] += 10  # Adjust the score based on your preference
+        print(f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
+        # We may need to add additional rewards or messages as needed below
+
     @property
     def log(self):
         # to do: think of some appropriate access checks here. For example,
@@ -101,6 +116,54 @@ class Game:
     @property
     def error_log(self):
         return self.__error_logger
+
+    def initialize_player(self):
+        max_login_attempts = 3
+
+        while max_login_attempts > 0:
+            user_choice = input("Do you want to register(R) or login(L): ")
+
+            if user_choice.lower() not in ["r", "l"]:
+                print("Please enter a valid option (R/L).")
+                continue
+
+            username = input("Enter your username: ")
+            password = input("Enter your password: ")
+
+            if user_choice.lower() == "r":
+                if register_user(username, password):
+                    print("Successfully Registered, enjoy the game")
+                    self.player_name = username.lower()
+                    break
+                else:
+                    print("Registration failed. Please choose a different username.")
+            elif user_choice.lower() == "l":
+                if login_user(username, password):
+                    print("Login successful!")
+                    self.player_name = username.lower()
+                    break
+                else:
+                    print("Login failed. Incorrect username or password. Attempts remaining:",
+                          max_login_attempts - 1)
+                    max_login_attempts -= 1
+                    if max_login_attempts == 0:
+                        print("Maximum login attempts reached. Exiting...")
+                        self.running = False
+                        break
+                    else:
+                        print("Invalid option. Please enter 'R' for registration or 'L' for login.")
+
+    def update_user_score(self, username, score):
+        try:
+            with open('user_data.json', 'r') as file:
+                user_data = json.load(file)
+        except FileNotFoundError:
+            user_data = {}
+
+        user_data[username]["score"] = score
+
+        with open('user_data.json', 'w') as file:
+            json.dump(user_data, file, indent=2)
 
     def run(self):
         text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
@@ -112,6 +175,8 @@ class Game:
         for char in text:
             print(char, end="", flush=True)
             time.sleep(0.005)  # Adjust the delay time as needed
+
+        self.initialize_player()
 
         while self.running:
             try:
@@ -212,9 +277,7 @@ class Game:
     def start_game(self):
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
-        self.player_name = input("Enter Your name, Detective: ")
-        self.game_leaderboard.add_player(self.player_name)
-        self.game_log.log(f"Player entered their name as {self.player_name}")
+        print(f"Welcome {self.player_name}")
         print(
             f"As the renowned detective, {self.player_name},\n"
             "you were called in to solve the baffling case of the "
@@ -276,13 +339,14 @@ class Game:
                 print("You walk back out of the room")
             self.library.save_clues()
         if room_choice.lower() == 'c':
-            print("As you make your way through the winding stairs that lead \n"
-                  "to the crime scene you feel all eyes are on you, you must\n"
+            print("As you make your way through the winding stairs that lead\n"
+                  " to the crime scene you feel all eyes are on you, "
+                  "you must\n"
                   "solve this crime. You reach the top of the stairs and go\n"
                   "to the bedroom were the precious jewels were stored. You\n"
                   "slowly push the door open.")
             self.game_log.log("Player chose to examine clues at "
-                            "Crime Scene")
+                              "Crime Scene")
             self.examine_clues()
 
     def door_choice(self):
@@ -307,7 +371,7 @@ class Game:
                       f"ill take your head")
                 # Play mini-game only for the first door choice
                 word_result = self.haunted_game.play_haunted_mansion_game()
-                if word_result == True:
+                if word_result:
                     self.doors_checker[0] = True
                     print(
                         "inside is a small kitchen with a butler making food\n"
@@ -317,38 +381,45 @@ class Game:
                         "extensive knowledge of the mansion's layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge " "of the mansion's layout"
+                        "Mr. Reginald's extensive knowledge " 
+                        "of the mansion's layout"
                     )
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('haunted_game')
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
                       "worthy, Beat me in this game of with..before you end "
                       "up dead")
-                RPS_Result =self.rock_paper_scissors.play_game()
-                if RPS_Result == True:
+                rps_result = self.rock_paper_scissors.play_game()
+                if rps_result:
                     self.doors_checker[1] = True
                     print(
                         "You slowly open the door to reveal a...\n"
                         "...a dark corridor which leads you to stairs\n"
                     )
                     self.crime_scene.add_clue("The letter on the ground")
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('rock_paper_scissors')
+
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print("Those who dare to procced ahead..let me riddle you a "
-                      "question before you end you dead")
+                print("Those who dare to proceed ahead...let me riddle you a question before you end up dead")
+                # Use the new methods from the updated Riddle class
                 self.game_riddle.print_riddle()
                 user_input = input("What is your guess Detective:")
-                if (user_input.lower().strip() ==
-                        self.game_riddle.get_answer.strip()):
-                    print("Very wise Detective, you my proceed")
+                # Access the answer using the get_answer property
+                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
+                    print("Very wise Detective, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
                         "passage...\n"
                         "What secrets does it hold?"
                     )
-                    self.crime_scene.add_clue("The hidden passage "
-                                              "behind library door")
+                    self.crime_scene.add_clue("The hidden passage behind the library door")
                     self.doors_checker[2] = True
+                    # Calls the method reward_for_game_completion adds to the users score.
+                    self.reward_for_game_completion('riddle_game')
                 else:
                     print("Not very smart for a Detective, are you")
 
@@ -485,19 +556,55 @@ class Game:
               "mystery...")
 
     def end_game(self):
-        # Finds the score from the magic method score
-        final_score = self.__score__()
+        # Find the scores from the individual games
+        haunted_game_score = self.game_scores["Haunted Mansion"]
+        rps_score = self.game_scores["Rock Paper Scissors"]
+        riddle_score = self.game_scores["Riddle"]
+
+        # Calculate the final total score
+        final_score = self.__score__() + haunted_game_score + rps_score + riddle_score
 
         # log_filename = input("Please enter a filename to save the logs:")
-        self.log.save_logs_to_file("blah")
+        self.log.save_logs_to_file("log_file")
 
         print(f"Game Over! Your final score was {final_score}")
         self.game_log.log(
             f"Player ended the game with a final score of" f" {final_score}"
         )
-        self.game_leaderboard.update_score(self.player_name, final_score)
-        self.game_leaderboard.save_leaderboard("LeaderboardFile.txt")
+
+        # Update user's score in user_data.json
+        self.update_user_score(self.player_name, final_score)
+        self.store_clues()
+
         if final_score > 35:
             print("Well done, that's impressive!!")
         else:
             print("That's disappointing... expected better from you")
+
+    def store_clues(self):
+        crime_scene_clues = self.crime_scene.save_clues(self.player_name)
+        attic_clues = self.attic.save_clues(self.player_name)
+        kitchen_clues = self.kitchen.save_clues(self.player_name)
+        library_clues = self.library.save_clues(self.player_name)
+
+        # Initialize an empty dictionary for all clues
+        all_clues = {}
+
+        # Loop through each set of clues and update the all_clues dictionary
+        for clues in (
+        crime_scene_clues, attic_clues, kitchen_clues, library_clues):
+            for username, data in clues.items():
+                if username not in all_clues:
+                    all_clues[username] = {}
+                all_clues[username].update(data)
+
+        try:
+            with open('user_data.json', 'r') as file:
+                user_data = json.load(file)
+        except FileNotFoundError:
+            user_data = {}
+
+        user_data[self.player_name]["clues"] = all_clues
+
+        with open('user_data.json', 'w') as file:
+            json.dump(user_data, file, indent=2)
