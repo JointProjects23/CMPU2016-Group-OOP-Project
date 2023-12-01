@@ -574,8 +574,37 @@ class Game:
 
         # Update user's score in user_data.json
         self.update_user_score(self.player_name, final_score)
+        self.store_clues()
 
         if final_score > 35:
             print("Well done, that's impressive!!")
         else:
             print("That's disappointing... expected better from you")
+
+    def store_clues(self):
+        crime_scene_clues = self.crime_scene.save_clues(self.player_name)
+        attic_clues = self.attic.save_clues(self.player_name)
+        kitchen_clues = self.kitchen.save_clues(self.player_name)
+        library_clues = self.library.save_clues(self.player_name)
+
+        # Initialize an empty dictionary for all clues
+        all_clues = {}
+
+        # Loop through each set of clues and update the all_clues dictionary
+        for clues in (
+        crime_scene_clues, attic_clues, kitchen_clues, library_clues):
+            for username, data in clues.items():
+                if username not in all_clues:
+                    all_clues[username] = {}
+                all_clues[username].update(data)
+
+        try:
+            with open('user_data.json', 'r') as file:
+                user_data = json.load(file)
+        except FileNotFoundError:
+            user_data = {}
+
+        user_data[self.player_name]["clues"] = all_clues
+
+        with open('user_data.json', 'w') as file:
+            json.dump(user_data, file, indent=2)

@@ -1,4 +1,5 @@
 from character import NPC
+import json
 
 
 class Location:
@@ -110,6 +111,19 @@ class Location:
         """
         return {self.npc.action}
 
+    def save_clues(self, username,):
+        clues_data = {}
+
+        user_clues = {
+            "Location": self.__class__.__name__,
+            "All clues found": self.all_clues_found,
+            "Clues": self.__clues
+        }
+
+        clues_data[username] = {"clues": user_clues}
+
+        return clues_data
+
 
 class CrimeScene(Location):
     def __init__(self, name):
@@ -129,11 +143,6 @@ class CrimeScene(Location):
         else:
             print("investigated is expected to be a boolean.")
 
-    def save_clues(self):
-        with open("CrimeSceneClues.txt", 'w') as file:
-            file.write(f"Location: {self.__class__.__name__}\n")
-            file.write(f"All clues found: {self.all_clues_found}\n")
-
     def interact_with_npcs(self):
         pass
 
@@ -144,13 +153,7 @@ class Kitchen(Location):
         self._visited = False
         self._all_clues_found = False
         self.npc = NPC("Smelly Chef", "Get out of my Kitchen", "Goes back to "
-                                                        "cooking", 69)
-
-    def save_clues(self):
-        with open("KitchenClues.txt", 'w') as file:
-            file.write(f"Location: {self.__class__.__name__}\n")
-            file.write(f"All clues found: {self.all_clues_found}\n")
-            file.write(f"Clues found:\n{self._}")
+                                                               "cooking", 69)
 
 
 class Library(Location):
@@ -161,11 +164,6 @@ class Library(Location):
         self.npc = NPC("Librarian", "SHHHH", "Goes back to "
                                              "reading", 50)
 
-    def save_clues(self):
-        with open("LibraryClues.txt", 'w') as file:
-            file.write(f"Location: {self.__class__.__name__}\n")
-            file.write(f"All clues found: {self.all_clues_found}\n")
-
 
 class Attic(Location):
     def __init__(self):
@@ -175,10 +173,3 @@ class Attic(Location):
 
         self.npc = NPC("Laura", "Hello how are you", "Goes back to "
                                                      "writing her journal", 15)
-
-
-    def save_clues(self):
-        with open("AtticClues.txt", 'w') as file:
-            file.write(f"Location: {self.__class__.__name__}\n")
-            file.write(f"All clues found: {self.all_clues_found}\n")
-

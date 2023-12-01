@@ -2,12 +2,25 @@
   "john_doe": {
     "name": "John",
     "hashed_password": "$2b$12$FdR.6.0mBlbqJ5LLBlNk7.GBDYBA4lH/6EeX7w6/SquW9HEh5zC.q",
-    "Score:": 10
+    "Score:": 10,
+    "clues": {
+      "CrimeScene": "",
+      "Attic": ""
+    }
   },
   "hayden": {
     "name": "Hayden",
-    "hashed_password": "$2b$12$ED4MACvLRNSdNSwzTNRAGu2qa1XA9Al7jwYJz7q5f6Rd21RrNubAS",
-    "score": 0
+    "hashed_password": "$2b$12$E9kChIwrFOlaZsiYkj65FeRiAuxNocMXERV/dChesAoBwKPurz0lm",
+    "score": 41,
+    "clues": {
+      "hayden": {
+        "clues": {
+          "Location": "Library",
+          "All clues found": false,
+          "Clues": []
+        }
+      }
+    }
   },
   "hayd": {
     "name": "Hayd",

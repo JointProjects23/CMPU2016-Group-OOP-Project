@@ -1,7 +1,6 @@
 import json
 from game import Game
 from leaderboard import Leaderboard
-import json
 
 if __name__ == "__main__":
 
