@@ -20,9 +20,9 @@ Date: 01/12/2023
 Note: Make sure to have the 'game_data.json' file available for the HauntedMansionGame and Riddle classes.
 """
 
-
 import random
 import json
+
 
 class HauntedMansionGame:
     def __init__(self, max_attempts=6):

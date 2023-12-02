@@ -1,6 +1,14 @@
 Player chose to start the game
 Successfully updating
 ---
+Player input is e.
+Successfully updating
+---
+Player input is s.
+Player chose to see their score
+Successfully updating
+---
+Player input is e.
 Player input is i.
 Player chose to interact with characters
 Player chose to interact with witness and suspects
@@ -19,6 +27,12 @@ Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was workin
 You notice subtle body language cues indicating potential deception
 Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
 You notice subtle body language cues indicating potential deception
+Player input is b.
+Successfully updating
+---
+Player input is s.
+Player chose to see their score
+Successfully updating
 ---
 Player input is q.
 Player quit the game

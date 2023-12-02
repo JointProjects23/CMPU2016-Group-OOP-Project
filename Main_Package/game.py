@@ -1,4 +1,4 @@
-#game.py
+# game.py
 
 """
 Game Module
@@ -19,6 +19,7 @@ Date: 15/11/2023 - 01/12/2023
 
 import time
 import json
+from colorama import Fore
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
@@ -234,7 +235,7 @@ class Game:
          choice to start the game or quit."""
 
         if self.started:
-            player_input = input(
+            player_input = input(Fore.GREEN +
                 "Press one of the following keys: \n'q' to quit\n"
                 "'r' to review your clues\n"
                 "'e' to explore the mansion further\n"
@@ -305,7 +306,7 @@ class Game:
 
     def explore_options(self):
 
-        explore_choice = input("Which path do you dare to take,"
+        explore_choice = input(Fore.GREEN + "Which path do you dare to take,"
                                "The path that leads upstairs(1) or "
                                "The path that leads downstairs("
                                "2) : ")
@@ -318,13 +319,14 @@ class Game:
 
     def explore_upstairs(self):
         while True:
-            room_choice = input("As you venture forward 4 rooms are revealed "
-                                "to you:\n\nA Kitchen(K)"
-                                "\nA huge Library(L)"
-                                "\nA dusty Attic(A)"
-                                f"\nThe {self.crime_scene.name}(D)\n"
-                                f"\n--To go back(B)--"
-                                "Which do you want to choose")
+            room_choice = input(Fore.GREEN + "As you venture forward 4 rooms"
+                                             "are revealed "
+                                             "to you:\n\nA Kitchen(K)"
+                                             "\nA huge Library(L)"
+                                             "\nA dusty Attic(A)"
+                                             f"\nThe {self.crime_scene.name}(D)\n"
+                                             f"\n--To go back(B)--"
+                                             "Which do you want to choose")
 
             if room_choice.lower() == 'k' and not self.kitchen.visited:
                 self.kitchen.visited = True
@@ -341,9 +343,10 @@ class Game:
                           'you might\'ve missed an important clue...')
             elif room_choice.lower() == "a" and not self.attic.visited:
                 self.attic.visited = True
-                print("You walk through the never ending halls of the mansion on "
-                      "your way to the attic. You reach a dimly lit room, As you "
-                      "walk in there\'s a young girl writing at a desk")
+                print(
+                    "You walk through the never ending halls of the mansion on "
+                    "your way to the attic. You reach a dimly lit room, As you "
+                    "walk in there\'s a young girl writing at a desk")
                 interact_choice = input(
                     f"do you want to talk to the girl? (y/n) : ")
                 if interact_choice.lower() == 'y':
@@ -353,8 +356,9 @@ class Game:
                     print("You back out of the room")
             elif room_choice.lower() == "l" and not self.library.visited:
                 self.library.visited = True
-                print("you walk through the never ending halls of the mansion on "
-                      "your way to the library.")
+                print(
+                    "you walk through the never ending halls of the mansion on "
+                    "your way to the library.")
                 interact_choice = input(
                     "do you want to talk to the librarian? (y/n) : ")
                 if interact_choice.lower() == 'y':
@@ -373,25 +377,28 @@ class Game:
                     print(char, end="", flush=True)
                     time.sleep(0.005)  # Adjust the delay time as needed
 
-                text =("\033[1;31mAs you make your way through the winding stairs that "
-                   "lead\n"
-                  " to the crime scene you feel all eyes are on you, "
-                  "you must\n"
-                  "solve this crime. You reach the top of the stairs and go\n"
-                  "to the bedroom were the precious jewels were stored. You\n"
-                  "slowly push the door open.\n\033[0m")
+                text = (
+                    "\033[1;31mAs you make your way through the winding stairs that "
+                    "lead\n"
+                    " to the crime scene you feel all eyes are on you, "
+                    "you must\n"
+                    "solve this crime. You reach the top of the stairs and go\n"
+                    "to the bedroom were the precious jewels were stored. You\n"
+                    "slowly push the door open.\n\033[0m")
                 for char in text:
                     print(char, end="", flush=True)
                     time.sleep(0.005)
 
                 while True:
-                    player_input = input(
-                        "Press one of the following keys: \n'b' to go back to "
-                        "the hallway\n"
-                        "'i' to interact with characters at the crime scene\n"
-                        "'r' to review your clues\n"
-                        "Please Enter your selection: "
-                    )
+                    player_input = input(Fore.RED +
+                                         "Press one of the following keys: "
+                                         "\n'b' to go back to"
+                                         "the hallway\n"
+                                         "'i' to interact with characters at "
+                                         "the crime scene\n"
+                                         "'r' to review your clues\n"
+                                         "Please Enter your selection: "
+                                         )
 
                     self.game_log.log(f"Player input is {player_input}.")
 
@@ -406,14 +413,16 @@ class Game:
                             "If you'd like to speak to other people in the room, "
                             "choose 2:"
                         )
-                        self.game_log.log("Player chose to interact with characters")
+                        self.game_log.log(
+                            "Player chose to interact with characters")
                         if character_choice == "1":
                             self.game_log.log(
                                 "Player chose to interact with witness " "and suspects"
                             )
                             self.interact_with_characters()
                         elif character_choice == "2":
-                            self.game_log.log("Player chose to interact with NPCs")
+                            self.game_log.log(
+                                "Player chose to interact with NPCs")
                             self.interact_with_npcs()
                     elif player_input.lower() == "r":
                         self.game_log.log("Player chose to review clues "
@@ -426,10 +435,10 @@ class Game:
                                     print(clue)
                             else:
                                 print("No clues have been gathered yet.")
-                                self.game_log.log("Player had no clues to review")
+                                self.game_log.log(
+                                    "Player had no clues to review")
 
                         print(f"Your current score is {self.__score__()}")
-
 
     def door_choice(self):
         """This method handles the door examination option. User input is
