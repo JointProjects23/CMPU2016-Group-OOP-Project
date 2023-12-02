@@ -17,6 +17,7 @@ class Location:
         self._all_clues_found = False
         self.number_of_clues_to_find = number_of_clues
         self.__clues = []
+        self.clues_found = len(self.__clues)
 
     @property
     def visited(self):
@@ -110,6 +111,11 @@ class Location:
         set: A set containing the NPC's action.
         """
         return {self.npc.action}
+
+    def import_past_progress(self, loaction_data):
+        for clues in loaction_data["Clues"]:
+            self.__clues.append(clues)
+        self.all_clues_found = loaction_data["All clues found"]
 
 
 class CrimeScene(Location):
