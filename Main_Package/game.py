@@ -1,3 +1,22 @@
+#game.py
+
+"""
+Game Module
+
+Description:
+This Python module defines the main game class, 'Game', which manages the behavior and flow of the mystery game.
+It includes interactions with characters, exploring locations, playing mini-games, and keeping track of the player's progress.
+
+Classes:
+1. Game: Represents the main game class, managing the player's journey, interactions, inventory, and overall progress.
+
+Usage:
+- Import this module into your Python program to use the 'Game' class.
+
+Author: Sam Curran, Sam Courtney, Hayden Carroll, Jamie O'Neill, Finn Delaney
+Date: 15/11/2023 - 01/12/2023
+"""
+
 import time
 import json
 from loggable import Loggable
