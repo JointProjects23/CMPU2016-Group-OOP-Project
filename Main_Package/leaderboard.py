@@ -1,3 +1,25 @@
+# leaderboard.py
+
+"""
+Leaderboard Module
+
+Description:
+This Python module defines a Leaderboard class for managing player scores. It includes methods to update scores, retrieve top players,
+and load leaderboard data from a file.
+
+Classes:
+- Leaderboard: Manages player scores and provides methods for updating scores, retrieving top players, and loading data from a file.
+
+Usage:
+- Import this module into your Python program to use the Leaderboard class.
+
+Author: Hayden Carroll
+Date: 01/12/2023
+
+Note: This module does not handle saving changes back to a file; additional functions may be implemented for that purpose.
+"""
+
+
 import json
 
 

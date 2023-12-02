@@ -1,3 +1,26 @@
+# miniGames.py
+
+"""
+Haunted Games Library
+
+Description:
+This Python file contains three classes representing different haunted-themed games:
+1. HauntedMansionGame: A guessing game set in a haunted mansion where the player tries to guess a secret word akin to wordle
+2. RockPaperScissors: A classic Rock, Paper, Scissors game with a haunted twist.
+3. Riddle: A game that presents the player with random riddles to solve.
+
+Usage:
+- Import this file into your Python program to use the HauntedMansionGame, RockPaperScissors, and Riddle classes.
+- Each class provides methods for playing their respective games.
+
+Author: Sam,Finn and Hayden
+
+Date: 01/12/2023
+
+Note: Make sure to have the 'game_data.json' file available for the HauntedMansionGame and Riddle classes.
+"""
+
+
 import random
 import json
 
