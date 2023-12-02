@@ -246,15 +246,42 @@ class Riddle:
         self.current_riddle = None  # Store the current riddle
 
     def load_riddles_and_answers(self):
+        """
+        Loading the data from game_data.json to be used
+
+        Parameters:
+        self
+
+        Returns:
+        Data : That is a JSON load.
+        """
         with open("game_data.json", "r") as file:
             data = json.load(file)
         return data
 
     def print_riddle(self):
+        """
+        Printing the randomly picked riddle.
+
+        Parameters:
+        self
+
+        Returns:
+        None
+        """
         self.current_riddle = random.choice(list(self.riddles_and_answers["Riddles"].keys()))
         print(self.current_riddle)
 
     @property
     def get_answer(self):
+        """
+        Function that holds the answer to the riddles.
+
+        Parameters:
+        self
+
+        Returns:
+        Riddle (str): 
+        """
         return self.riddles_and_answers["Riddles"].get(self.current_riddle, "")
 

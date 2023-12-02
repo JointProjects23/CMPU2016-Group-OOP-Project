@@ -5,6 +5,17 @@ import bcrypt
 
 
 def register_user(username, password):
+    """
+    Register a user to the game
+
+    Parameters:
+    - username (str) : Passes the username into the user_data.json file if it is not already present
+    - password (str) : Passes the password into the user_data.json file if it is not already present
+
+    Returns:
+    False
+    """
+
     # Load existing user data from JSON file
     try:
         with open('user_data.json', 'r') as file:
@@ -30,6 +41,17 @@ def register_user(username, password):
 
 
 def login_user(username, password):
+    """
+    Log a user into the game
+
+    Parameters:
+    - username (str) : Checks for the username in the user_data.json file
+    - password (str) : Passes the password in the user_data.json file
+
+    Returns:
+    False
+    """
+
     # Load user data from JSON file
     try:
         with open('user_data.json', 'r') as file:
