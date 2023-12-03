@@ -13,7 +13,7 @@ Usage:
 - Import this file into your Python program to use the HauntedMansionGame, RockPaperScissors, and Riddle classes.
 - Each class provides methods for playing their respective games.
 
-Author: Jamie, Sam Courtney, Finn and Hayden
+Author: Jamie O'Neill, Sam Courtney, Finn Delaney and Hayden Carroll
 
 Date: 01/12/2023
 

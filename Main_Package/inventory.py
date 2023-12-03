@@ -3,8 +3,8 @@ inventory.py
 
 This module defines the Inventory class, which manages the player's inventory.
 
-Author: [Your Name]
-Date: [Current Date]
+Author: Sam Curren, Jamie O'Neill
+Date: 15/11/2023 - 01/12/2023
 
 Usage:
     # Example usage of the Inventory class

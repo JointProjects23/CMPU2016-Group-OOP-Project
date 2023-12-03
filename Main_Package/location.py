@@ -3,22 +3,24 @@
 """
 Location Module
 
-Description:
-This Python module defines classes representing different locations within a mystery game. Each location has properties
-such as whether it has been visited, if all clues have been found, and methods for interacting with NPCs and reviewing clues.
+Description: This Python module defines classes representing different
+locations within a mystery game. Each location has properties such as
+whether it has been visited, if all clues have been found, and methods for
+interacting with NPCs and reviewing clues.
 
-Classes:
-1. Location: Represents a generic location with properties and methods common to all locations.
-2. CrimeScene: Represents a crime scene location with additional properties related to investigation.
-3. Kitchen: Represents a kitchen location with a specific number of clues and an NPC character.
-4. Library: Represents a library location with a specific number of clues and an NPC character.
-5. Attic: Represents an attic location with a specific number of clues and an NPC character.
+Classes: 1. Location: Represents a generic location with properties and
+methods common to all locations. 2. CrimeScene: Represents a crime scene
+location with additional properties related to investigation. 3. Kitchen:
+Represents a kitchen location with a specific number of clues and an NPC
+character. 4. Library: Represents a library location with a specific number
+of clues and an NPC character. 5. Attic: Represents an attic location with a
+specific number of clues and an NPC character.
 
 Usage:
 - Import this module into your Python program to use the Location, CrimeScene, Kitchen, Library, and Attic classes.
 
-Author: Hayden Carroll
-Date: 27/11/2023
+Author: Hayden Carroll, Sam Courtney, Finn Delaney
+Date: 27/11/2023 - 01/12/2023
 """
 
 from character import NPC
