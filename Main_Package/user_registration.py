@@ -20,7 +20,6 @@ Date: 26/11/2023
 Note: Make sure to have the 'user_data.json' file available for user data storage.
 """
 
-
 import json
 import bcrypt
 
@@ -43,7 +42,7 @@ def register_user(username, password):
 
     # Save user data to JSON file with an initial score of 0
     users[username.lower()] = {"name": username, 'hashed_password':
-    hashed_password.decode('utf-8'), 'score': 0}
+        hashed_password.decode('utf-8'), 'score': 0}
     with open('user_data.json', 'w') as file:
         json.dump(users, file, indent=2)
 

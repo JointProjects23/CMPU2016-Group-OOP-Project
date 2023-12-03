@@ -182,7 +182,8 @@ class Library(Location):
         super().__init__(3)
         self.visited = False
         self.all_clues_found = False
-        self.npc = NPC("Librarian", "I heard footsteps in the attic late lastnight", "Goes back to "
+        self.npc = NPC("Librarian", "I heard footsteps in the attic late "
+                                    "lastnight", "Goes back to"
                                              "reading", 50)
 
 

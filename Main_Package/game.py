@@ -27,7 +27,7 @@ from leaderboard import Leaderboard
 from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
 from inventory import Inventory
 from item import Item
-from location import CrimeScene, Kitchen, Attic, Library
+from location import CrimeScene, Kitchen, Attic, Library, Location
 from user_registration import register_user, login_user
 
 
@@ -47,6 +47,7 @@ class Game:
         self.library = Library()
         self.attic = Attic()
         self.kitchen = Kitchen()
+        self.secret_passages = Location(3)
         self.rock_paper_scissors = RockPaperScissors()
         self.running = True
         self.started = False
@@ -58,27 +59,46 @@ class Game:
         self.score = 0
         self.crime_scene = CrimeScene("Mansion's Drawing Room")
         self.witness = Witness(
-            "Lady Victoria Starling",
-            "I cant believe my Diamond necklace was"
-            " Stolen!\nI heard someone in my room last night",
-            "Someone in the owners room last night",
-            "walks away",
-            78,
+            "Mr. Drew the Gardener",
+            "I am not so sure this is as simple a case, people have been "
+            "very suspicious recently, the chef and the butler are acting "
+            "strange, I suggest you talk to them, if you haven't already",
+            "Chef and butler acting strange",
+            "Leaves the room to go back to gardening",
+            48,
         )
         self.witness2 = Witness(
             "Ms. Parker",
-            "I saw someone near the window at the time of the incident.",
+            "I saw someone near the window at the time of the incident, "
+            "just after my walk with Lady Victoria",
             "Suspicious figure in dark clothing.",
-            "frustratedly walks away",
+            "calmly walks away",
             45,
         )
         self.suspect = Suspect(
-            "Mr. Reginald ",
+            "Mr. Reginald, the butler",
             "I was working last night but left at 8",
             "Claims to have left at 8",
             "walks away in a rush",
             61,
         )
+        self.suspect2 = Suspect(
+            "Lady Victoria Starling",
+            "I cant believe my Diamond necklace was"
+            " Stolen!\nI heard someone in my room last night, it was worth "
+            "so much aswell!!",
+            "Was on a walk with Mr. Parker",
+            "walks away",
+            78,
+        )
+        self.suspect3 = Suspect(
+            "The Chef",
+            "Get out my kitchen, I dont need to talk to you",
+            "Left at 9 with the butler (You notice the times dont match up)",
+            "Acting Suspicious",
+            78,
+        )
+
         self.npcs = [
             NPC(
                 "Beatrice",
@@ -149,7 +169,8 @@ class Game:
         self.game_scores[game_name] += 10  # Adjust the score based on your
         # preference
         print(
-            f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
+            f"You earned 10 points. Your total score for {game_name} is now "
+            f"{self.game_scores[game_name]}.")
         # We may need to add additional rewards or messages as needed below
 
     @property
@@ -167,18 +188,25 @@ class Game:
             game_data = json.load(file)
         self.player_name = game_data[self.username]["name"]
         self.score = game_data[self.username]["score"]
-        self.crime_scene.import_past_progress(game_data[self.username][
+        try:
+            self.crime_scene.import_past_progress(game_data[self.username][
+                                                      "Location_clues"][
+                                                      "CrimeScene"])
+            self.attic.import_past_progress(game_data[self.username][
+                                                "Location_clues"][
+                                                "Attic"])
+            self.kitchen.import_past_progress(game_data[self.username][
                                                   "Location_clues"][
-                                                  "CrimeScene"])
-        self.attic.import_past_progress(game_data[self.username][
-                                            "Location_clues"][
-                                            "Attic"])
-        self.kitchen.import_past_progress(game_data[self.username][
-                                              "Location_clues"][
-                                              "Kitchen"])
-        self.library.import_past_progress(game_data[self.username][
-                                              "Location_clues"][
-                                              "Library"])
+                                                  "Kitchen"])
+            self.library.import_past_progress(game_data[self.username][
+                                                  "Location_clues"][
+                                                  "Library"])
+            self.secret_passages.import_past_progress(game_data[
+                                                          self.username][
+                                                          "Location_clues"][
+                                                          "Secret Passages"])
+        except KeyError:
+            print("You found no clues last time, or didn't exit properly!")
 
     def initialize_player(self):
         max_login_attempts = 3
@@ -365,36 +393,45 @@ class Game:
                       'you open the door and see an old man cutting carrots')
                 interact_choice = input("Do you want to talk to the chef "
                                         "(Y/N) : ")
-                if interact_choice.lower() == 'y':
-                    print(self.kitchen.interact_with_npcs)
-                    self.kitchen_npc_interacted = True
-                    print(self.kitchen.npc_action)
-                    self.kitchen.add_clue("chef is hostile and doesnt seem to "
-                                          "want to help you solve the crime")
-                else:
-                    print('Scared off interaction...How embarrassing, '
-                          'you might\'ve missed an important clue...')
+                while True:
+                    if interact_choice.lower() == 'y':
+                        print(self.suspect3.interact())
+                        self.kitchen.add_clue("chef is hostile and doesnt seem to "
+                                              "want to help you solve the crime")
+                        break
+                    elif interact_choice.lower() == 'n':
+                        print('Scared off interaction...How embarrassing, '
+                              'you might\'ve missed an important clue...')
+                        break
+                    else:
+                        print("Please choose a valid option (Y/N):")
 
                 explore_choice1 = input(
                     "do you want to explore kitchen further"
                     " ? (Y/N) :")
-                if explore_choice1.lower() == 'y':
-                    print(
-                        "you walk around the kitchen searching for clues...\n"
-                        "you see signs of a forced entry on the knife press\n"
-                        "and you also heard the chef complain about missing\n"
-                        "utensils earlier")
-                    self.kitchen.add_clue("looks like someone stole a knife "
-                                          "from the kitchen")
+                while True:
+                    if explore_choice1.lower() == 'y':
+                        print(
+                            "you walk around the kitchen searching for clues...\n"
+                            "you see signs of a forced entry on the knife press\n"
+                            "and you also heard the chef complain about missing\n"
+                            "utensils earlier")
+                        self.kitchen.add_clue("looks like someone stole a knife "
+                                              "from the kitchen")
+                    elif explore_choice1.lower() == 'n':
+                        print("You return to the hallway")
+                        break
+                    else:
+                        print("Please choose a valid option (Y/N):")
 
                 explore_choice1 = input(
                     "do you want to explore kitchen further"
-                    " ? (Y/N) :")
+                    "? (Y/N) :")
                 if explore_choice1.lower() == 'y':
                     print(
-                        "\nas you are leaving you see a camera in the corner "
-                        "of\n"
-                        "the kitchen that looks t0 be off. the chef says \n"
+                        "\nAs you are leaving you see a camera in the corner "
+                        "off\n"
+                        "the kitchen that looks to be off. The Chef says \n"
                         "'it wasn't on when i arrived this morning'.\nThis "
                         "person"
                         "must know a lot about this mansion, you think to "
@@ -469,12 +506,15 @@ class Game:
                     time.sleep(0.005)  # Adjust the delay time as needed
 
                 text = (
-                    "\033[1;31mAs you make your way through the winding stairs that "
+                    "\033[1;31mAs you make your way through the winding "
+                    "stairs that"
                     "lead\n"
                     " to the crime scene you feel all eyes are on you, "
                     "you must\n"
-                    "solve this crime. You reach the top of the stairs and go\n"
-                    "to the bedroom were the precious jewels were stored. You\n"
+                    "solve this crime. You reach the top of the stairs and "
+                    "go\n"
+                    "to the bedroom were the precious jewels were stored. "
+                    "You\n"
                     "slowly push the door open.\n\033[0m")
                 for char in text:
                     print(char, end="", flush=True)
@@ -565,7 +605,11 @@ class Game:
                         " suspiciously extensive knowledge of the mansion's "
                         "layout\n"
                     )
-                    self.crime_scene.add_clue(
+                    self.secret_passages.add_clue(
+                        "Mr. Reginald's rugged look and extensive knowledge "
+                        "of the mansion's layout"
+                    )
+                    self.secret_passages.add_clue(
                         "Mr. Reginald's rugged look and extensive knowledge "
                         "of the mansion's layout"
                     )
@@ -584,7 +628,7 @@ class Game:
                         "You slowly open the door to reveal a...\n"
                         "...a dark corridor which leads you to stairs\n"
                     )
-                    self.crime_scene.add_clue("The letter on the ground")
+                    self.secret_passages.add_clue("The letter on the ground")
                     # Calls the method reward_for_game_completion adds to the users score.
                     #self.reward_for_game_completion('rock_paper_scissors')
 
@@ -597,13 +641,13 @@ class Game:
                 user_input = input("What is your guess Detective:")
                 # Access the answer using the get_answer property
                 if user_input.lower().strip() == self.game_riddle.get_answer.strip():
-                    print("Very wise Detective, you may proceed")
+                    print("Very good Detective, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
                         "passage...\n"
                         "What secrets does it hold?"
                     )
-                    self.crime_scene.add_clue(
+                    self.secret_passages.add_clue(
                         "The hidden passage behind the library door")
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
@@ -859,6 +903,11 @@ class Game:
                 "All clues found": self.library.all_clues_found,
                 "Clues": self.library.review_clue(),
                 "Visited": self.library.visited
+            },
+            "Secret Passages": {
+                "All clues found": self.library.all_clues_found,
+                "Clues": self.secret_passages.review_clue(),
+                "Visited": self.secret_passages.visited
             }
         }
 
