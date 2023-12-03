@@ -385,7 +385,7 @@ class Game:
         while True:
             room_choice = input(Fore.GREEN + "As you venture forward 4 rooms "
                                              "are revealed "
-                                             "to you:\n\nA Kitchen(K)"
+                                             "to you:\nA Kitchen(K)"
                                              "\nA huge Library(L)"
                                              "\nA dusty Attic(A)"
                                              f"\nThe {self.crime_scene.name}(D)"
@@ -599,101 +599,104 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark "
-              "passages appear before you:")
-        for i, door in enumerate(self.doors, start=1):
-            print(f"{i}. {door}")
-        player_input = int(
-            input("Which passage will you venture through...Brave"
-                  f" detective:")
-        )
 
-        if 0 < player_input < len(self.doors) + 1:  # for valid entry check
-            self.game_log.log(f"Player chose to enter door {player_input}")
-            if int(player_input) == 1 and not self.doors_checker[0]:
-                print("Those who dare to enter ahead..guess this word...or "
-                      f"ill take your head")
-                # Play mini-game only for the first door choice
-                word_result = self.haunted_game.play_haunted_mansion_game()
-                if word_result:
-                    self.doors_checker[0] = True
+        while True:
+            print("You venture forward within this decrepted mansion,Three dark "
+                  "passages appear before you:")
+            for i, door in enumerate(self.doors, start=1):
+                print(f"{i}. {door}")
+                print("\n--To go back(B)--")
+            player_input = int(
+                input("Which passage will you venture through...Brave"
+                      f" detective:")
+            )
+
+            if 0 < player_input < len(self.doors) + 1:  # for valid entry check
+                self.game_log.log(f"Player chose to enter door {player_input}")
+                if int(player_input) == 1 and not self.doors_checker[0]:
+                    print("Those who dare to enter ahead..guess this word...or "
+                          f"ill take your head")
+                    # Play mini-game only for the first door choice
+                    word_result = self.haunted_game.play_haunted_mansion_game()
+                    if word_result:
+                        self.doors_checker[0] = True
+                        print(
+                            "inside is a small kitchen with a butler making food\n"
+                            "you ask him who he is  and he tells you hes the "
+                            "the mansion's butler, Mr. Reginald\n"
+                            "you are surised he is the butler at first as his"
+                            " trousers seem to be stained with mud and his shoes\n"
+                            "look tarnished after talking, you realise he has a"
+                            " suspiciously extensive knowledge of the mansion's "
+                            "layout\n"
+                        )
+                        self.secret_passages.add_clue(
+                            "Mr. Reginald's rugged look and extensive knowledge "
+                            "of the mansion's layout"
+                        )
+                        self.secret_passages.add_clue(
+                            "Mr. Reginald's rugged look and extensive knowledge "
+                            "of the mansion's layout"
+                        )
+                        # Calls the method reward_for_game_completion adds to the users score.
+                        self.mini_game.display_counter()
+                        if self.mini_game.counter == 4:
+                            self.completed_mini_game_message()
+
+                elif int(player_input) == 2 and not self.doors_checker[1]:
+                    print("Those who dare to enter ahead..Prove to me you are "
+                          "worthy, Beat me in this game of wit..before you end "
+                          "up dead")
+
+                    rps_result = self.rock_paper_scissors.play_game()
+                    if rps_result:
+                        self.doors_checker[1] = True
+                        print(
+                            "You slowly open the door to reveal a...\n"
+                            "...a dark corridor which leads you to stairs\n"
+                        )
+                        self.secret_passages.add_clue("The letter on the ground")
+                        # Calls the method reward_for_game_completion adds to the users score.
+                        self.mini_game.display_counter()
+                        if self.mini_game.counter == 4:
+                            self.completed_mini_game_message()
+
+                elif int(player_input) == 3 and not self.doors_checker[2]:
                     print(
-                        "inside is a small kitchen with a butler making food\n"
-                        "you ask him who he is  and he tells you hes the "
-                        "the mansion's butler, Mr. Reginald\n"
-                        "you are surised he is the butler at first as his"
-                        " trousers seem to be stained with mud and his shoes\n"
-                        "look tarnished after talking, you realise he has a"
-                        " suspiciously extensive knowledge of the mansion's "
-                        "layout\n"
-                    )
-                    self.secret_passages.add_clue(
-                        "Mr. Reginald's rugged look and extensive knowledge "
-                        "of the mansion's layout"
-                    )
-                    self.secret_passages.add_clue(
-                        "Mr. Reginald's rugged look and extensive knowledge "
-                        "of the mansion's layout"
-                    )
-                    # Calls the method reward_for_game_completion adds to the users score.
-                    self.mini_game.display_counter()
-                    if self.mini_game.counter == 4:
-                        self.completed_mini_game_message()
+                        "Those who dare to proceed ahead...let me riddle you a question before you end up dead")
+                    # Use the new methods from the updated Riddle class
+                    self.game_riddle.print_riddle()
+                    user_input = input("What is your guess Detective:")
+                    # Access the answer using the get_answer property
+                    if user_input.lower().strip() == self.game_riddle.get_answer.strip():
+                        print("Very good Detective, you may proceed")
+                        print(
+                            "You open the library door to reveal a hidden\n"
+                            "passage...\n"
+                            "What secrets does it hold?"
+                        )
+                        self.secret_passages.add_clue(
+                            "The hidden passage behind the library door")
+                        self.doors_checker[2] = True
+                        # Calls the method reward_for_game_completion adds to the users score.
+                        self.mini_game.display_counter()
+                        if self.mini_game.counter == 4:
+                            self.completed_mini_game_message()
 
-            elif int(player_input) == 2 and not self.doors_checker[1]:
-                print("Those who dare to enter ahead..Prove to me you are "
-                      "worthy, Beat me in this game of wit..before you end "
-                      "up dead")
-
-                rps_result = self.rock_paper_scissors.play_game()
-                if rps_result:
-                    self.doors_checker[1] = True
-                    print(
-                        "You slowly open the door to reveal a...\n"
-                        "...a dark corridor which leads you to stairs\n"
-                    )
-                    self.secret_passages.add_clue("The letter on the ground")
-                    # Calls the method reward_for_game_completion adds to the users score.
-                    self.mini_game.display_counter()
-                    if self.mini_game.counter == 4:
-                        self.completed_mini_game_message()
-
-            elif int(player_input) == 3 and not self.doors_checker[2]:
-                print(
-                    "Those who dare to proceed ahead...let me riddle you a question before you end up dead")
-                # Use the new methods from the updated Riddle class
-                self.game_riddle.print_riddle()
-                user_input = input("What is your guess Detective:")
-                # Access the answer using the get_answer property
-                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
-                    print("Very good Detective, you may proceed")
-                    print(
-                        "You open the library door to reveal a hidden\n"
-                        "passage...\n"
-                        "What secrets does it hold?"
-                    )
-                    self.secret_passages.add_clue(
-                        "The hidden passage behind the library door")
-                    self.doors_checker[2] = True
-                    # Calls the method reward_for_game_completion adds to the users score.
-                    self.mini_game.display_counter()
-                    if self.mini_game.counter == 4:
-                        self.completed_mini_game_message()
+                    elif player_input == "B":
+                        break
 
                 else:
-                    print("Not very smart for a Detective, are you")
-
+                    self.game_log.log(
+                        f"Player chose to enter door {player_input} "
+                        f"but they had already looked inside"
+                    )
+                    print(
+                        f"You've already been to {self.doors[player_input - 1]} "
+                        f"Detective."
+                    )
             else:
-                self.game_log.log(
-                    f"Player chose to enter door {player_input} "
-                    f"but they had already looked inside"
-                )
-                print(
-                    f"You've already been to {self.doors[player_input - 1]} "
-                    f"Detective."
-                )
-        else:
-            raise ValueError(f"Invalid door choice Detective: {player_input}")
+                raise ValueError(f"Invalid door choice Detective: {player_input}")
 
     def interact_with_characters(self):
         if not self.characters_interacted:
