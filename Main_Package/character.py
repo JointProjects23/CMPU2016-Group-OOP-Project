@@ -108,7 +108,7 @@ class Suspect(Character):
     def interact(self):
         if not self._interacted:
             interaction = (
-                f"Suspect {self._name} reacts nervously:"
+                f"§{self._name} reacts nervously:"
                 f"{self._dialogue}"
             )
             interaction += (

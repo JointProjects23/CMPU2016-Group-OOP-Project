@@ -181,5 +181,15 @@
     "name": "Hayden_c",
     "hashed_password": "$2b$12$RBLqNGDMloGg2TStItbvb.oa5oDw65RWIyuXbT6MbvgR.QQ8edUZ6",
     "score": 0
+  },
+  "hayde": {
+    "name": "Hayde",
+    "hashed_password": "$2b$12$bfdR3DKE9QBGp3EyLSnbiODRrR2K6gfZ05iptZs5WtTMm7i/0IpMC",
+    "score": 0
+  },
+  "hayden_123": {
+    "name": "Hayden_123",
+    "hashed_password": "$2b$12$LPZ5DLIWQxDOfeDlYn7LO.CqfDkEYbvcZ.F1MDhhF0uxuk0LFVcKu",
+    "score": 0
   }
 }
