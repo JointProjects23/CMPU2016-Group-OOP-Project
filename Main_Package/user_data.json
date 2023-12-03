@@ -1,0 +1,175 @@
+{
+  "john_doe": {
+    "name": "John",
+    "hashed_password": "$2b$12$FdR.6.0mBlbqJ5LLBlNk7.GBDYBA4lH/6EeX7w6/SquW9HEh5zC.q",
+    "score:": 10,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "hayden": {
+    "name": "Hayden",
+    "hashed_password": "$2b$12$E9kChIwrFOlaZsiYkj65FeRiAuxNocMXERV/dChesAoBwKPurz0lm",
+    "score": 41,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "haydencc": {
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [
+          "Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8\nYou notice subtle body language cues indicating potential deception",
+          "Mr. Reginald 's Alibi: Claims to have left at 8",
+          "Witness Lady Victoria Starling speaks hurriedly: I cant believe my Diamond necklace was Stolen!\nI heard someone in my room last night\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Lady Victoria Starling's Observation: Someone in the owners room last night",
+          "Witness Ms. Parker speaks hurriedly: I saw someone near the window at the time of the incident.\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Ms. Parker's Observation: Suspicious figure in dark clothing."
+        ],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "haydenccc": {
+    "name": "Haydenccc",
+    "hashed_password": "$2b$12$GVguY2YwqTBDJM179V7hVuw7.yZ241dY81QzeJKSqxWT9K5V84MAu",
+    "score": 41,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [
+          "Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8\nYou notice subtle body language cues indicating potential deception",
+          "Mr. Reginald 's Alibi: Claims to have left at 8",
+          "Witness Lady Victoria Starling speaks hurriedly: I cant believe my Diamond necklace was Stolen!\nI heard someone in my room last night\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Lady Victoria Starling's Observation: Someone in the owners room last night",
+          "Witness Ms. Parker speaks hurriedly: I saw someone near the window at the time of the incident.\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Ms. Parker's Observation: Suspicious figure in dark clothing."
+        ],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "hayden123123": {
+    "name": "Hayden123123",
+    "hashed_password": "$2b$12$kZ58I.d0s20vF.C/HSZcB.NidMxjp1hYugVd.t0WHAHnNOWyFC90K",
+    "score": 0
+  },
+  "hayden12": {
+    "name": "hayden12",
+    "hashed_password": "$2b$12$BvE/stoH./13BJQig/I4XOPxTkUiUeNbpKQhLgDP8vF1CjerG4QAm",
+    "score": 0
+  },
+  "hayden1": {
+    "name": "hayden1",
+    "hashed_password": "$2b$12$Mm0WkH6El19Z/rEbnsDAO.iL/JmDGwSLnSatkpNAhIsKS8ZYkYzNy",
+    "score": 0
+  },
+  "haye": {
+    "name": "Haye",
+    "hashed_password": "$2b$12$xVPpQIXkvwy5dJso2GsVxee4/5nCysTrdwSh5U02ZN9ZRiJtKxf8O",
+    "score": 0
+  },
+  "hay": {
+    "name": "Hayden",
+    "hashed_password": "$2b$12$rfv8UHw4MwLvG9RGV8JmPeU/rcmb7.Q5cfnQz5o3kk0Mt3TbQCsg.",
+    "score": 41,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [
+          "Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8\nYou notice subtle body language cues indicating potential deception",
+          "Mr. Reginald 's Alibi: Claims to have left at 8",
+          "Witness Lady Victoria Starling speaks hurriedly: I cant believe my Diamond necklace was Stolen!\nI heard someone in my room last night\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Lady Victoria Starling's Observation: Someone in the owners room last night",
+          "Witness Ms. Parker speaks hurriedly: I saw someone near the window at the time of the incident.\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Ms. Parker's Observation: Suspicious figure in dark clothing."
+        ],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": true
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  }
+}

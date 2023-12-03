@@ -16,21 +16,6 @@ class Character(ABC):
         self.action = action
         self.age = age
 
-    def __str__(self):
-        # overrides the default display for printing a class instance
-        return f"{self.__class__.__name__}: {self._name}"
-
-    def __lt__(self, other):
-        # compares the age of 2 given class instances
-        return (f"Is {self._name} younger then {other._name}: "
-                f"{self.age < other.age}")
-
-    def __eq__(self, other):
-        if isinstance(other, Character):
-            return (f"Are {self._name} and {other._name} the same person: "
-                    f"{self._name == other._name}")
-        return False
-
     def interact(self):
         if not self._interacted:
             interaction = f"{self._name}: {self._dialogue}"
@@ -132,20 +117,6 @@ class Witness(Character):
     def __init__(self, name, dialogue, observation, action, age):
         super().__init__(name, dialogue, action, age)
         self.observation = observation
-
-    def __add__(self, other):
-        combined_name = f"{self._name} and {other._name}"
-        combined_dialogue = f"{self._dialogue} and {other._dialogue}"
-        combined_observation = f"{self.observation} and {other.observation}"
-        combined_action = self.action + other.action
-        combined_age = f"{self.age} years old and {other.age} years old"
-        return Witness(
-            combined_name,
-            combined_dialogue,
-            combined_observation,
-            combined_action,
-            combined_age
-        )
 
     def share_observation(self):
         return f"{self._name}'s Observation: {self.observation}"
