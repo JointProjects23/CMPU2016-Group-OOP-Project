@@ -292,7 +292,3 @@ class MiniGameCounter:
     def display_counter(self):
         print(f"You have completed {self.counter} / 3 mini-games")
         self.counter += 1
-
-    def completed_message(self):
-        self.crime_scene.add_clue("The letter on the ground")
-        print("You have discovered a secret letter")

@@ -24,7 +24,7 @@ from colorama import \
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
-from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
+from miniGames import HauntedMansionGame, RockPaperScissors, Riddle, MiniGameCounter
 from inventory import Inventory
 from item import Item
 from location import CrimeScene, Kitchen, Attic, Library
@@ -53,6 +53,7 @@ class Game:
         self.characters_interacted = False
         self.npcs_interacted = False
         self.score = 0
+        self.mini_game = MiniGameCounter()
         self.crime_scene = CrimeScene("Mansion's Drawing Room")
         self.witness = Witness(
             "Lady Victoria Starling",
@@ -217,6 +218,10 @@ class Game:
 
         with open('user_data.json', 'w') as file:
             json.dump(user_data, file, indent=2)
+
+    def completed_mini_game_message(self):
+        self.crime_scene.add_clue("The letter on the ground")
+        print("You have discovered a secret letter")
 
     def run(self):
         text = "\033[1;31mWelcome to 'The Poirot Mystery'\n" \
@@ -397,6 +402,10 @@ class Game:
                         "yourself")
                     self.kitchen.add_clue("camera system has been shut off")
 
+            elif room_choice.lower() == 'k' and self.kitchen.visited:
+                print("You have already explored this room\n"
+                      "Select a door to explore")
+
             elif room_choice.lower() == "a" and not self.attic.visited:
                 self.attic.visited = True
                 print(
@@ -426,6 +435,10 @@ class Game:
                     print(
                         'Scared of a bit of investigating...How embarrassing,'
                         'you might\'ve missed an important clue...')
+            elif room_choice.lower() == "a" and self.attic.visited:
+                print("You have already explored the attic"
+                      "\nChoose another door to explore more")
+
             elif room_choice.lower() == "l" and not self.library.visited:
                 self.library.visited = True
                 print(
@@ -451,6 +464,11 @@ class Game:
                     self.library.add_clue(
                         "hidden passage that leads to library")
                     self.library.add_clue("muddy footprints in library")
+
+            elif room_choice.lower() == "l" and self.library.visited:
+                print("You have already explored the library"
+                      "Continue to explore, you never know what you might find")
+
             elif room_choice.lower() == "b":
                 break
             elif room_choice.lower() == 'd':
@@ -564,7 +582,10 @@ class Game:
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('haunted_game')
+                    #self.reward_for_game_completion('haunted_game')
+                    self.mini_game.display_counter()
+                    if self.mini_game.counter == 4:
+                        self.completed_mini_game_message()
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
@@ -578,9 +599,12 @@ class Game:
                         "You slowly open the door to reveal a...\n"
                         "...a dark corridor which leads you to stairs\n"
                     )
-                    self.crime_scene.add_clue("The letter on the ground")
+                    self.crime_scene.add_clue("A piece of glass with a finger print")
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('rock_paper_scissors')
+                    self.mini_game.display_counter()
+                    if self.mini_game.counter == 4:
+                        self.completed_mini_game_message()
+                    #self.reward_for_game_completion('rock_paper_scissors')
 
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
@@ -601,7 +625,11 @@ class Game:
                         "The hidden passage behind the library door")
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('riddle_game')
+                    self.mini_game.display_counter()
+                    #self.reward_for_game_completion('riddle_game')
+                    if self.mini_game.counter == 4:
+                        self.completed_mini_game_message()
+
                 else:
                     print("Not very smart for a Detective, are you")
 
