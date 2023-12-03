@@ -2,11 +2,17 @@ Player chose to start the game
 Successfully updating
 ---
 Player input is e.
+Player chose to enter door 3
+---
+Player input is r.
+Player chose to review clues at Crime Scene
 Successfully updating
 ---
 Player input is s.
 Player chose to see their score
 Successfully updating
+---
+Player input is x.
 ---
 Player input is e.
 Player input is i.
@@ -27,6 +33,8 @@ Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was workin
 You notice subtle body language cues indicating potential deception
 Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
 You notice subtle body language cues indicating potential deception
+Player input is r.
+Player chose to review clues at Crime Scene
 Player input is b.
 Successfully updating
 ---
