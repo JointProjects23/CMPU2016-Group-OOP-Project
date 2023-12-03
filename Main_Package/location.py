@@ -1,4 +1,4 @@
-#location.py
+# location.py
 
 """
 Location Module
@@ -168,24 +168,25 @@ class Kitchen(Location):
         super().__init__(3)
         self._visited = False
         self._all_clues_found = False
-        self.npc = NPC("Smelly Chef", "Get out of my Kitchen", "Goes back to "
-                                                               "cooking", 69)
+        self.npc = NPC("Smelly Chef", "Get out of my Kitchen",
+                       " looks at you with disgust and then goes back to "
+                       "cooking", 69)
 
 
 class Library(Location):
     def __init__(self):
-        super().__init__(5)
+        super().__init__(3)
         self.visited = False
         self.all_clues_found = False
-        self.npc = NPC("Librarian", "SHHHH", "Goes back to "
+        self.npc = NPC("Librarian", "I heard footsteps in the attic late lastnight", "Goes back to "
                                              "reading", 50)
 
 
 class Attic(Location):
     def __init__(self):
-        super().__init__(2)
+        super().__init__(3)
         self.visited = False
         self.all_clues_found = False
 
-        self.npc = NPC("Laura", "Hello how are you", "Goes back to "
-                                                     "writing her journal", 15)
+        self.npc = NPC("Laura", "Hello. Have you solved the mystery yet?"
+                       , "Goes back to writing her journal", 15)

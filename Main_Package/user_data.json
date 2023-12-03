@@ -171,5 +171,51 @@
         "Visited": false
       }
     }
+  },
+  "finn": {
+    "name": "Finn",
+    "hashed_password": "$2b$12$4IFF89l/JfHu.Uh3zva5puC1qsbxc7NSNfRh34Bb1KZ.pJ2sqx4Ry",
+    "score": 0
+  },
+  "finn1": {
+    "name": "finn1",
+    "hashed_password": "$2b$12$KSX4f7bJvanFQClV9Kd.2OL7BycLBhlKjf.W2o39lR.TcDFpwQEre",
+    "score": 0
+  },
+  "finn2": {
+    "name": "finn2",
+    "hashed_password": "$2b$12$Kn18XKOyFqW.AtnGkhwDg.sb8b8QLr5S4/4HCGR4P/xDdrVUzDNEK",
+    "score": 0
+  },
+  "finn3": {
+    "name": "w",
+    "hashed_password": "$2b$12$NkmkF1raGsa3jy9.QgV29eXuKfh91xh1onCQgObkGn.5nYj.X/Jr.",
+    "score": 0,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [
+          "chef is hostile and doesnt seem to want to help you solve the crime",
+          "looks like someone stole a knife from the kitchen",
+          "camera system has been shut off"
+        ],
+        "Visited": true
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
   }
 }
