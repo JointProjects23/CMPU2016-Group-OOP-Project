@@ -3,8 +3,8 @@ item.py
 
 This module defines the Item class, representing items that can impact the game.
 
-Author: [Your Name]
-Date: [Current Date]
+Author: Sam Curran, Hayden Carroll
+Date: 3/12
 
 Usage:
     # Example usage of the Item class
