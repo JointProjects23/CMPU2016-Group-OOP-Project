@@ -12,6 +12,7 @@ Usage:
     item.use(game_instance)
 """
 
+
 class Item:
     """
     The Item class represents an item that can impact the game.

@@ -690,8 +690,6 @@ class Game:
                 "who have nothing to do with the crime"
             )
             self.npcs_interacted = True
-            self.inventory.add_item(Item("NPC Interaction",
-                                         "Received information from NPCs"))
             # Detail needed to be added here, Storyline etc
 
     def examine_clues(self):
@@ -700,23 +698,25 @@ class Game:
                 "You step into the dimly lit crime scene.\nBroken glass lies "
                 "near the window, and a table is overturned.\n"
                 "You find a torn piece of fabric near the window.\n"
-                "There's a distinct smell of perfume lingering in the air.\n"
+                "There's a distinct smell of Cigars lingering in the air.\n"
                 "The mystery deepens."
             )
 
             # Add items to the inventory when examining clues
             self.crime_scene.add_clue("Torn fabric")
             self.inventory.add_item(
-                Item("Torn Fabric", "A torn piece of fabric near the window"))
+                Item("Torn Fabric", "A torn piece of fabric near the "
+                                    "window", "You notice this piece of "
+                                             "fabric is part of the butlers "
+                                             "suit", 2))
             self.crime_scene.add_clue("Broken glass near window")
-            self.inventory.add_item(
-                Item("Broken Glass", "Glass pieces near the window"))
             self.crime_scene.add_clue("An overturned table at crime scene")
             self.inventory.add_item(Item("Overturned Table",
                                          "Table overturned at the crime scene"))
             self.crime_scene.add_clue("Smell of perfume")
             self.inventory.add_item(
-                Item("Perfume Smell", "Distinct smell of perfume"))
+                Item("Cigar", "Cigar at crime scene",
+                     "You think that whoever did the crime smokes cigars", 1))
             self.crime_scene.investigated = True
         else:
             print(
