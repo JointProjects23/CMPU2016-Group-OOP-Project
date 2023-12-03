@@ -159,7 +159,6 @@ class HauntedMansionGame:
             print("'game_data.json' not found.")
             return ""
 
-
     def play_haunted_mansion_game(self):
         """
         Play the Haunted Mansion guessing game.
@@ -182,6 +181,7 @@ class HauntedMansionGame:
 
         print(f"Game over! The secret word was '{self.secret_word}'.")
         return 0
+
 
 class RockPaperScissors:
     def __init__(self):
@@ -256,7 +256,7 @@ class RockPaperScissors:
             print(f"You chose {user_choice}. I chose {computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             if result:
-                return True
+                break
             if self.attempts > 0:
                 print(f"You have {self.attempts} chances left.")
             else:
