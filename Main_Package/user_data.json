@@ -415,5 +415,15 @@
     "name": "vad",
     "hashed_password": "$2b$12$yRn1Ynrk5t2f.7nuTkZEG.TSZAbVm33JA47VNZnVAbEvXgaP9gk3G",
     "score": 0
+  },
+  "hayde": {
+    "name": "Hayde",
+    "hashed_password": "$2b$12$bfdR3DKE9QBGp3EyLSnbiODRrR2K6gfZ05iptZs5WtTMm7i/0IpMC",
+    "score": 0
+  },
+  "hayden_123": {
+    "name": "Hayden_123",
+    "hashed_password": "$2b$12$LPZ5DLIWQxDOfeDlYn7LO.CqfDkEYbvcZ.F1MDhhF0uxuk0LFVcKu",
+    "score": 0
   }
 }
