@@ -582,7 +582,7 @@ class Game:
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
-                    #self.reward_for_game_completion('haunted_game')
+                    self.reward_for_game_completion('haunted_game')
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
@@ -604,7 +604,7 @@ class Game:
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
-                    #self.reward_for_game_completion('rock_paper_scissors')
+                    self.reward_for_game_completion('rock_paper_scissors')
 
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
@@ -626,7 +626,7 @@ class Game:
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
                     self.mini_game.display_counter()
-                    #self.reward_for_game_completion('riddle_game')
+                    self.reward_for_game_completion('riddle_game')
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
 
