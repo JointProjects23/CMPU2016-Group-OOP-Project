@@ -270,6 +270,8 @@ class Game:
                 self.game_log.log("Player chose to see their score")
                 print(f"Your current score is {self.__score__()}")
             elif player_input.lower() == "u":
+                # Print all items in the inventory
+                self.inventory.print_inventory()
                 item_name = input(
                     "Enter the name of the item you want to use: ")
                 self.inventory.use_item(item_name, Game)
@@ -290,6 +292,7 @@ class Game:
                 self.start_game()
             else:
                 raise ValueError("Incorrect user entry.")
+
 
     def start_game(self):
         """The start_game method introduces the player

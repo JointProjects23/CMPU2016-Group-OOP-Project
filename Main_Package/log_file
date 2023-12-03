@@ -1,20 +1,19 @@
 Player chose to start the game
 Successfully updating
 ---
-Player input is e.
-Player chose to enter door 3
+Player input is u.
+Successfully updating
 ---
+Player input is e.
+Successfully updating
+---
+Player input is u.
+Successfully updating
+---
+Player input is e.
 Player input is r.
 Player chose to review clues at Crime Scene
-Successfully updating
----
-Player input is s.
-Player chose to see their score
-Successfully updating
----
-Player input is x.
----
-Player input is e.
+Player had no clues to review
 Player input is i.
 Player chose to interact with characters
 Player chose to interact with witness and suspects
@@ -33,16 +32,16 @@ Mr. Reginald  provided clue: Suspect Mr. Reginald  reacts nervously:I was workin
 You notice subtle body language cues indicating potential deception
 Mr. Reginald  provided observation: Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8
 You notice subtle body language cues indicating potential deception
-Player input is r.
-Player chose to review clues at Crime Scene
+Player input is i.
+Player chose to interact with characters
+Player chose to interact with NPCs
+Beatrice interacted with Player
+Beatrice said to the player: How do you do.
+Seamus interacted with Player
+Seamus said to the player: Welcome to the mansion
+The Child interacted with Player
+The Child said to the player: Go away this is my house!
 Player input is b.
 Successfully updating
 ---
-Player input is s.
-Player chose to see their score
-Successfully updating
----
-Player input is q.
-Player quit the game
-Successfully updating
----
+Player input is c.

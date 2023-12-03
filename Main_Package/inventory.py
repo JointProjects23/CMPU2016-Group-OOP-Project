@@ -48,3 +48,12 @@ class Inventory:
             print(f"{item.name} has been removed from your inventory.")
         else:
             print(f"You don't have {item_name} in your inventory.")
+
+    def print_inventory(self):
+        """Print all items in the player's inventory."""
+        if self.items:
+            print("Items in your inventory:")
+            for item in self.items:
+                print(f"- {item.name}: {item.description}")
+        else:
+            print("Your inventory is empty.")
