@@ -19,7 +19,7 @@ Date: 15/11/2023 - 01/12/2023
 
 import time
 import json
-from colorama import Fore
+from colorama import Fore # Easily installed via Pycharm (requirement for project submission)
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
