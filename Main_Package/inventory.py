@@ -3,7 +3,11 @@ inventory.py
 
 This module defines the Inventory class, which manages the player's inventory.
 
+<<<<<<< Updated upstream
 Author: Sam Curren, Jamie O'Neill
+=======
+Author: Sam Curran, Jamie O'Neill, Hayden Carroll
+>>>>>>> Stashed changes
 Date: 15/11/2023 - 01/12/2023
 
 Usage:

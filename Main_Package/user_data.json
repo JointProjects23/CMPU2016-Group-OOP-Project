@@ -568,6 +568,17 @@
     "name": "h",
     "hashed_password": "$2b$12$yHVwoaPC049yibIA5oXXO.I801eb5Oh/9S.W6/dBNJYpf1/xY0Gna",
     "score": 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+  },
+  "3": {
+    "name": "3",
+    "hashed_password": "$2b$12$Uz/.V27B/ke.53TVFvYFC.BRQN2HuhoZ8gvkayTPjB6ivpQ0MAm7G",
+  "r": {
+    "name": "r",
+    "hashed_password": "$2b$12$fFc6JiTcROaRkEXyYxbLPOelhdx/k6En9LYngLcLkNa75hMTRdZp.",
+    "score": 0
 >>>>>>> Stashed changes
   }
 }
