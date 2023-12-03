@@ -322,7 +322,7 @@ class Game:
 
     def explore_upstairs(self):
         while True:
-            room_choice = input(Fore.GREEN + "As you venture forward 4 rooms"
+            room_choice = input(Fore.GREEN + "As you venture forward 4 rooms "
                                              "are revealed "
                                              "to you:\n\nA Kitchen(K)"
                                              "\nA huge Library(L)"
@@ -334,7 +334,7 @@ class Game:
             if room_choice.lower() == 'k' and not self.kitchen.visited:
                 self.kitchen.visited = True
                 print('you walk through the seemingly never ending upstairs '
-                      'hallway of the mansion on your way to the kitchen'
+                      'hallway of the mansion on your way to the kitchen '
                       'you open the door and see an old man cutting carrots')
                 interact_choice = input("Do you want to talk to the chef "
                                         "(Y/N) : ")
@@ -500,7 +500,7 @@ class Game:
             print(f"{i}. {door}")
         player_input = int(
             input("Which passage will you venture through...Brave"
-                  f"detective:")
+                  f" detective:")
         )
 
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
@@ -531,8 +531,9 @@ class Game:
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
-                      "worthy, Beat me in this game of with..before you end "
+                      "worthy, Beat me in this game of wit..before you end "
                       "up dead")
+
                 rps_result = self.rock_paper_scissors.play_game()
                 if rps_result:
                     self.doors_checker[1] = True
