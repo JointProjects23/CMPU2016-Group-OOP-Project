@@ -23,7 +23,7 @@ from colorama import Fore # Easily installed via Pycharm (requirement for projec
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
-from miniGames import HauntedMansionGame, RockPaperScissors, Riddle
+from miniGames import HauntedMansionGame, RockPaperScissors, Riddle, MiniGameCounter
 from inventory import Inventory
 from item import Item
 from location import CrimeScene, Kitchen, Attic, Library
@@ -52,6 +52,7 @@ class Game:
         self.characters_interacted = False
         self.npcs_interacted = False
         self.score = 0
+        self.mini_game = MiniGameCounter()
         self.crime_scene = CrimeScene("Mansion's Drawing Room")
         self.witness = Witness(
             "Lady Victoria Starling",
@@ -186,6 +187,7 @@ class Game:
                     break
                 else:
                     print("Login failed")
+
 
     def update_user_score(self, username, score):
         try:
@@ -527,7 +529,10 @@ class Game:
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('haunted_game')
+                    #self.reward_for_game_completion('haunted_game')
+                    self.mini_game.display_counter()
+                #if self.mini_game.counter == 3:
+
 
             elif int(player_input) == 2 and not self.doors_checker[1]:
                 print("Those who dare to enter ahead..Prove to me you are "
@@ -541,9 +546,10 @@ class Game:
                         "You slowly open the door to reveal a...\n"
                         "...a dark corridor which leads you to stairs\n"
                     )
-                    self.crime_scene.add_clue("The letter on the ground")
+                    self.crime_scene.add_clue("Glass with a fingerprint")
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('rock_paper_scissors')
+                    self.mini_game.display_counter()
+                    #self.reward_for_game_completion('rock_paper_scissors')
 
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
@@ -564,7 +570,8 @@ class Game:
                         "The hidden passage behind the library door")
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('riddle_game')
+                    #self.reward_for_game_completion('riddle_game')
+                    self.mini_game.display_counter()
                 else:
                     print("Not very smart for a Detective, are you")
 
@@ -708,16 +715,17 @@ class Game:
                       "1. Mr. Reginald (the butler)\n"
                       "2. Lady Victoria Starling\n"
                       "3. The Chef\n"
-                      "who do you believe commited the crime : ")
+                      "who do you believe committed the crime : ")
 
         if guilty.lower() == guess.lower():
             print("congratulations Detective you have found the suspect")
             self.end_game()
         else:
-            print("unlucky detective you didnt find the suspect. the theif was"
+            print("unlucky detective you didnt find the suspect. the thief was"
                   "'Mr. Reginald (the butler)'")
             self.end_game()
-            
+
+
     def end_game(self):
         # Find the scores from the individual games
         haunted_game_score = self.game_scores["Haunted Mansion"]
@@ -778,3 +786,4 @@ class Game:
 
         with open('user_data.json', 'w') as file:
             json.dump(user_data, file, indent=2)
+

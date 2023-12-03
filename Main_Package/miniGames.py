@@ -71,7 +71,6 @@ class HauntedMansionGame:
             print("Please enter a valid single letter or a complete word.")
             return None
 
-
     def check_letter(self, guess):
         """
         Check a single letter guess and update the game state.
@@ -285,3 +284,15 @@ class Riddle:
     def get_answer(self):
         return self.riddles_and_answers["Riddles"].get(self.current_riddle, "")
 
+
+class MiniGameCounter:
+    def __init__(self):
+        self.counter = 1
+
+    def display_counter(self):
+        print(f"You have completed {self.counter} / 3 mini-games")
+        self.counter += 1
+
+    def completed_message(self):
+        self.crime_scene.add_clue("The letter on the ground")
+        print("You have discovered a secret letter")
