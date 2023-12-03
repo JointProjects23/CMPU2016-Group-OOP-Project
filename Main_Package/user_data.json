@@ -171,42 +171,5 @@
         "Visited": false
       }
     }
-  },
-  "sam_courtney": {
-    "name": "sam_courtney",
-    "hashed_password": "$2b$12$deMMsEg3id3KANBr.zB2Nea1BDprjXs6hV3OGy3q313cBBCBvnR/u",
-    "score": 0
-  },
-  "samm": {
-    "name": "samm",
-    "hashed_password": "$2b$12$YG1SGJ7Ps4siNPTLFv/h7OZ4K9gpekrj5iwopVtkxzkF9xyR9dU16",
-    "score": 0,
-    "Location_clues": {
-      "CrimeScene": {
-        "All clues found": false,
-        "Clues": [],
-        "Visited": false
-      },
-      "Attic": {
-        "All clues found": false,
-        "Clues": [],
-        "Visited": false
-      },
-      "Kitchen": {
-        "All clues found": false,
-        "Clues": [],
-        "Visited": false
-      },
-      "Library": {
-        "All clues found": false,
-        "Clues": [],
-        "Visited": false
-      }
-    }
-  },
-  "sammm": {
-    "name": "sammm",
-    "hashed_password": "$2b$12$7QmU2wdUoxv1RjO70vNIEOe.X21W4Nzg9Dt.efBsy8zJLguRQXW7G",
-    "score": 0
   }
 }

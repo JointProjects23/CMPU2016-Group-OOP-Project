@@ -63,7 +63,7 @@ class Game:
         )
         self.witness2 = Witness(
             "Ms. Parker",
-            "I saw someone near the window at the " "time of the incident.",
+            "I saw someone near the window at the time of the incident.",
             "Suspicious figure in dark clothing.",
             "frustratedly walks away",
             45,
@@ -241,6 +241,7 @@ class Game:
                 "'e' to explore the mansion further\n"
                 "'s' to see your current score \n"
                 "'u' to use an item from your inventory: \n"
+                "'c' to conclude investigation\n"
                 "Please Enter your selection: "
             )
 
@@ -271,6 +272,8 @@ class Game:
                 item_name = input(
                     "Enter the name of the item you want to use: ")
                 self.inventory.use_item(item_name, Game)
+            elif player_input.lower() == "c":
+                self.user_guess()
             else:
                 raise ValueError("Incorrect user entry.")
 
@@ -338,9 +341,28 @@ class Game:
                 if interact_choice.lower() == 'y':
                     print(self.kitchen.interact_with_npcs)
                     print(self.kitchen.npc_action)
+                    self.kitchen.add_clue("chef is hostile and doesnt seem to "
+                                          "want to help you solve the crime")
                 else:
                     print('Scared off interaction...How embarrassing, '
                           'you might\'ve missed an important clue...')
+
+                explore_choice1 = input("do you want to explore kitchen further"
+                                        " ? (Y/N) :")
+                if explore_choice1.lower() == 'y':
+                    print("you walk around the kitchen searching for clues...\n"
+                          "you see signs of a forced entry on the knife press\n"
+                          "and you also heard the chef complain about missing\n"
+                          "utensils earlier")
+                    self.kitchen.add_clue("looks like someone stole a knife "
+                                          "from the kitchen")
+
+                print("\nas you are leaving you see a camera in the corner of\n"
+                      "the kitchen that looks t0 be off. the chef says \n"
+                      "'it wasn't on when i arrived this morning'.\nThis person"
+                      "must know a lot about this mansion")
+                self.kitchen.add_clue("camera system has been shut off")
+
             elif room_choice.lower() == "a" and not self.attic.visited:
                 self.attic.visited = True
                 print(
@@ -354,6 +376,21 @@ class Game:
                     print(self.attic.npc_action)
                 else:
                     print("You back out of the room")
+
+                explore_choice2 = input("do you want to explore attic further"
+                                        " ? (Y/N) :")
+                if explore_choice2.lower() == 'y':
+                    print("\n as you walk around the attic you feel a cold "
+                          "breeze coming from\nthe window at the back of the "
+                          "room.\nYou see it has been opened and see a muddy "
+                          "footprint on the windowsill.\n\nAs you examine it "
+                          "closer it looks to be forces open")
+                    self.attic.add_clue("window open in attic")
+                    self.attic.add_clue("muddy footprint on attic windowsill")
+                    self.attic.add_clue("window appears to be forced open")
+                else:
+                    print('Scared of a bit of investigating...How embarrassing,'
+                          'you might\'ve missed an important clue...')
             elif room_choice.lower() == "l" and not self.library.visited:
                 self.library.visited = True
                 print(
@@ -364,8 +401,19 @@ class Game:
                 if interact_choice.lower() == 'y':
                     print(self.library.interact_with_npcs)
                     print(self.library.npc_action)
+                    self.library.add_clue("someone was walking in the attic"
+                                          " late last night")
                 else:
                     print("You walk back out of the room")
+
+                explore_choice3 = input("do you want to explore library further"
+                                        " ? (Y/N) :")
+                if explore_choice3.lower() == 'y':
+                    print("\nas you walk through the isles of bookshelves you "
+                          "see a trail of footprints\nleading from what seems "
+                          "to be a hidden passage.")
+                    self.library.add_clue("hidden passage that leads to library")
+                    self.library.add_clue("muddy footprints in library")
             elif room_choice.lower() == "b":
                 break
             elif room_choice.lower() == 'd':
@@ -468,11 +516,14 @@ class Game:
                         "inside is a small kitchen with a butler making food\n"
                         "you ask him who he is  and he tells you hes the "
                         "the mansion's butler, Mr. Reginald\n"
-                        "after talking, you realise he has a suspiciously "
-                        "extensive knowledge of the mansion's layout\n"
+                        "you are surised he is the butler at first as his"
+                        " trousers seem to be stained with mud and his shoes\n"
+                        "look tarnished after talking, you realise he has a"
+                        " suspiciously extensive knowledge of the mansion's "
+                        "layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge "
+                        "Mr. Reginald's rugged look and extensive knowledge "
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
@@ -651,6 +702,22 @@ class Game:
                 "review the clues gathered)"
             )
 
+    def user_guess(self):
+        guilty = "Mr.Reginald"
+        guess = input("After reviewing your clues you have 3 possible suspects\n"
+                      "1. Mr. Reginald (the butler)\n"
+                      "2. Lady Victoria Starling\n"
+                      "3. The Chef\n"
+                      "who do you believe commited the crime : ")
+
+        if guilty.lower() == guess.lower():
+            print("congratulations Detective you have found the suspect")
+            self.end_game()
+        else:
+            print("unlucky detective you didnt find the suspect. the theif was"
+                  "'Mr. Reginald (the butler)'")
+            self.end_game()
+            
     def end_game(self):
         # Find the scores from the individual games
         haunted_game_score = self.game_scores["Haunted Mansion"]
