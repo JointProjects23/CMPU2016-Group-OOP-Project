@@ -425,5 +425,62 @@
     "name": "Hayden_123",
     "hashed_password": "$2b$12$LPZ5DLIWQxDOfeDlYn7LO.CqfDkEYbvcZ.F1MDhhF0uxuk0LFVcKu",
     "score": 0
+  },
+  "jay": {
+    "name": "jay",
+    "hashed_password": "$2b$12$hNJPbB8.2sZ7RdInyu/1yeYGEYfJcXyqFpfj1L.4gwmWhTL3gkIc2",
+    "score": 0
+  },
+  "j": {
+    "name": "j",
+    "hashed_password": "$2b$12$zlyH8BsvVIoTljLemeBUwuUl4IWrwDYwbUOqoA/Hz/UQYwtOujd2.",
+    "score": 0
+  },
+  "123": {
+    "name": "j",
+    "hashed_password": "$2b$12$soRc9RRDDL85r/A8BGScIuaVMwfiKzuofY.MFPJhKRIsEvIqEBjZy",
+    "score": 44,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [
+          "Suspect Mr. Reginald  reacts nervously:I was working last night but left at 8\nYou notice subtle body language cues indicating potential deception",
+          "Mr. Reginald 's Alibi: Claims to have left at 8",
+          "Witness Lady Victoria Starling speaks hurriedly: I cant believe my Diamond necklace was Stolen!\nI heard someone in my room last night\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Lady Victoria Starling's Observation: Someone in the owners room last night",
+          "Witness Ms. Parker speaks hurriedly: I saw someone near the window at the time of the incident.\nYou sense genuine anxiety and urgency in the witness's words.",
+          "Ms. Parker's Observation: Suspicious figure in dark clothing.",
+          "Three people hanging around the Crime Scenewho have nothing to do with the crime"
+        ],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [
+          "window open in attic",
+          "muddy footprint on attic windowsill",
+          "window appears to be forced open"
+        ],
+        "Visited": true
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [
+          "chef is hostile and doesnt seem to want to help you solve the crime",
+          "looks like someone stole a knife from the kitchen",
+          "camera system has been shut off"
+        ],
+        "Visited": true
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [
+          "someone was walking in the attic late last night",
+          "hidden passage that leads to library",
+          "muddy footprints in library"
+        ],
+        "Visited": true
+      }
+    }
   }
 }
