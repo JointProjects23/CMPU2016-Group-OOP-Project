@@ -53,6 +53,9 @@ class Game:
         self.started = False
         self.characters_interacted = False
         self.npcs_interacted = False
+        self.kitchen_npc_interacted = False
+        self.attic_npc_interacted = False
+        self.library_npc_interacted = False
         self.score = 0
         self.mini_game = MiniGameCounter()
         self.crime_scene = CrimeScene("Mansion's Drawing Room")
@@ -138,13 +141,13 @@ class Game:
         if self.npcs_interacted:
             score += 2
 
-        if self.attic.interact_with_npcs:
+        if self.attic_npc_interacted:
             score += 2
 
-        if self.library.interact_with_npcs:
+        if self.library_npc_interacted:
             score += 2
 
-        if self.kitchen.interact_with_npcs:
+        if self.kitchen_npc_interacted:
             score += 2
 
         # this gives you a point for every clue you find
@@ -152,13 +155,13 @@ class Game:
             score += len(self.crime_scene.review_clue())
 
         if self.attic.review_clue():
-            score += len(self.crime_scene.review_clue())
+            score += len(self.attic.review_clue())
 
         if self.library.review_clue():
-            score += len(self.crime_scene.review_clue())
+            score += len(self.library.review_clue())
 
         if self.kitchen.review_clue():
-            score += len(self.crime_scene.review_clue())
+            score += len(self.kitchen.review_clue())
 
         return score
 
@@ -460,6 +463,7 @@ class Game:
                     f"do you want to talk to the girl? (y/n) : ")
                 if interact_choice.lower() == 'y':
                     print(self.attic.interact_with_npcs)
+                    self.attic_npc_interacted = True
                     print(self.attic.npc_action)
                 else:
                     print("You back out of the room")
@@ -492,6 +496,7 @@ class Game:
                     "do you want to talk to the librarian? (y/n) : ")
                 if interact_choice.lower() == 'y':
                     print(self.library.interact_with_npcs)
+                    self.library_npc_interacted = True
                     print(self.library.npc_action)
                     self.library.add_clue("someone was walking in the attic"
                                           " late last night")
@@ -819,21 +824,61 @@ class Game:
             )
 
     def user_guess(self):
-        guilty = "Mr. Reginald"
-        guess = input(
+        guilty = '1'
+        interrogate_choice = input(
             "After reviewing your clues you have 3 possible suspects\n"
             "1. Mr. Reginald (the butler)\n"
             "2. Lady Victoria Starling\n"
             "3. The Chef\n"
-            "who do you believe commited the crime : ")
+            "Would you like to interrogate the suspects? (Y/N) : ")
 
-        if guilty.lower() == guess.lower():
-            print("congratulations Detective you have found the suspect")
-            self.end_game()
+        if interrogate_choice.lower() == 'y':
+            suspect_interrogated_choice = input("\n\nwho would you like to interrogate ? \n"
+                                                "1. Mr. Reginald (the butler)\n"
+                                                "2. Lady Victoria Starling\n"
+                                                "3. The Chef\n"
+                                                "choose now : ")
+            if suspect_interrogated_choice == '1':
+                print("At first Mr. Reginald seems to be avoiding the"
+                      " questions.\nas you continue to push he breaks and "
+                      "admits it was him.")
+                print("\ncongratulations Detective you have found the suspect")
+                self.end_game()
+            elif suspect_interrogated_choice == '2':
+                print("Lady Victoria Starling was irate that you could even"
+                      " think she did this and kicks you out of the mansion."
+                      "\nYour investigation has come to an end........")
+                self.end_game()
+            elif suspect_interrogated_choice == '3':
+                print("As you ask the chef questions you feel he is hiding"
+                      " something.\nAfter an hour of probing he slips and tells"
+                      " you he caught Mr. Reginald doing it last night\n"
+                      " and agreed to be silent for a cut after the necklace is"
+                      " sold \n")
+                extra_interrogation = input("With this new information would"
+                                            " you like to interrogate "
+                                            "Mr. Reginald ? (Y/N) : ")
+                if extra_interrogation.lower() == 'y':
+                    print("\nWhen you present your finding to Mr. Reginalde "
+                          "immediately admits defeat and confesses.")
+                    self.end_game()
+            else:
+                raise ValueError(f"Invalid choice Detective: "
+                                 f"{suspect_interrogated_choice}")
+
+        elif interrogate_choice.lower() == 'n':
+            guess = input("Who do you believe commited the crime? : ")
+            if guilty.lower() == guess.lower():
+                print("congratulations Detective you have found the suspect")
+                self.end_game()
+            else:
+                print("unlucky detective you didnt find the suspect. the theif was"
+                      "'Mr. Reginald (the butler)'")
+                self.end_game()
+
         else:
-            print("unlucky detective you didnt find the suspect. the theif was"
-                  "'Mr. Reginald (the butler)'")
-            self.end_game()
+            raise ValueError(f"Invalid choice Detective: "
+                             f"{interrogate_choice}")
 
     def end_game(self):
         # Find the scores from the individual games

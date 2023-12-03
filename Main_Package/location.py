@@ -116,6 +116,10 @@ class Location:
         return self.__clues
 
     @property
+    def interacted(self):
+        return self.npc.interact
+
+    @property
     def interact_with_npcs(self):
         """
         Get the NPC interaction method of the location.
