@@ -19,7 +19,8 @@ Date: 15/11/2023 - 01/12/2023
 
 import time
 import json
-from colorama import Fore # Easily installed via Pycharm (requirement for project submission)
+from colorama import \
+    Fore  # Easily installed via Pycharm (requirement for project submission)
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
@@ -236,14 +237,14 @@ class Game:
 
         if self.started:
             player_input = input(Fore.GREEN +
-                "Press one of the following keys: \n'q' to quit\n"
-                "'r' to review your clues\n"
-                "'e' to explore the mansion further\n"
-                "'s' to see your current score \n"
-                "'u' to use an item from your inventory: \n"
-                "'c' to conclude investigation\n"
-                "Please Enter your selection: "
-            )
+                                 "Press one of the following keys: \n'q' to quit\n"
+                                 "'r' to review your clues\n"
+                                 "'e' to explore the mansion further\n"
+                                 "'s' to see your current score \n"
+                                 "'u' to use an item from your inventory: \n"
+                                 "'c' to conclude investigation\n"
+                                 "Please Enter your selection: "
+                                 )
 
             self.game_log.log(f"Player input is {player_input}.")
 
@@ -295,14 +296,19 @@ class Game:
         to the mystery case and sets the scene."""
         if not self.player_name:
             self.player_name = input("Please enter your detective name:")
-            print(
-                f"As the renowned detective, {self.player_name},\n"
-                "you were called in to solve the baffling case of the "
-                "missing Diamond Necklace Starlight Serenade\n\n"
-                "You have been tasked with finding the missing piece "
-                "of the mansion's owner, Lady Victoria Starling!\n"
-                "You can find her in the mansions drawing room...\n"
-            )
+
+            text = ("\033[1;31mAs the renowned detective, "
+                    f"{self.player_name},\n"
+                    "you were called in to solve the baffling case of the "
+                    "missing Diamond Necklace Starlight Serenade\n\n"
+                    "You have been tasked with finding the missing piece "
+                    "of the mansion's owner, Lady Victoria Starling!\n"
+                    "You can find her in the mansions drawing room...\n\033[0m")
+
+            for char in text:
+                print(char, end="", flush=True)
+                time.sleep(0.005)  # Adjust the delay time as needed
+
             print(f"Welcome {self.player_name}")
         else:
             print(f"Welcome back {self.player_name}")
@@ -310,9 +316,9 @@ class Game:
     def explore_options(self):
 
         explore_choice = input(Fore.GREEN + "Which path do you dare to take,"
-                               "The path that leads upstairs(1) or "
-                               "The path that leads downstairs("
-                               "2) : ")
+                                            "The path that leads upstairs(1) or "
+                                            "The path that leads downstairs("
+                                            "2) : ")
         if explore_choice == '1':
             self.explore_upstairs()
         elif explore_choice == '2':
@@ -347,28 +353,38 @@ class Game:
                     print('Scared off interaction...How embarrassing, '
                           'you might\'ve missed an important clue...')
 
-                explore_choice1 = input("do you want to explore kitchen further"
-                                        " ? (Y/N) :")
+                explore_choice1 = input(
+                    "do you want to explore kitchen further"
+                    " ? (Y/N) :")
                 if explore_choice1.lower() == 'y':
-                    print("you walk around the kitchen searching for clues...\n"
-                          "you see signs of a forced entry on the knife press\n"
-                          "and you also heard the chef complain about missing\n"
-                          "utensils earlier")
+                    print(
+                        "you walk around the kitchen searching for clues...\n"
+                        "you see signs of a forced entry on the knife press\n"
+                        "and you also heard the chef complain about missing\n"
+                        "utensils earlier")
                     self.kitchen.add_clue("looks like someone stole a knife "
                                           "from the kitchen")
 
-                print("\nas you are leaving you see a camera in the corner of\n"
-                      "the kitchen that looks t0 be off. the chef says \n"
-                      "'it wasn't on when i arrived this morning'.\nThis person"
-                      "must know a lot about this mansion")
-                self.kitchen.add_clue("camera system has been shut off")
+                explore_choice1 = input(
+                    "do you want to explore kitchen further"
+                    " ? (Y/N) :")
+                if explore_choice1.lower() == 'y':
+                    print(
+                        "\nas you are leaving you see a camera in the corner "
+                        "of\n"
+                        "the kitchen that looks t0 be off. the chef says \n"
+                        "'it wasn't on when i arrived this morning'.\nThis "
+                        "person"
+                        "must know a lot about this mansion, you think to "
+                        "yourself")
+                    self.kitchen.add_clue("camera system has been shut off")
 
             elif room_choice.lower() == "a" and not self.attic.visited:
                 self.attic.visited = True
                 print(
-                    "You walk through the never ending halls of the mansion on "
-                    "your way to the attic. You reach a dimly lit room, As you "
-                    "walk in there\'s a young girl writing at a desk")
+                    "You walk through the never ending halls of the mansion on"
+                    "your way to the attic. You reach a dimly lit room, As you"
+                    " walk in there\'s a young girl writing at a desk")
                 interact_choice = input(
                     f"do you want to talk to the girl? (y/n) : ")
                 if interact_choice.lower() == 'y':
@@ -389,8 +405,9 @@ class Game:
                     self.attic.add_clue("muddy footprint on attic windowsill")
                     self.attic.add_clue("window appears to be forced open")
                 else:
-                    print('Scared of a bit of investigating...How embarrassing,'
-                          'you might\'ve missed an important clue...')
+                    print(
+                        'Scared of a bit of investigating...How embarrassing,'
+                        'you might\'ve missed an important clue...')
             elif room_choice.lower() == "l" and not self.library.visited:
                 self.library.visited = True
                 print(
@@ -406,13 +423,15 @@ class Game:
                 else:
                     print("You walk back out of the room")
 
-                explore_choice3 = input("do you want to explore library further"
-                                        " ? (Y/N) :")
+                explore_choice3 = input(
+                    "do you want to explore library further"
+                    " ? (Y/N) :")
                 if explore_choice3.lower() == 'y':
                     print("\nas you walk through the isles of bookshelves you "
                           "see a trail of footprints\nleading from what seems "
                           "to be a hidden passage.")
-                    self.library.add_clue("hidden passage that leads to library")
+                    self.library.add_clue(
+                        "hidden passage that leads to library")
                     self.library.add_clue("muddy footprints in library")
             elif room_choice.lower() == "b":
                 break
@@ -704,11 +723,12 @@ class Game:
 
     def user_guess(self):
         guilty = "Mr.Reginald"
-        guess = input("After reviewing your clues you have 3 possible suspects\n"
-                      "1. Mr. Reginald (the butler)\n"
-                      "2. Lady Victoria Starling\n"
-                      "3. The Chef\n"
-                      "who do you believe commited the crime : ")
+        guess = input(
+            "After reviewing your clues you have 3 possible suspects\n"
+            "1. Mr. Reginald (the butler)\n"
+            "2. Lady Victoria Starling\n"
+            "3. The Chef\n"
+            "who do you believe commited the crime : ")
 
         if guilty.lower() == guess.lower():
             print("congratulations Detective you have found the suspect")
@@ -717,7 +737,7 @@ class Game:
             print("unlucky detective you didnt find the suspect. the theif was"
                   "'Mr. Reginald (the butler)'")
             self.end_game()
-            
+
     def end_game(self):
         # Find the scores from the individual games
         haunted_game_score = self.game_scores["Haunted Mansion"]

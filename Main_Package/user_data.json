@@ -171,5 +171,15 @@
         "Visited": false
       }
     }
+  },
+  "hayden_carroll": {
+    "name": "Hayden_carroll",
+    "hashed_password": "$2b$12$MOZTMEgcXpdMbtGRyQL4H.i7P2OhlTsxp2Ccr8hPbHeXSMDd5bh3C",
+    "score": 0
+  },
+  "hayden_c": {
+    "name": "Hayden_c",
+    "hashed_password": "$2b$12$RBLqNGDMloGg2TStItbvb.oa5oDw65RWIyuXbT6MbvgR.QQ8edUZ6",
+    "score": 0
   }
 }
