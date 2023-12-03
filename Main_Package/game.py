@@ -338,9 +338,27 @@ class Game:
                 if interact_choice.lower() == 'y':
                     print(self.kitchen.interact_with_npcs)
                     print(self.kitchen.npc_action)
+                    self.kitchen.add_clue("chef is hostile and doesnt seem to "
+                                          "want to help you solve the crime")
                 else:
                     print('Scared off interaction...How embarrassing, '
                           'you might\'ve missed an important clue...')
+
+                explore_choice1 = input("do you want to explore kitchen further"
+                                        " ? (Y/N) :")
+                if explore_choice1.lower() == 'y':
+                    print("you walk around the kitchen searching for clues...\n"
+                          "you see signs of a forced entry on the knife press\n"
+                          "and you also heard the chef complain about missing\n"
+                          "utensils earlier")
+                    self.kitchen.add_clue("looks like someone stole a knife "
+                                          "from the kitchen")
+
+                print("\nas you are leaving you see a camera in the corner of \n"
+                      "the kitchen that looks t0 be off. the chef says \n"
+                      "'it wasn't on when i arrived this morning'")
+                self.kitchen.add_clue("camera system has been shut off")
+
             elif room_choice.lower() == "a" and not self.attic.visited:
                 self.attic.visited = True
                 print(
@@ -354,6 +372,21 @@ class Game:
                     print(self.attic.npc_action)
                 else:
                     print("You back out of the room")
+
+                explore_choice2 = input("do you want to explore attic further"
+                                        " ? (Y/N) :")
+                if explore_choice2.lower() == 'y':
+                    print("\n as you walk around the attic you feel a cold "
+                          "breeze coming from\nthe window at the back of the "
+                          "room.\nYou see it has been opened and see a muddy "
+                          "footprint on the windowsill.\n\nAs you examine it "
+                          "closer it looks to be forces open")
+                    self.attic.add_clue("window open in attic")
+                    self.attic.add_clue("muddy footprint on attic windowsill")
+                    self.attic.add_clue("window appears to be forced open")
+                else:
+                    print('Scared of a bit of investigating...How embarrassing,'
+                          'you might\'ve missed an important clue...')
             elif room_choice.lower() == "l" and not self.library.visited:
                 self.library.visited = True
                 print(
@@ -364,8 +397,19 @@ class Game:
                 if interact_choice.lower() == 'y':
                     print(self.library.interact_with_npcs)
                     print(self.library.npc_action)
+                    self.library.add_clue("someone was walking in the attic"
+                                          " late last night")
                 else:
                     print("You walk back out of the room")
+
+                explore_choice3 = input("do you want to explore library further"
+                                        " ? (Y/N) :")
+                if explore_choice3.lower() == 'y':
+                    print("\nas you walk through the isles of bookshelves you "
+                          "see a trail of footprints\nleading from what seems "
+                          "to be a hidden passage.")
+                    self.library.add_clue("hidden passage that leads to library")
+                    self.library.add_clue("muddy footprints in library")
             elif room_choice.lower() == "b":
                 break
             elif room_choice.lower() == 'd':
