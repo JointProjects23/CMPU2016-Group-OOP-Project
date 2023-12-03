@@ -4,20 +4,25 @@
 User Registration Module
 
 Description:
-This Python module provides functions for user registration and login using a JSON file to store user data.
+This Python module provides functions for user registration and login using a
+JSON file to store user data.
 It includes password hashing for enhanced security.
 
 Functions:
-1. register_user(username, password): Registers a new user with a unique username and hashed password.
-2. login_user(username, password): Validates user login credentials by checking the entered password against the stored hashed password.
+1. register_user(username, password): Registers a new user with a unique
+username and hashed password.
+2. login_user(username, password): Validates user login credentials by checking
+the entered password against the stored hashed password.
 
 Usage:
-- Import this module into your Python program to use the user registration and login functionalities.
+- Import this module into your Python program to use the user registration and
+login functionalities.
 
 Authors: Sam Curran, Hayden Carroll
 Date: 26/11/2023
 
-Note: Make sure to have the 'user_data.json' file available for user data storage.
+Note: Make sure to have the 'user_data.json' file available for user data
+storage.
 """
 
 import json

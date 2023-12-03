@@ -2,7 +2,8 @@
 Loggable Class
 
 This module defines a Loggable class that provides a simple logging mechanism.
-Logs can be added using the log method, and the logs can be retrieved or saved to a file.
+Logs can be added using the log method, and the logs can be retrieved or saved
+to a file.
 
 Author: Haydens Little Helpers
 Date: 23/11/2023
@@ -21,6 +22,7 @@ Usage:
     # Save logs to a file
     logger.save_logs_to_file("logfile.txt")
 """
+
 
 class Loggable:
     def __init__(self):

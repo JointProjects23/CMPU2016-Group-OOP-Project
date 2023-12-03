@@ -4,20 +4,24 @@
 Haunted Games Library
 
 Description:
-This Python file contains three classes representing different haunted-themed games:
-1. HauntedMansionGame: A guessing game set in a haunted mansion where the player tries to guess a secret word akin to wordle
+This Python file contains three classes representing different haunted-themed
+games:
+1. HauntedMansionGame: A guessing game set in a haunted mansion where the player
+ tries to guess a secret word akin to wordle
 2. RockPaperScissors: A classic Rock, Paper, Scissors game with a haunted twist.
 3. Riddle: A game that presents the player with random riddles to solve.
 
 Usage:
-- Import this file into your Python program to use the HauntedMansionGame, RockPaperScissors, and Riddle classes.
+- Import this file into your Python program to use the HauntedMansionGame,
+RockPaperScissors, and Riddle classes.
 - Each class provides methods for playing their respective games.
 
 Author: Jamie, Sam Courtney, Finn and Hayden
 
 Date: 01/12/2023
 
-Note: Make sure to have the 'game_data.json' file available for the HauntedMansionGame and Riddle classes.
+Note: Make sure to have the 'game_data.json' file available for the
+HauntedMansionGame and Riddle classes.
 """
 
 import random
@@ -31,7 +35,8 @@ class HauntedMansionGame:
 
         Parameters:
         - secret_word (str): The secret word to be guessed.
-        - max_attempts (int): The maximum number of attempts allowed for guessing the word. Default is 6.
+        - max_attempts (int): The maximum number of attempts allowed for
+        guessing the word. Default is 6.
 
         Returns:
         None
@@ -43,7 +48,8 @@ class HauntedMansionGame:
 
     def display_word(self):
         """
-        Display the current state of the secret word, revealing guessed letters and hiding others.
+        Display the current state of the secret word, revealing guessed letters
+         and hiding others.
 
         Returns:
         str: The formatted secret word display.
@@ -57,7 +63,8 @@ class HauntedMansionGame:
         Check the validity of the guess and update the game state accordingly.
 
         Parameters:
-        - guess (str): The user's guess, either a single letter or a complete word.
+        - guess (str): The user's guess, either a single letter or a complete
+        word.
 
         Returns:
         None
@@ -108,14 +115,17 @@ class HauntedMansionGame:
             self.guessed_letters = set(self.secret_word)
             return 1  # User wins if they guessed the entire word
         else:
-            correct_letters = set(letter for letter in guess if letter in self.secret_word)
+            correct_letters = set(letter for letter in guess if letter in
+                                  self.secret_word)
 
             if correct_letters:
                 self.guessed_letters.update(correct_letters)
                 print(f"Correct letters: {', '.join(correct_letters)}")
             else:
                 self.remaining_attempts -= 1
-                print(f"Incorrect word guess. You have {self.remaining_attempts} guesses remaining. Choose carefully.")
+                print(f"Incorrect word guess. You have "
+                      f"{self.remaining_attempts}  guesses remaining. Choose"
+                      f" carefully.")
 
             return 0  # User did not win
 
@@ -150,7 +160,8 @@ class HauntedMansionGame:
 
             secret_words = game_data.get("Secret_words", [])
             if secret_words:
-                return random.choice(secret_words).lower()  # Convert to lowercase for case-insensitive comparison
+                return random.choice(secret_words).lower()  # Convert to
+                # lowercase for case-insensitive comparison
             else:
                 print("No secret words found in 'game_data.json'.")
                 return ""
@@ -248,7 +259,8 @@ class RockPaperScissors:
         Returns:
         None
         """
-        print("This game is Rock, Paper, Scissors! You have 3 tries, or you are not allowed in!")
+        print("This game is Rock, Paper, Scissors! You have 3 tries, or you are"
+              " not allowed in!")
         while self.attempts > 0:
             user_choice = self.get_user_choice()
             computer_choice = self.get_computer_choice()
@@ -277,7 +289,8 @@ class Riddle:
                 Selects a riddle at random from a list
                 and displays it to the user
         """
-        self.current_riddle = random.choice(list(self.riddles_and_answers["Riddles"].keys()))
+        self.current_riddle = random.choice(list(self.riddles_and_answers
+                                                 ["Riddles"].keys()))
         print(self.current_riddle)
 
     @property

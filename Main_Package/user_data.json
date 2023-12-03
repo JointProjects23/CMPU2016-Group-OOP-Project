@@ -524,5 +524,47 @@
         "Visited": false
       }
     }
+  },
+  "sdvcwecf": {
+    "name": "qwedqwefw",
+    "hashed_password": "$2b$12$yCk7e1fYugXibu0A1jE2oOZtASFXx8ox5hHnoYNkK13Na725OwTyW",
+    "score": 0,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Secret Passages": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "wfqefwf": {
+    "name": "wfqefwf",
+    "hashed_password": "$2b$12$.GlqFfSGC9TgNh2IlzL0eO6pwy6mhgaJs.XyjbvQ66/WGeHnVxEEq",
+    "score": 0
+  },
+  "wrfwrf": {
+    "name": "wrfwrf",
+    "hashed_password": "$2b$12$Hx9JhJ9iE4uHm2zGYK9Z5eV.LWkCAowdw/w9vkjIy6NhLW3aL6W7i",
+    "score": 0
   }
 }

@@ -1,9 +1,10 @@
 """
 characters.py
 
-This module defines the Character, NPC, Suspect, and Witness classes for characters in a crime investigation game.
+This module defines the Character, NPC, Suspect, and Witness classes for
+characters in a crime investigation game.
 
-Author: Haydens Little Helpers
+Author: Hayden's Little Helpers
 Date: 18/11/2023
 
 Description: - The Character class serves as the base class, providing
@@ -19,7 +20,8 @@ Classes:
     - Character: Base class with common attributes and methods for characters.
     - NPC: Non-player character class inheriting from Character.
     - Suspect: Represents characters under suspicion with alibi information.
-    - Witness: Represents characters who have witnessed or heard something related to the crime.
+    - Witness: Represents characters who have witnessed or heard something
+    related to the crime.
 
 """
 

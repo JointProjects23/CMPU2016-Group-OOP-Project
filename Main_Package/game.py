@@ -4,11 +4,14 @@
 Game Module
 
 Description:
-This Python module defines the main game class, 'Game', which manages the behavior and flow of the mystery game.
-It includes interactions with characters, exploring locations, playing mini-games, and keeping track of the player's progress.
+This Python module defines the main game class, 'Game', which manages the
+behavior and flow of the mystery game.
+It includes interactions with characters, exploring locations, playing
+mini-games, and keeping track of the player's progress.
 
 Classes:
-1. Game: Represents the main game class, managing the player's journey, interactions, inventory, and overall progress.
+1. Game: Represents the main game class, managing the player's journey,
+interactions, inventory, and overall progress.
 
 Usage:
 - Import this module into your Python program to use the 'Game' class.
@@ -24,7 +27,8 @@ from colorama import \
 from loggable import Loggable
 from character import Suspect, NPC, Witness
 from leaderboard import Leaderboard
-from miniGames import HauntedMansionGame, RockPaperScissors, Riddle, MiniGameCounter
+from miniGames import HauntedMansionGame, RockPaperScissors, Riddle, \
+    MiniGameCounter
 from inventory import Inventory
 from item import Item
 from location import CrimeScene, Kitchen, Attic, Library, Location
@@ -87,7 +91,7 @@ class Game:
             "Lady Victoria Starling",
             "I cant believe my Diamond necklace was"
             " Stolen!\nI heard someone in my room last night, it was worth "
-            "so much aswell!!",
+            "so much as well!!",
             "Was on a walk with Mr. Parker",
             "walks away",
             78,
@@ -227,8 +231,8 @@ class Game:
                     print("Successfully Registered, enjoy the game")
                     break
                 else:
-                    print(
-                        "Registration failed. Please choose a different username.")
+                    print("Registration failed. Please choose a different "
+                          "username.")
             elif user_choice.lower() == "l":
                 if login_user(self.username, password):
                     print("Login successful!")
@@ -292,7 +296,8 @@ class Game:
 
         if self.started:
             player_input = input(Fore.GREEN +
-                                 "Press one of the following keys: \n'q' to quit\n"
+                                 "Press one of the following keys: \n"
+                                 "'q' to quit\n"
                                  "'r' to review your clues\n"
                                  "'e' to explore the mansion further\n"
                                  "'s' to see your current score \n"
@@ -311,7 +316,10 @@ class Game:
                 self.game_log.log("Player chose to review clues "
                                   "at Crime Scene")
                 if self.crime_scene:
-                    clues = self.crime_scene.review_clue() + self.attic.review_clue() + self.library.review_clue() + self.kitchen.review_clue()
+                    clues = (self.crime_scene.review_clue() +
+                             self.attic.review_clue() +
+                             self.library.review_clue() +
+                             self.kitchen.review_clue())
                     if clues:
                         print("You review your clues:")
                         for clue in clues:
@@ -348,12 +356,11 @@ class Game:
             else:
                 raise ValueError("Incorrect user entry.")
 
-
     def start_game(self):
         """The start_game method introduces the player
         to the mystery case and sets the scene."""
         if not self.player_name:
-            self.player_name = input("Please enter your detective name:")
+            self.player_name = input("Please enter your detective name: ")
 
             text = ("\033[1;31mAs the renowned detective, "
                     f"{self.player_name},\n"
@@ -393,7 +400,7 @@ class Game:
                                              "\nA dusty Attic(A)"
                                              f"\nThe {self.crime_scene.name}(D)"
                                              f"\n--To go back(B)--\n"
-                                             "Which do you want to choose")
+                                             "Which do you want to choose : ")
 
             if room_choice.lower() == 'k' and not self.kitchen.visited:
                 self.kitchen.visited = True
@@ -405,38 +412,40 @@ class Game:
                 while True:
                     if interact_choice.lower() == 'y':
                         print(self.suspect3.interact())
-                        self.kitchen.add_clue("chef is hostile and doesnt seem to "
-                                              "want to help you solve the crime")
+                        self.kitchen.add_clue(
+                            "chef is hostile and doesnt seem to "
+                            "want to help you solve the crime")
                         break
                     elif interact_choice.lower() == 'n':
                         print('Scared off interaction...How embarrassing, '
                               'you might\'ve missed an important clue...')
                         break
                     else:
-                        print("Please choose a valid option (Y/N):")
+                        print("Please choose a valid option (Y/N): ")
 
                 explore_choice1 = input(
                     "do you want to explore kitchen further"
-                    " ? (Y/N) :")
+                    " ? (Y/N) : ")
                 while True:
                     if explore_choice1.lower() == 'y':
                         print(
-                            "you walk around the kitchen searching for clues...\n"
-                            "you see signs of a forced entry on the knife press\n"
-                            "and you also heard the chef complain about missing\n"
-                            "utensils earlier")
-                        self.kitchen.add_clue("looks like someone stole a knife "
-                                              "from the kitchen")
+                            "you walk around the kitchen searching "
+                            "for clues...\n you see signs of a forced entry on"
+                            " the knife press\n and you also heard the chef "
+                            "complain about missing\n utensils earlier")
+                        self.kitchen.add_clue(
+                            "looks like someone stole a knife "
+                            "from the kitchen")
                         break
                     elif explore_choice1.lower() == 'n':
                         print("You return to the hallway")
                         break
                     else:
-                        print("Please choose a valid option (Y/N):")
+                        print("Please choose a valid option (Y/N) : ")
 
                 explore_choice1 = input(
                     "do you want to explore kitchen further"
-                    "? (Y/N) :")
+                    "? (Y/N) : ")
                 if explore_choice1.lower() == 'y':
                     print(
                         "\nAs you are leaving you see a camera in the corner "
@@ -460,7 +469,7 @@ class Game:
                     "your way to the attic. You reach a dimly lit room, As you"
                     " walk in there\'s a young girl writing at a desk")
                 interact_choice = input(
-                    f"do you want to talk to the girl? (y/n) : ")
+                    f"do you want to talk to the girl? (Y/N) : ")
                 if interact_choice.lower() == 'y':
                     print(self.attic.interact_with_npcs)
                     self.attic_npc_interacted = True
@@ -469,7 +478,7 @@ class Game:
                     print("You back out of the room")
 
                 explore_choice2 = input("do you want to explore attic further"
-                                        " ? (Y/N) :")
+                                        " ? (Y/N) : ")
                 if explore_choice2.lower() == 'y':
                     print("\n as you walk around the attic you feel a cold "
                           "breeze coming from\nthe window at the back of the "
@@ -493,7 +502,7 @@ class Game:
                     "you walk through the never ending halls of the mansion on "
                     "your way to the library.")
                 interact_choice = input(
-                    "do you want to talk to the librarian? (y/n) : ")
+                    "do you want to talk to the librarian? (Y/N) : ")
                 if interact_choice.lower() == 'y':
                     print(self.library.interact_with_npcs)
                     self.library_npc_interacted = True
@@ -505,7 +514,7 @@ class Game:
 
                 explore_choice3 = input(
                     "do you want to explore library further"
-                    " ? (Y/N) :")
+                    " ? (Y/N) : ")
                 if explore_choice3.lower() == 'y':
                     print("\nas you walk through the isles of bookshelves you "
                           "see a trail of footprints\nleading from what seems "
@@ -552,7 +561,7 @@ class Game:
                                          "'i' to interact with characters at "
                                          "the crime scene\n"
                                          "'r' to review your clues\n"
-                                         "Please Enter your selection: "
+                                         "Please Enter your selection : "
                                          )
 
                     self.game_log.log(f"Player input is {player_input}.")
@@ -602,13 +611,13 @@ class Game:
         front door, door 2 leads to the library and door 3 leads to the
         kitchen. Wrong user input is being handled via print-outs for error
         handling."""
-        print("You venture forward within this decrepted mansion,Three dark "
+        print("You venture forward within this decrypted mansion,Three dark "
               "passages appear before you:")
         for i, door in enumerate(self.doors, start=1):
             print(f"{i}. {door}")
         player_input = int(
             input("Which passage will you venture through...Brave"
-                  f" detective:")
+                  f" detective : ")
         )
 
         if 0 < player_input < len(self.doors) + 1:  # for valid entry check
@@ -624,7 +633,7 @@ class Game:
                         "inside is a small kitchen with a butler making food\n"
                         "you ask him who he is  and he tells you hes the "
                         "the mansion's butler, Mr. Reginald\n"
-                        "you are surised he is the butler at first as his"
+                        "you are surprised he is the butler at first as his"
                         " trousers seem to be stained with mud and his shoes\n"
                         "look tarnished after talking, you realise he has a"
                         " suspiciously extensive knowledge of the mansion's "
@@ -638,7 +647,8 @@ class Game:
                         "Mr. Reginald's rugged look and extensive knowledge "
                         "of the mansion's layout"
                     )
-                    # Calls the method reward_for_game_completion adds to the users score.
+                    # Calls the method reward_for_game_completion adds to the
+                    # users score.
                     self.reward_for_game_completion('haunted_game')
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
@@ -657,21 +667,22 @@ class Game:
                         "...a dark corridor which leads you to stairs\n"
                     )
                     self.secret_passages.add_clue("The letter on the ground")
-                    # Calls the method reward_for_game_completion adds to the users score.
+                    # Calls the method reward_for_game_completion adds to the
+                    # users score.
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
                     self.reward_for_game_completion('rock_paper_scissors')
 
-
             elif int(player_input) == 3 and not self.doors_checker[2]:
-                print(
-                    "Those who dare to proceed ahead...let me riddle you a question before you end up dead")
+                print("Those who dare to proceed ahead...let me riddle you a "
+                      "question before you end up dead")
                 # Use the new methods from the updated Riddle class
                 self.game_riddle.print_riddle()
-                user_input = input("What is your guess Detective:")
+                user_input = input("What is your guess Detective : ")
                 # Access the answer using the get_answer property
-                if user_input.lower().strip() == self.game_riddle.get_answer.strip():
+                if (user_input.lower().strip() ==
+                        self.game_riddle.get_answer.strip()):
                     print("Very good Detective, you may proceed")
                     print(
                         "You open the library door to reveal a hidden\n"
@@ -681,7 +692,8 @@ class Game:
                     self.secret_passages.add_clue(
                         "The hidden passage behind the library door")
                     self.doors_checker[2] = True
-                    # Calls the method reward_for_game_completion adds to the users score.
+                    # Calls the method reward_for_game_completion adds to the
+                    # users score.
                     self.mini_game.display_counter()
                     self.reward_for_game_completion('riddle_game')
                     if self.mini_game.counter == 4:
@@ -705,7 +717,6 @@ class Game:
     def interact_with_characters(self):
         if not self.characters_interacted:
             print("You decide to interact with the characters in the room.")
-
             clue_suspect = self.suspect.interact()
             self.crime_scene.add_clue(clue_suspect)
             print(clue_suspect)  # keep the outputs going
@@ -806,12 +817,13 @@ class Game:
             self.inventory.add_item(
                 Item("Torn Fabric", "A torn piece of fabric near the "
                                     "window", "You notice this piece of "
-                                             "fabric is part of the butlers "
-                                             "suit", 2))
+                                              "fabric is part of the butlers "
+                                              "suit", 2))
             self.crime_scene.add_clue("Broken glass near window")
             self.crime_scene.add_clue("An overturned table at crime scene")
             self.inventory.add_item(Item("Overturned Table",
-                                         "Table overturned at the crime scene"))
+                                         "Table overturned at the "
+                                         "crime scene"))
             self.crime_scene.add_clue("Smell of perfume")
             self.inventory.add_item(
                 Item("Cigar", "Cigar at crime scene",
@@ -824,6 +836,7 @@ class Game:
             )
 
     def user_guess(self):
+
         guilty = '1'
         interrogate_choice = input(
             "After reviewing your clues you have 3 possible suspects\n"
@@ -833,11 +846,12 @@ class Game:
             "Would you like to interrogate the suspects? (Y/N) : ")
 
         if interrogate_choice.lower() == 'y':
-            suspect_interrogated_choice = input("\n\nwho would you like to interrogate ? \n"
-                                                "1. Mr. Reginald (the butler)\n"
-                                                "2. Lady Victoria Starling\n"
-                                                "3. The Chef\n"
-                                                "choose now : ")
+            suspect_interrogated_choice = input(
+                "\n\nwho would you like to interrogate ? \n"
+                "1. Mr. Reginald (the butler)\n"
+                "2. Lady Victoria Starling\n"
+                "3. The Chef\n"
+                "choose now : (1/2/3) ")
             if suspect_interrogated_choice == '1':
                 print("At first Mr. Reginald seems to be avoiding the"
                       " questions.\nas you continue to push he breaks and "
@@ -859,7 +873,7 @@ class Game:
                                             " you like to interrogate "
                                             "Mr. Reginald ? (Y/N) : ")
                 if extra_interrogation.lower() == 'y':
-                    print("\nWhen you present your finding to Mr. Reginalde "
+                    print("\nWhen you present your finding to Mr. Reginald "
                           "immediately admits defeat and confesses.")
                     self.end_game()
             else:
@@ -867,13 +881,13 @@ class Game:
                                  f"{suspect_interrogated_choice}")
 
         elif interrogate_choice.lower() == 'n':
-            guess = input("Who do you believe commited the crime? : ")
+            guess = input("Who do you believe committed the crime? (1/2/3) : ")
             if guilty.lower() == guess.lower():
                 print("congratulations Detective you have found the suspect")
                 self.end_game()
             else:
-                print("unlucky detective you didnt find the suspect. the theif was"
-                      "'Mr. Reginald (the butler)'")
+                print("unlucky detective you didnt find the suspect. the thief"
+                      " was 'Mr. Reginald (the butler)'")
                 self.end_game()
 
         else:
@@ -887,7 +901,8 @@ class Game:
         riddle_score = self.game_scores["Riddle"]
 
         # Calculate the final total score
-        final_score = self.__score__() + haunted_game_score + rps_score + riddle_score
+        final_score = (self.__score__() + haunted_game_score + rps_score +
+                       riddle_score)
 
         # log_filename = input("Please enter a filename to save the logs:")
         self.log.save_logs_to_file("log_file")

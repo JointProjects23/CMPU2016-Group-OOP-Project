@@ -8,7 +8,8 @@ Date: [Current Date]
 
 Usage:
     # Example usage of the Item class
-    item = Item(name="Clue from Suspect", description="A crucial clue from a suspect.")
+    item = Item(name="Clue from Suspect", description="A crucial clue from a
+    suspect.")
     item.use(game_instance)
 """
 
@@ -39,4 +40,3 @@ class Item:
 
         print(self.impact)
         game.score += self.score_increase
-

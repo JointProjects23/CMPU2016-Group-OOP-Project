@@ -9,10 +9,12 @@ Date: [Current Date]
 Usage:
     # Example usage of the Inventory class
     player_inventory = Inventory()
-    item = Item(name="Clue from Suspect", description="A crucial clue from a suspect.")
+    item = Item(name="Clue from Suspect", description="A crucial clue from a
+     suspect.")
     player_inventory.add_item(item)
     player_inventory.use_item("Clue from Suspect", game_instance)
 """
+
 
 class Inventory:
     """
@@ -41,7 +43,8 @@ class Inventory:
         :param item_name: The name of the item to be used.
         :param game: The game instance on which the item is used.
         """
-        item = next((item for item in self.items if item.name.lower() == item_name.lower()), None)
+        item = next((item for item in self.items if item.name.lower() ==
+                     item_name.lower()), None)
         if item:
             item.use(game)
             self.items.remove(item)
