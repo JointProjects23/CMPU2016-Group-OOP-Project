@@ -124,55 +124,45 @@ class Game:
         }
 
     def __score__(self):
-        score = 0
         # this gives you 10 points for interacting with a witness
         if self.witness.interacted:
-            score += 10
+            self.score += 10
 
         # this gives you 10 points for interacting with a witness
         if self.witness2.interacted:
-            score += 10
+            self.score += 10
 
         # this gives you 15 points for interacting with a suspect
         if self.suspect.interacted:
-            score += 15
+            self.score += 15
 
         # this gives you 2 points for interacting with NPCs
         if self.npcs_interacted:
-            score += 2
+            self.score += 2
 
         if self.attic_npc_interacted:
-            score += 2
+            self.score += 2
 
         if self.library_npc_interacted:
-            score += 2
+            self.score += 2
 
         if self.kitchen_npc_interacted:
-            score += 2
+            self.score += 2
 
         # this gives you a point for every clue you find
         if self.crime_scene.review_clue():
-            score += len(self.crime_scene.review_clue())
+            self.score += len(self.crime_scene.review_clue())
 
         if self.attic.review_clue():
-            score += len(self.attic.review_clue())
+            self.score += len(self.attic.review_clue())
 
         if self.library.review_clue():
-            score += len(self.library.review_clue())
+            self.score += len(self.library.review_clue())
 
         if self.kitchen.review_clue():
-            score += len(self.kitchen.review_clue())
+            self.score += len(self.kitchen.review_clue())
 
-        return score
-
-    def reward_for_game_completion(self, game_name):
-        print(f"You are rewarded for completing the {game_name} game!")
-        self.game_scores[game_name] += 10  # Adjust the score based on your
-        # preference
-        print(
-            f"You earned 10 points. Your total score for {game_name} is now "
-            f"{self.game_scores[game_name]}.")
-        # We may need to add additional rewards or messages as needed below
+        return self.score
 
     @property
     def log(self):
@@ -252,7 +242,14 @@ class Game:
 
     def completed_mini_game_message(self):
         self.crime_scene.add_clue("The letter on the ground")
-        self.inventory.add_item("Letter", "Butlers Letter")
+        self.inventory.add_item(Item("Letter", "Letter found in the butlers "
+                                               "pantry", "You read the "
+                                                         "letter to find the "
+                                                         "butler has been "
+                                                         "talking to a "
+                                                         "jeweller about "
+                                                         "selling "
+                                                         "jewellery", 15))
         print("You have discovered a secret letter")
 
     def run(self):
@@ -639,7 +636,6 @@ class Game:
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
-                    self.reward_for_game_completion('haunted_game')
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
@@ -661,8 +657,6 @@ class Game:
                     self.mini_game.display_counter()
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
-                    self.reward_for_game_completion('rock_paper_scissors')
-
 
             elif int(player_input) == 3 and not self.doors_checker[2]:
                 print(
@@ -683,7 +677,6 @@ class Game:
                     self.doors_checker[2] = True
                     # Calls the method reward_for_game_completion adds to the users score.
                     self.mini_game.display_counter()
-                    self.reward_for_game_completion('riddle_game')
                     if self.mini_game.counter == 4:
                         self.completed_mini_game_message()
 
@@ -811,7 +804,10 @@ class Game:
             self.crime_scene.add_clue("Broken glass near window")
             self.crime_scene.add_clue("An overturned table at crime scene")
             self.inventory.add_item(Item("Overturned Table",
-                                         "Table overturned at the crime scene"))
+                                         "Table overturned at the crime "
+                                         "scene", "Leads you to believe "
+                                                  "someone left in a hurry",
+                                         3))
             self.crime_scene.add_clue("Smell of perfume")
             self.inventory.add_item(
                 Item("Cigar", "Cigar at crime scene",

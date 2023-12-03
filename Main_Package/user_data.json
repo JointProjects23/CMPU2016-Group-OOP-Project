@@ -524,5 +524,42 @@
         "Visited": false
       }
     }
+  },
+  "hayden2332": {
+    "name": "Hayden",
+    "hashed_password": "$2b$12$Pf/MyBWm0qdvC3RGgeUl0O9E32bbEj2RNleOqQuR7IYkOZyy.RBAS",
+    "score": 0,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Secret Passages": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "h": {
+    "name": "h",
+    "hashed_password": "$2b$12$yHVwoaPC049yibIA5oXXO.I801eb5Oh/9S.W6/dBNJYpf1/xY0Gna",
+    "score": 0
   }
 }

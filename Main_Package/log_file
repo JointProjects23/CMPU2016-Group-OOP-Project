@@ -1,13 +1,16 @@
 Player chose to start the game
 Successfully updating
 ---
-Player input is e.
-Player input is 1.
-Player input is i.
-Player chose to interact with characters
-Player chose to interact with witness and suspects
+Player input is r.
+Player chose to review clues at Crime Scene
+Player had no clues to review
+Successfully updating
 ---
-Player input is q.
-Player quit the game
+Player input is s.
+Player chose to see their score
+Successfully updating
+---
+Player input is c.
+Player ended the game with a final score of 0
 Successfully updating
 ---
