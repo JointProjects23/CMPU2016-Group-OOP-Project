@@ -117,16 +117,34 @@ class Game:
         if self.npcs_interacted:
             score += 2
 
+        if self.attic.interact_with_npcs:
+            score += 2
+
+        if self.library.interact_with_npcs:
+            score += 2
+
+        if self.kitchen.interact_with_npcs:
+            score += 2
+
         # this gives you a point for every clue you find
         if self.crime_scene.review_clue():
+            score += len(self.crime_scene.review_clue())
+
+        if self.attic.review_clue():
+            score += len(self.crime_scene.review_clue())
+
+        if self.library.review_clue():
+            score += len(self.crime_scene.review_clue())
+
+        if self.kitchen.review_clue():
             score += len(self.crime_scene.review_clue())
 
         return score
 
     def reward_for_game_completion(self, game_name):
         print(f"You are rewarded for completing the {game_name} game!")
-        self.game_scores[
-            game_name] += 10  # Adjust the score based on your preference
+        self.game_scores[game_name] += 10  # Adjust the score based on your
+        # preference
         print(
             f"You earned 10 points. Your total score for {game_name} is now {self.game_scores[game_name]}.")
         # We may need to add additional rewards or messages as needed below
@@ -256,7 +274,7 @@ class Game:
                 self.game_log.log("Player chose to review clues "
                                   "at Crime Scene")
                 if self.crime_scene:
-                    clues = self.crime_scene.review_clue()
+                    clues = self.crime_scene.review_clue() + self.attic.review_clue() + self.library.review_clue() + self.kitchen.review_clue()
                     if clues:
                         print("You review your clues:")
                         for clue in clues:
@@ -316,8 +334,8 @@ class Game:
     def explore_options(self):
 
         explore_choice = input(Fore.GREEN + "Which path do you dare to take,"
-                                            "The path that leads upstairs(1) or "
-                                            "The path that leads downstairs("
+                                            "The path that leads upstairs(1) or"
+                                            " The path that leads downstairs("
                                             "2) : ")
         if explore_choice == '1':
             self.explore_upstairs()
@@ -475,10 +493,10 @@ class Game:
                         break
                     elif player_input.lower() == "i":
                         character_choice = input(
-                            "If you want to speak to the witness and a suspect, "
+                            "If you want to speak to the witness and a suspect,"
                             "choose 1. "
-                            "If you'd like to speak to other people in the room, "
-                            "choose 2:"
+                            "If you'd like to speak to other people in the"
+                            " room, choose 2:"
                         )
                         self.game_log.log(
                             "Player chose to interact with characters")
@@ -722,7 +740,7 @@ class Game:
             )
 
     def user_guess(self):
-        guilty = "Mr.Reginald"
+        guilty = "Mr. Reginald"
         guess = input(
             "After reviewing your clues you have 3 possible suspects\n"
             "1. Mr. Reginald (the butler)\n"
@@ -763,6 +781,8 @@ class Game:
             print("Well done, that's impressive!!")
         else:
             print("That's disappointing... expected better from you")
+
+        self.running = False
 
     def store_clues(self):
         try:

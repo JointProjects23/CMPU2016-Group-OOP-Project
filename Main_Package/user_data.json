@@ -181,5 +181,74 @@
     "name": "Hayden_c",
     "hashed_password": "$2b$12$RBLqNGDMloGg2TStItbvb.oa5oDw65RWIyuXbT6MbvgR.QQ8edUZ6",
     "score": 0
+  },
+  "finn7": {
+    "name": "rr",
+    "hashed_password": "$2b$12$3ehrsg0z3owZP8U3Bfwose6GVnIC3Spt1rqfSFjlGW3I.q/swxE2K",
+    "score": 0,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "fi": {
+    "name": "f",
+    "hashed_password": "$2b$12$1X5ef9gMc9An/rtnAaGT3.4KoIt0FfCu8dORyS/m2DVPL3P8Ky6fa",
+    "score": 0,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
+  },
+  "erfe": {
+    "name": "erfe",
+    "hashed_password": "$2b$12$DnZ4UslfY5n.ClN0sBS/keHemGXFZ5DJmUWSflEoAuVx./0HVv0by",
+    "score": 0
+  },
+  "wefd": {
+    "name": "wefd",
+    "hashed_password": "$2b$12$i.Vp1VBWh0gWDWWJ3EsSteA7.m1eGNghJD09qTUDWbjxK4LPsqo3m",
+    "score": 0
+  },
+  "wefw": {
+    "name": "wefw",
+    "hashed_password": "$2b$12$ktAEuCXQa6hPzU2xd.JmiOK/.Np5cNgt6MWp85JKRC8i/m479v.gi",
+    "score": 0
   }
 }
