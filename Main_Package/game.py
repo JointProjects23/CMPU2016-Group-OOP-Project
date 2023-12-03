@@ -63,7 +63,7 @@ class Game:
         )
         self.witness2 = Witness(
             "Ms. Parker",
-            "I saw someone near the window at the " "time of the incident.",
+            "I saw someone near the window at the time of the incident.",
             "Suspicious figure in dark clothing.",
             "frustratedly walks away",
             45,
@@ -241,6 +241,7 @@ class Game:
                 "'e' to explore the mansion further\n"
                 "'s' to see your current score \n"
                 "'u' to use an item from your inventory: \n"
+                "'c' to conclude investigation\n"
                 "Please Enter your selection: "
             )
 
@@ -271,6 +272,8 @@ class Game:
                 item_name = input(
                     "Enter the name of the item you want to use: ")
                 self.inventory.use_item(item_name, Game)
+            elif player_input.lower() == "c":
+                self.user_guess()
             else:
                 raise ValueError("Incorrect user entry.")
 
@@ -354,9 +357,10 @@ class Game:
                     self.kitchen.add_clue("looks like someone stole a knife "
                                           "from the kitchen")
 
-                print("\nas you are leaving you see a camera in the corner of \n"
+                print("\nas you are leaving you see a camera in the corner of\n"
                       "the kitchen that looks t0 be off. the chef says \n"
-                      "'it wasn't on when i arrived this morning'")
+                      "'it wasn't on when i arrived this morning'.\nThis person"
+                      "must know a lot about this mansion")
                 self.kitchen.add_clue("camera system has been shut off")
 
             elif room_choice.lower() == "a" and not self.attic.visited:
@@ -512,11 +516,14 @@ class Game:
                         "inside is a small kitchen with a butler making food\n"
                         "you ask him who he is  and he tells you hes the "
                         "the mansion's butler, Mr. Reginald\n"
-                        "after talking, you realise he has a suspiciously "
-                        "extensive knowledge of the mansion's layout\n"
+                        "you are surised he is the butler at first as his"
+                        " trousers seem to be stained with mud and his shoes\n"
+                        "look tarnished after talking, you realise he has a"
+                        " suspiciously extensive knowledge of the mansion's "
+                        "layout\n"
                     )
                     self.crime_scene.add_clue(
-                        "Mr. Reginald's extensive knowledge "
+                        "Mr. Reginald's rugged look and extensive knowledge "
                         "of the mansion's layout"
                     )
                     # Calls the method reward_for_game_completion adds to the users score.
@@ -694,6 +701,22 @@ class Game:
                 "review the clues gathered)"
             )
 
+    def user_guess(self):
+        guilty = "Mr.Reginald"
+        guess = input("After reviewing your clues you have 3 possible suspects\n"
+                      "1. Mr. Reginald (the butler)\n"
+                      "2. Lady Victoria Starling\n"
+                      "3. The Chef\n"
+                      "who do you believe commited the crime : ")
+
+        if guilty.lower() == guess.lower():
+            print("congratulations Detective you have found the suspect")
+            self.end_game()
+        else:
+            print("unlucky detective you didnt find the suspect. the theif was"
+                  "'Mr. Reginald (the butler)'")
+            self.end_game()
+            
     def end_game(self):
         # Find the scores from the individual games
         haunted_game_score = self.game_scores["Haunted Mansion"]
