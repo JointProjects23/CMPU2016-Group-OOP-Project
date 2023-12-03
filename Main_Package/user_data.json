@@ -486,6 +486,43 @@
   "hayden2": {
     "name": "hayden2",
     "hashed_password": "$2b$12$s2S50.hfYnoE73kJ22B6leDxZ4fnLo2OaEsTvf9n55qDhouw9rUVi",
-    "score": 0
+    "score": 24,
+    "Location_clues": {
+      "CrimeScene": {
+        "All clues found": false,
+        "Clues": [
+          "\u00a7Mr. Reginald, the butler reacts nervously:I was working last night but left at 8\nYou notice subtle body language cues indicating potential deception"
+        ],
+        "Visited": false
+      },
+      "Attic": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      },
+      "Kitchen": {
+        "All clues found": false,
+        "Clues": [
+          "chef is hostile and doesnt seem to want to help you solve the crime",
+          "looks like someone stole a knife from the kitchen",
+          "camera system has been shut off"
+        ],
+        "Visited": true
+      },
+      "Library": {
+        "All clues found": false,
+        "Clues": [
+          "someone was walking in the attic late last night",
+          "hidden passage that leads to library",
+          "muddy footprints in library"
+        ],
+        "Visited": true
+      },
+      "Secret Passages": {
+        "All clues found": false,
+        "Clues": [],
+        "Visited": false
+      }
+    }
   }
 }

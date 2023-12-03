@@ -388,8 +388,8 @@ class Game:
                                              "to you:\n\nA Kitchen(K)"
                                              "\nA huge Library(L)"
                                              "\nA dusty Attic(A)"
-                                             f"\nThe {self.crime_scene.name}(D)\n"
-                                             f"\n--To go back(B)--"
+                                             f"\nThe {self.crime_scene.name}(D)"
+                                             f"\n--To go back(B)--\n"
                                              "Which do you want to choose")
 
             if room_choice.lower() == 'k' and not self.kitchen.visited:
@@ -567,7 +567,8 @@ class Game:
                             "Player chose to interact with characters")
                         if character_choice == "1":
                             self.game_log.log(
-                                "Player chose to interact with witness " "and suspects"
+                                "Player chose to interact with witness and "
+                                "suspects"
                             )
                             self.interact_with_characters()
                         elif character_choice == "2":
@@ -703,7 +704,6 @@ class Game:
             clue_suspect = self.suspect.interact()
             self.crime_scene.add_clue(clue_suspect)
             print(clue_suspect)  # keep the outputs going
-            self.inventory.add_item(Item("Clue from Suspect", clue_suspect))
             self.game_log.log(f"{self.suspect.name} interacted with Player")
             self.game_log.log(
                 f"{self.suspect.name} provided clue:" f" {clue_suspect}")
