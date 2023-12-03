@@ -256,7 +256,7 @@ class RockPaperScissors:
             print(f"You chose {user_choice}. I chose {computer_choice}.")
             result = self.determine_winner(user_choice, computer_choice)
             if result:
-                break
+                return True
             if self.attempts > 0:
                 print(f"You have {self.attempts} chances left.")
             else:
