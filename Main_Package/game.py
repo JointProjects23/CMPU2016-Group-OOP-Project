@@ -424,6 +424,7 @@ class Game:
                             "utensils earlier")
                         self.kitchen.add_clue("looks like someone stole a knife "
                                               "from the kitchen")
+                        break
                     elif explore_choice1.lower() == 'n':
                         print("You return to the hallway")
                         break

@@ -482,5 +482,10 @@
         "Visited": true
       }
     }
+  },
+  "hayden2": {
+    "name": "hayden2",
+    "hashed_password": "$2b$12$s2S50.hfYnoE73kJ22B6leDxZ4fnLo2OaEsTvf9n55qDhouw9rUVi",
+    "score": 0
   }
 }
