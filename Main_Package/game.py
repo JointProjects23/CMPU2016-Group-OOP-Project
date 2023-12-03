@@ -379,7 +379,8 @@ class Game:
                         "'it wasn't on when i arrived this morning'.\nThis "
                         "person"
                         "must know a lot about this mansion, you think to "
-                        "yourself")
+                        "yourself \n As you walk out of the kitchen you get "
+                        "a strong distinct smell of a cigar...interesting")
                     self.kitchen.add_clue("camera system has been shut off")
 
             elif room_choice.lower() == "a" and not self.attic.visited:
