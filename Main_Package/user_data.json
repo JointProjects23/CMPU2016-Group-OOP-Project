@@ -566,5 +566,10 @@
     "name": "r",
     "hashed_password": "$2b$12$fFc6JiTcROaRkEXyYxbLPOelhdx/k6En9LYngLcLkNa75hMTRdZp.",
     "score": 0
+  },
+  "dd": {
+    "name": "dd",
+    "hashed_password": "$2b$12$.4bnYlAPjeVIf/uydhTgmeV8h5eCEx4JECJriICgbC0rMHB2g9Pvm",
+    "score": 0
   }
 }

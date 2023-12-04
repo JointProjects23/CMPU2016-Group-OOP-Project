@@ -39,4 +39,3 @@ class Item:
 
         print(self.impact)
         game.score += self.score_increase
-

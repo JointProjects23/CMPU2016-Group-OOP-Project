@@ -605,7 +605,7 @@ class Game:
                   "passages appear before you:")
             for i, door in enumerate(self.doors, start=1):
                 print(f"{i}. {door}")
-                print("\n--To go back(B)--")
+            print("\n--To go back(B)--")
             player_input = int(
                 input("Which passage will you venture through...Brave"
                       f" detective:")
@@ -640,8 +640,6 @@ class Game:
                         )
                         # Calls the method reward_for_game_completion adds to the users score.
                         self.mini_game.display_counter()
-                        if self.mini_game.counter == 4:
-                            self.completed_mini_game_message()
 
                 elif int(player_input) == 2 and not self.doors_checker[1]:
                     print("Those who dare to enter ahead..Prove to me you are "
@@ -658,8 +656,6 @@ class Game:
                         self.secret_passages.add_clue("The letter on the ground")
                         # Calls the method reward_for_game_completion adds to the users score.
                         self.mini_game.display_counter()
-                        if self.mini_game.counter == 4:
-                            self.completed_mini_game_message()
 
                 elif int(player_input) == 3 and not self.doors_checker[2]:
                     print(
@@ -680,8 +676,6 @@ class Game:
                         self.doors_checker[2] = True
                         # Calls the method reward_for_game_completion adds to the users score.
                         self.mini_game.display_counter()
-                        if self.mini_game.counter == 4:
-                            self.completed_mini_game_message()
 
                     elif player_input == "B":
                         break
@@ -697,6 +691,8 @@ class Game:
                     )
             else:
                 raise ValueError(f"Invalid door choice Detective: {player_input}")
+        if self.mini_game.counter == 4:
+            self.completed_mini_game_message()
 
     def interact_with_characters(self):
         if not self.characters_interacted:
